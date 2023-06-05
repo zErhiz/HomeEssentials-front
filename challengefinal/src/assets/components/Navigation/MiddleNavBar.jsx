@@ -11,9 +11,9 @@ const MiddleNavBar = () => {
           <h2 className='text-white text-lg'>Free shipping on purchases over $499</h2>
         </div>
         <div className='text-white flex justify-center items-center content-center   px-10 gap-12'>
-        <Anchor to='/acerca-de' className='mx-2 text-lg underline'> About</Anchor>
-          <Anchor to='/contacto' className='mx-2 text-lg underline'> Contact</Anchor>
-          <Anchor to='/asistencia' className='mx-2 text-lg underline'> Attendance</Anchor>
+        <Anchor to='/about' className='mx-2 text-lg underline'> About</Anchor>
+          <Anchor to='/contact' className='mx-2 text-lg underline'> Contact</Anchor>
+          <Anchor to='/attendance' className='mx-2 text-lg underline'> Attendance</Anchor>
           <a className='text-white text-lg ' href='tel:+5213312345678'> Call to +52-1-33-12345678 </a>
         </div>
       </div>
