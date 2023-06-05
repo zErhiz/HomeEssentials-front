@@ -1,4 +1,4 @@
-import Navbar from "../components/NavBar"
+import Navbar from "../components/Navigation/NavBar"
 import Footer from "../components/Footer"
 import { Outlet } from "react-router-dom"
 
