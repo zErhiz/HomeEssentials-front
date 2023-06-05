@@ -1,7 +1,7 @@
-import React from 'react';
-import { BsInstagram,BsGithub } from 'react-icons/bs';
-import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
-import { Link as Anchor } from 'react-router-dom';
+import React from "react";
+import { BsInstagram, BsGithub } from "react-icons/bs";
+import { FaFacebookF, FaTwitter, FaYoutube } from "react-icons/fa";
+import { Link as Anchor } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -10,11 +10,16 @@ const Footer = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="mb-4 flex flex-col gap-5">
-              <h4 className="text-black text-lg font-semibold">Store location</h4>
+              <h4 className="text-black text-lg font-semibold">
+                Store location
+              </h4>
               <p className="text-gray-700">
-                Av. Fray A. Alcalde 10<br />
-                44100, Guad., Jal., México<br />
-                info@misitio.com<br />
+                Av. Fray A. Alcalde 10
+                <br />
+                44100, Guad., Jal., México
+                <br />
+                info@misitio.com
+                <br />
                 +52-1-33-12345678
               </p>
               <div className="flex gap-4">
@@ -67,7 +72,9 @@ const Footer = () => {
             </div>
 
             <div className="mb-4 flex flex-col gap-4">
-              <h4 className="text-black text-lg font-semibold">Customer Support</h4>
+              <h4 className="text-black text-lg font-semibold">
+                Customer Support
+              </h4>
               <ul className="text-gray-700">
                 <li>
                   <Anchor to="/contact">Contact us</Anchor>
@@ -107,40 +114,50 @@ const Footer = () => {
 
           <div className="flex justify-center">
             <div className="text-center">
-              <h4 className="text-black text-md font-semibold">We accept the following payment methods</h4>
-              <div className="flex gap-20 p-4 h-20">
-                <img src="https://i.ibb.co/xSGScnM/payu.png" alt="" />
-                <img src="https://i.ibb.co/gg5zV28/payo2.png" alt="" />
-                <img src="https://i.ibb.co/R6XPJgw/mp.jpg" alt="" />
-                <img src="https://i.ibb.co/nCKJVPy/visa.png" alt="" />
+              <h4 className="text-black text-md font-semibold">
+                We accept the following payment methods
+              </h4>
+              <div className="flex  justify-center gap-4  p-4">
+                <img
+                  src="https://i.ibb.co/xSGScnM/payu.png"
+                  alt=""
+                  className=" w-[10%] lg:w-[5%]  h-auto"
+                />
+                <img
+                  src="https://i.ibb.co/gg5zV28/payo2.png"
+                  alt=""
+                  className=" w-[10%] lg:w-[5%]  h-auto"
+                />
+                <img
+                  src="https://i.ibb.co/R6XPJgw/mp.jpg"
+                  alt=""
+                  className="w-[10%] lg:w-[5%] h-auto"
+                />
+                <img
+                  src="https://i.ibb.co/nCKJVPy/visa.png"
+                  alt=""
+                  className="w-[10%] lg:w-[5%]  h-auto"
+                />
               </div>
             </div>
           </div>
         </div>
       </footer>
-        <div className='bg-[#EDECEC] w-[100%] h-12 flex justify-center items-center content-center'>
-        <h2 className='flex justify-center content-center items-center gap-4'>
-        <BsGithub/>this site was created by  <a href="https://github.com/maxi-gartner">
-                  Maximiliano Gartner
-                </a>
-                <a href="https://github.com/nicodsd">
-                  Nicolas Barrera
-                </a>
-                <a href="https://github.com/lucas271102">
-                 Lucas Speziale
-                </a>
-                <a href="https://github.com/Sebas-ovalle">
-                  Sebastian Ovalle
-                </a>
-                <a href="https://github.com/zErhiz">
-                  Mateo Carrizo
-                </a>
-                <a href="https://github.com/Tomas-Salazar">
-                  Tomas Salazar
-                </a>
-                <BsGithub/>
-        </h2>
-        </div>
+      <div className="hidden md:block">
+      <div className="bg-[#EDECEC] w-full h-12 flex justify-center items-center content-center">
+  <h2 className="flex flex-row justify-center content-center items-center gap-4 text-center text-sm">
+    <BsGithub />
+    this site was created by{" "}
+    <a href="https://github.com/maxi-gartner">Maximiliano Gartner</a>
+    <a href="https://github.com/nicodsd">Nicolas Barrera</a>
+    <a href="https://github.com/lucas271102">Lucas Speziale</a>
+    <a href="https://github.com/Sebas-ovalle">Sebastian Ovalle</a>
+    <a href="https://github.com/zErhiz">Mateo Carrizo</a>
+    <a href="https://github.com/Tomas-Salazar">Tomas Salazar</a>
+    <BsGithub />
+  </h2>
+</div>
+</div>
     </>
   );
 };

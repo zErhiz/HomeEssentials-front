@@ -6,9 +6,9 @@ import CategoriesNav from './CategoriesNav';
 const NavBar = () => {
   return (
     <>
-      <MiddleNavBar />
+       <MiddleNavBar /> 
       <SearchAndLogoNavbar />
-      <CategoriesNav />
+       <CategoriesNav /> 
     </>
   );
 };
