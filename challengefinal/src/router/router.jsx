@@ -8,6 +8,8 @@ import Home from "../assets/pages/Home"
 import Signup from "../pages/Signup";
 import Signin from "../pages/Signin";
 
+import AdminPanel from "../pages/AdminPanel";
+
 const routes = createBrowserRouter([
     {
       path: "/",
@@ -15,8 +17,9 @@ const routes = createBrowserRouter([
       children: [
         { path: "/", element: <Home /> },
         { path: "/2", element: <Parte1 /> },
-        {path:"/signin", element:<Signin/>},
-        {path:"/signup", element:<Signup/>},
+        { path:"/signin", element:<Signin/>},
+        { path:"/signup", element:<Signup/>},
+        { path:"/admin", element:<AdminPanel/>},
     ],
 },
 ]);
