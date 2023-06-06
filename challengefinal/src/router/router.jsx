@@ -1,17 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../assets/layout/Layout";
-import Index from "../assets/pages/Index";
+import Layout from "../assets/layout/Layout"
 import Parte1 from "../assets/pages/parte1";
-
 import Home from "../assets/pages/Home"
-
 import Signup from "../pages/Signup";
 import Signin from "../pages/Signin";
-<<<<<<< HEAD
 import FormCV from "../pages/FormCV";
-=======
 
->>>>>>> b0486fe5c738cad8fac896de6e704f763e380bc8
 const routes = createBrowserRouter([
     {
       path: "/",
