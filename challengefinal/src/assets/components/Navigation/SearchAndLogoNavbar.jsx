@@ -1,8 +1,23 @@
 import React from "react";
 import { Link as Anchor } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import categories_actions from '../../../store/actions/categories'
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const SearchAndLogoNavbar = () => {
+  let { categories_read } = categories_actions
+  const dispatch = useDispatch()
+  let navigate=useNavigate()
+  let categories = useSelector(store => store.categories.categories)
+  console.log(categories);
 
+
+  useEffect(() => {
+    if (categories.length === 0) {
+        dispatch(categories_read())
+       
+    }
+}, [])
   const [menuIsOpen, setMenuIsOpen] = useState(false)
   console.log(menuIsOpen)
   return (
@@ -209,12 +224,9 @@ const SearchAndLogoNavbar = () => {
           <div className="flex  w-[100%] h-[46%]  justify-center  ">
 
         <ul className="flex flex-col w-[100%]  overflow-y-auto">
-        <li><Anchor to="#" className="text-black hover:text-purple-600"> <div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>Buy all</h2> </div> </Anchor></li>
-        <li><Anchor to="#" className="text-black hover:text-purple-600"><div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>categoria 2 </h2> </div> </Anchor></li>
-        <li><Anchor to="#" className="text-black hover:text-purple-600"><div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>categoria 3</h2> </div> </Anchor></li>
-        <li><Anchor to="#" className="text-black hover:text-purple-600"><div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>categoria 4</h2> </div> </Anchor></li>
-        <li><Anchor to="#" className="text-black hover:text-purple-600"><div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>categoria 4</h2> </div> </Anchor></li>
-        <li><Anchor to="#" className="text-black hover:text-purple-600"><div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>categoria 4</h2> </div> </Anchor></li>   
+        {categories.map((cat) => (
+         <li key={cat._id}><Anchor to="#" className="text-black hover:text-purple-600"> <div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>{cat.name}</h2> </div> </Anchor></li>
+        ))}
       </ul>
 
       </div>
