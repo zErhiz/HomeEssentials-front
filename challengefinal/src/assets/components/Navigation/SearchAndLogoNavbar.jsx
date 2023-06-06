@@ -60,7 +60,7 @@ const SearchAndLogoNavbar = () => {
         <div className=" lg:flex lg:justify-center lg:items-center lg:content-center lg:px-12 lg:gap-8">
           <div className="hidden lg:block">
             <Anchor
-              to="/enter"
+              to="/signin"
               className=" mx-2 text-xl lg:gap-1  flex justify-center content-center items-center"
             >
               <svg
