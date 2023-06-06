@@ -1,5 +1,5 @@
 
-let apiUrl = 'http://localhost:8000/api/'
+let apiUrl = 'http://localhost:8000/'
 
 
 

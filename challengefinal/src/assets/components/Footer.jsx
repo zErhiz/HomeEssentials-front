@@ -1,9 +1,25 @@
 import React from "react";
 import { BsInstagram, BsGithub } from "react-icons/bs";
+import { useEffect, useState, useRef } from "react";
 import { FaFacebookF, FaTwitter, FaYoutube } from "react-icons/fa";
 import { Link as Anchor } from "react-router-dom";
-
+import categories_actions from '../../store/actions/categories'
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Footer = () => {
+  let { categories_read } = categories_actions
+  const dispatch = useDispatch()
+  let navigate=useNavigate()
+  let categories = useSelector(store => store.categories.categories)
+  console.log(categories);
+
+
+  useEffect(() => {
+    if (categories.length === 0) {
+        dispatch(categories_read())
+       
+    }
+}, [])
   return (
     <>
       <footer className="bg-[#FFFFFF] py-8">
@@ -41,33 +57,11 @@ const Footer = () => {
             <div className="mb-4 flex flex-col gap-4">
               <h4 className="text-black text-lg font-semibold">Store</h4>
               <ul className="text-gray-700">
-                <li>
-                  <Anchor to="#">Buy all</Anchor>
+              {categories.map((cat) => (
+               <li key={cat._id}>
+                  <Anchor to="#">{cat.name}</Anchor>
                 </li>
-                <li>
-                  <Anchor to="#">category2</Anchor>
-                </li>
-                <li>
-                  <Anchor to="#">category3</Anchor>
-                </li>
-                <li>
-                  <Anchor to="#">category4</Anchor>
-                </li>
-                <li>
-                  <Anchor to="#">category5</Anchor>
-                </li>
-                <li>
-                  <Anchor to="#">category6</Anchor>
-                </li>
-                <li>
-                  <Anchor to="#">category7</Anchor>
-                </li>
-                <li>
-                  <Anchor to="#">category8</Anchor>
-                </li>
-                <li>
-                  <Anchor to="#">category9</Anchor>
-                </li>
+               ))}
               </ul>
             </div>
 
