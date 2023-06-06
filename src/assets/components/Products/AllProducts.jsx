@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { useEffect, useState, useRef } from "react";
 import { Link as Anchor } from 'react-router-dom'
 import products_actions from '../../../store/actions/products'
@@ -120,7 +121,6 @@ const AllProducts = () => {
   
 ))}
 </>
-  )
-}
+
 
 export default AllProducts
