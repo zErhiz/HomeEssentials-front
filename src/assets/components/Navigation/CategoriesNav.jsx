@@ -10,8 +10,7 @@ const CategoriesNav = () => {
   const dispatch = useDispatch()
   let navigate=useNavigate()
   let categories = useSelector(store => store.categories.categories)
-  console.log(categories);
-
+  
 
   useEffect(() => {
     if (categories.length === 0) {

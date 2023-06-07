@@ -10,7 +10,7 @@ const SearchAndLogoNavbar = () => {
   const dispatch = useDispatch()
   let navigate=useNavigate()
   let categories = useSelector(store => store.categories.categories)
-  console.log(categories);
+
 
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const SearchAndLogoNavbar = () => {
     }
 }, [])
   const [menuIsOpen, setMenuIsOpen] = useState(false)
-  console.log(menuIsOpen)
+
   return (
     <>
       <div className=" justify-center bg-[#FFFFFF] h-[100px] lg:h-[80px] flex lg:justify-between">

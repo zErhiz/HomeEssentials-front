@@ -15,7 +15,7 @@ const Home = () => {
   const dispatch = useDispatch()
   let cards = useSelector(store => store.cardsHome.productsHome)
 
-console.log(cards)
+
 useEffect(() => {
   if (cards.length === 0) {
       dispatch(cards_home_read())

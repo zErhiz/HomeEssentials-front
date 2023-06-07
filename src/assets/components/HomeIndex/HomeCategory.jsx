@@ -10,7 +10,6 @@ const HomeCategory = () => {
     const dispatch = useDispatch()
     let navigate=useNavigate()
     let categories = useSelector(store => store.categories.categories)
-    console.log(categories);
   
   
     useEffect(() => {

@@ -9,7 +9,7 @@ const Brands = () => {
     const dispatch = useDispatch()
     let navigate=useNavigate()
     let manufacturers = useSelector(store => store.manufacturerHome.manufacturers)
-    console.log(manufacturers);
+  
   
   
     useEffect(() => {
