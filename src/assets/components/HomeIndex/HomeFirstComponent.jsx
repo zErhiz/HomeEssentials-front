@@ -9,7 +9,7 @@ const HomeFirstComponent = () => {
       <h2 className='text-center md:text-start text-md md:text-xl text-gray-500'>Earn more for your money</h2>
       <button className='rounded-3xl py-2.5 w-[60%] md:w-[40%] xl:w-[40%] md:py-3.5 bg-[#403d56] text-white font-semibold'>Buy now</button>
       </div>   
-    <div className='h-[100%] w-[100%] xl:w-[75%] border border-orange-500 relative z-0'>
+    <div className='h-[100%] w-[100%] xl:w-[75%] border border-orange-500'>
       <img src='https://i.ibb.co/HCR11br/image.png' alt='image bg' className='w-full h-full object-contain' />
     </div>
   </div>

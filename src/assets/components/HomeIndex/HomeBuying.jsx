@@ -4,6 +4,7 @@ const HomeBuying = () => {
   return (
     <>
      <div className="h-fit w-[95%] bg-white items-center justify-center gap-0 md:gap-8 flex flex-col  lg:flex-row">
+          
           <div className="flex flex-row gap-3 justify-center items-center content-center h-40 lg:w-[20%] xl:w-[18%] ">
             {" "}
             <svg
