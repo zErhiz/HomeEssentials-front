@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useEffect, useState } from 'react'
 import HomeFirstComponent from "../components/HomeIndex/HomeFirstComponent";
@@ -9,7 +10,9 @@ import { useSelector, useDispatch } from "react-redux";
 import MiddlePhotoSection from "../components/HomeIndex/MiddlePhotoSection";
 import HomeCurriculum from "../components/HomeIndex/HomeCurriculum";
 import { useNavigate } from "react-router-dom";
+import {Link as Anchor } from 'react-router-dom'
 import Brands from "../components/HomeIndex/Brands";
+
 const Home = () => {
   let { cards_home_read } = cards_home
   const dispatch = useDispatch()
@@ -25,6 +28,7 @@ useEffect(() => {
 const imageStyle = "h-[100%] w-[100%] transition-transform transform hover:scale-105 cursor-pointer";
 
   return (
+
     <>
       <HomeFirstComponent />
       <div className="bg-white  h-[10vh] xl:h-[5vh]"></div>
@@ -45,6 +49,7 @@ const imageStyle = "h-[100%] w-[100%] transition-transform transform hover:scale
             <h2 className="text-xl text-purple-500">${car.price}</h2>
         </div>
   
+
     </div>
 ))}
         </div>

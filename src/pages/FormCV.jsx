@@ -1,14 +1,28 @@
 import  { useRef, useState } from "react"
 import { uploadFile } from "../../firebase";
 import Grid from "react-loading-icons/dist/esm/components/grid";
-import { Form } from "react-router-dom";
+import axios from "axios";
+import apiUrl from "../../api"
 
 export default function FormCV() {
 
+let name = useRef()
+let email = useRef()
+let lastName = useRef()
+let age = useRef()
+const [Studies1, setStudies1] = useState("nothing")
+const [Studies2, setStudies2] = useState("nothing")
+const [Studies3, setStudies3] = useState("nothing")
+const [Experience1, setExperience1] = useState("nothing")
+const [Experience2, setExperience2] = useState("nothing")
+const [Experience3, setExperience3] = useState("nothing")
+const [References1, setReferences1] = useState("nothing")
+const [References2, setReferences2] = useState("nothing")
+const [References3, setReferences3] = useState("nothing")
 let [img, setImg] = useState(null)
+let [cvLink, setCvLink] = useState(null)
 let [buttonSend, setButtonSend] = useState(true)
 let [loading, setLoading] = useState(false)
-console.log("img", img);
 
 const handleSubmit = async (img) => {
     try {
@@ -23,29 +37,59 @@ const handleSubmit = async (img) => {
         console.log(error);
     }
 }
-const handleForm = () => {
-    console.log("enviado");
+
+const handleSubmitCV = async (cv) => {
+    try {
+        setLoading(true)
+        const resultCv = await uploadFile(cv, "imgCV/")
+        setCvLink(resultCv)
+        setLoading(false) 
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-let name = useRef()
-let lastName = useRef()
-let age = useRef()
-let Studies1 = useRef()
-let Studies2 = useRef()
-let Studies3 = useRef()
-let Experience1 = useRef()
-let Experience2 = useRef()
-let Experience3 = useRef()
-let References1 = useRef()
-let References2 = useRef()
-let References3 = useRef()
+
+const handleForm = (e) => {
+    const data = {
+        name: name.current.value,
+        img: img,
+        cv: cvLink,
+        email: email.current.value,
+        lastName: lastName.current.value,
+        age: age.current.value,
+        studies: [{
+            studies1: Studies1,
+            studies2: Studies2,
+            studies3: Studies3
+        }],
+        experience: [{
+            experience1: Experience1,
+            experience2: Experience2,
+            experience3: Experience3
+        }],
+        references: [{
+            references1: References1,
+            references2: References2,
+            references3: References3
+        }]
+    }
+    console.log("data", data);
+    axios.post(apiUrl+"curriculums", data)
+    .then(res =>{
+        console.log(res)
+        e.target.reset()
+    }) 
+    .catch(err => {
+        console.error(err.response.data.message)
+    })
+}
 
 const [nameInput, setNameInput] = useState("Curriculum Vitae")
 
 const [countStudies , setCountStudies] = useState(0)
 const [countExperience , setCountExperience] = useState(0)
 const [countReferences , setCountReferences] = useState(0)
-console.log("countStudies", countStudies);
 
 const handleStudies = (res) => {
     if(res){countStudies !== 3 ? setCountStudies(countStudies + 1) : setCountStudies(countStudies)}
@@ -64,12 +108,11 @@ const handleReferences = (res) => {
 return (
     <>
     <section className="h-full w-full flex p-10 justify-center text-slate-300 bg-[#dfe1e6]">
-        <Form onSubmit={(e)=>handleForm(e)} className="w-[80%] flex flex-col items-center space-y-6 border-2 border-black p-10 bg-white max-w-[800px]">
+        <form onSubmit={(e)=>handleForm(e)} className="w-[80%] flex flex-col items-center space-y-6 border-2 border-black p-10 bg-white max-w-[800px]">
             <div>
                 <input
                     type="text"
                     disabled
-                    placeholder="Curriculum Vitae"
                     value={nameInput}
                     className="w-full p-2 px-4 bg-transparent text-center text-4xl mb-3 text-[#403d56] border-b-2 border-[#403d56] font-bold"/>
             </div>
@@ -80,16 +123,20 @@ return (
                             <div className="w-4/6 flex flex-col items-start">
                                 <input type="name" id="name" name="name"
                                         placeholder="Insert your name"
-                                        onChange={e => setNameInput(e.target.value)}
-                                        className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black"
+                                        onChange={e => e.target.value.length > 0 ? setNameInput(e.target.value) : setNameInput("Curriculum Vitae")}
+                                        className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent"
                                         ref = {name}/>
+                                <input type="email" id="email" name="email"
+                                        placeholder="Insert your email"
+                                        className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent"
+                                        ref = {email}/>
                                 <input type="lastName" id="lastName" name="lastName"
                                         placeholder="Insert your last name"
                                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black"
                                         ref = {lastName}/>
-                                <input type="name" id="name" name="name"
+                                <input type="number" id="name" name="name"
                                         placeholder="Insert how old are you"
-                                        className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
+                                        className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2 focus:bg-transparent"
                                         ref = {age}/>
                             </div>
                             {!img ? (
@@ -122,78 +169,81 @@ return (
                 <div className="pb-2 mb-5 border-[#403d56] border-b-4 border-dashed flex flex-col items-start">
                     <h2 className="text-2xl border-[#403d56] border-b-2 mb-3 px-3 text-[#403d56] font-bold">Studies</h2>
                     <button className="rounded-full bg-[#403d56] mb-1 px-6 py-1 text-white t-10 text-lg font-bold hover:bg-[#6474a3]"
-                            onClick={() => handleStudies(true)}>Append one</button>
+                            onClick={(e) => {e.preventDefault()
+                                            handleStudies(true)}}>Append one</button>
                     {countStudies > 0 ? (
                         <input type="text" id="Studies1" name="Studies1"
                         placeholder="Insert Studies"
                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
-                        ref = {Studies1}/>
+                        onChange={e => e.target.value.length > 0 ? setStudies1(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
                     {countStudies > 1 ? (
                         <input type="text" id="Studies2" name="Studies2"
                         placeholder="Insert Studies"
                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
-                        ref = {Studies2}/>
+                        onChange={e => e.target.value.length > 0 ? setStudies2(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
                     {countStudies > 2 ? (
                         <input type="text" id="Studies3" name="Studies3"
                         placeholder="Insert Studies"
                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
-                        ref = {Studies3}/>
+                        onChange={e => e.target.value.length > 0 ? setStudies3(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
-                    {countStudies > 0 ? (<button className="rounded-full bg-[#ba2727] mb-1 px-6 py-1 text-white t-10 text-lg font-bold hover:bg-[#dc7878]"
-                            onClick={() => handleStudies(false)}>Delete one option</button>) : (<></>)}
+                    {countStudies > 0 ? (<button className="flex items-end rounded-full border-b-2 border-red-700 text-black mb-1 px-6 py-1 t-10 text-lg font-bold hover:text-red-700"
+                            onClick={() => handleStudies(false)}><b className="mr-2 text-red-700">X </b> Delete one option</button>) : (<></>)}
                 </div>
                 <div className="pb-2 mb-5 border-[#403d56] border-b-4 border-dashed flex flex-col items-start">
                     <h2 className="text-2xl border-[#403d56] border-b-2 mb-3 px-3 text-[#403d56] font-bold">Work experience</h2>
                     <button className="rounded-full bg-[#403d56] px-6 py-1 text-white t-10 text-lg font-bold hover:bg-[#6474a3]"
-                            onClick={() => handleExperience(true)}>Append one</button>
+                            onClick={(e) => {e.preventDefault()
+                                            handleExperience(true)}}>Append one</button>
                     {countExperience > 0 ? (
                         <input type="text" id="Experience1" name="Experience1"
                         placeholder="Insert Work experience"
                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
-                        ref = {Experience1}/>
+                        onChange={e => e.target.value.length > 0 ? setExperience1(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
                     {countExperience > 1 ? (
                         <input type="text" id="Experience2" name="Experience2"
                         placeholder="Insert Work experience"
                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
-                        ref = {Experience2}/>
+                        onChange={e => e.target.value.length > 0 ? setExperience2(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
                     {countExperience > 2 ? (
                         <input type="text" id="Experience3" name="Experience3"
                         placeholder="Insert Work experience"
                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
-                        ref = {Experience3}/>
+                        onChange={e => e.target.value.length > 0 ? setExperience3(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
-                    {countExperience > 0 ? (<button className="rounded-full bg-[#ba2727] mb-1 px-6 py-1 text-white t-10 text-lg font-bold hover:bg-[#dc7878]"
-                            onClick={() => handleExperience(false)}>Delete one option</button>) : (<></>)}
+                    {countExperience > 0 ? (<button className="flex items-end rounded-full border-b-2 border-red-700 text-black mb-1 px-6 py-1 t-10 text-lg font-bold hover:text-red-700"
+                            onClick={() => handleExperience(false)}><b className="mr-2 text-red-700">X </b> Delete one option</button>) : (<></>)}
                 </div>
                 <div className="pb-2 mb-5 border-[#403d56] border-b-4 border-dashed flex flex-col items-start">
                     <h2 className="text-2xl border-[#403d56] border-b-2 mb-3 px-3 text-[#403d56] font-bold">Employment References</h2>
                     <button className="rounded-full bg-[#403d56] px-6 py-1 text-white t-10 text-lg font-bold hover:bg-[#6474a3]"
-                            onClick={() => handleReferences(true)}>Append one</button>
+                            onClick={(e) => {e.preventDefault()
+                                            handleReferences(true)}}>Append one</button>
                     {countReferences > 0 ? (
                         <input type="text" id="References1" name="References1"
                         placeholder="Insert Employment References"
                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
-                        ref = {References1}/>
+                        onChange={e => e.target.value.length > 0 ? setReferences1(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
                     {countReferences > 1 ? (
                         <input type="text" id="References2" name="References2"
                         placeholder="Insert Employment References"
                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
-                        ref = {References2}/>
+                        onChange={e => e.target.value.length > 0 ? setReferences2(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
                     {countReferences > 2 ? (
                         <input type="text" id="References3" name="References3"
                         placeholder="Insert Employment References"
                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2"
-                        ref = {References3}/>
+                        onChange={e => e.target.value.length > 0 ? setReferences3(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
                     {countReferences > 0 ? (
-                        <button className="rounded-full bg-[#ba2727] mb-1 px-6 py-1 text-white t-10 text-lg font-bold hover:bg-[#dc7878]"
-                        onClick={() => handleReferences(false)}>Delete one option</button>
+                        <button className="flex items-end rounded-full border-b-2 border-red-700 text-black mb-1 px-6 py-1 t-10 text-lg font-bold hover:text-red-700"
+                        onClick={() => handleReferences(false)}><b className="mr-2 text-red-700">X </b> Delete one option</button>
                     ) : (<></>)}
                 </div>
             </div>
@@ -203,15 +253,15 @@ return (
                 text-sm text-grey-500 file:mr-5 
                 file:rounded-full file:bg-[#403d56] file:px-6 file:py-1 file:text-white file:t-10 file:text-lg file:font-bold 
                 hover:file:bg-[#6474a3]" 
-                onChange={e => handleSubmit(e.target.files[0])}/>
+                onChange={e => handleSubmitCV(e.target.files[0])}/>
             </label>
             </div>
             <button disabled={buttonSend} 
                     className="rounded-full bg-[#403d56] p-2 px-16 py-2 text-white t-10 text-lg font-bold mt-5  disabled:opacity-50" 
                     type="submit" value={"send"}>Send
             </button>
-            {!loading ? (<></>) : (<Grid className="absolute bg-[#00000073] p-2 rounded-lg"/>)}
-        </Form>
+            {!loading ? (<></>) : (<Grid className="fixed bg-[#00000073] p-2 rounded-lg"/>)}
+        </form>
         </section>
     </>
     )
