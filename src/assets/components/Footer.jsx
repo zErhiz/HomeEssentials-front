@@ -80,7 +80,7 @@ const Footer = () => {
                   <Anchor to="/about">About</Anchor>
                 </li>
                 <li>
-                  <Anchor to="/jobs">Jobs</Anchor>
+                  <Anchor to="/formcv">Jobs</Anchor>
                 </li>
               </ul>
             </div>
