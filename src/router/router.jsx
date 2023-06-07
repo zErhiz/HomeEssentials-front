@@ -15,24 +15,26 @@ import FormCV from "../pages/FormCV";
 
 import AdminPanel from "../pages/AdminPanel";
 
+import AdminPanel from "../pages/AdminPanel";
+
 const routes = createBrowserRouter([
 
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        { path: "/", element: <Home /> },
-        { path: "/2", element: <Parte1 /> },
+        {
+                path: "/",
+                element: <Layout />,
+                children: [
+                        { path: "/", element: <Home /> },
+                        { path: "/2", element: <Parte1 /> },
 
-        {path:"/signin", element:<Signin/>},
-        {path:"/signup", element:<Signup/>},
-        {path:'/allproducts', element:<AllProducts/>},
-          {path:"/FormCV", element:<FormCV/>},
-        
-        { path:"/admin", element:<AdminPanel/>},
+                        { path: "/signin", element: <Signin /> },
+                        { path: "/signup", element: <Signup /> },
+                        { path: '/allproducts', element: <AllProducts /> },
+                        { path: "/FormCV", element: <FormCV /> },
 
-    ],
+                        { path: "/admin", element: <AdminPanel /> },
 
-},
+                ],
+
+        },
 ]);
 export default routes;
