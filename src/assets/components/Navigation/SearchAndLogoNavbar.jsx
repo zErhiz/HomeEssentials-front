@@ -4,12 +4,13 @@ import { useEffect, useState, useRef } from "react";
 import categories_actions from '../../../store/actions/categories'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "./searchbar";
 const SearchAndLogoNavbar = () => {
   let { categories_read } = categories_actions
   const dispatch = useDispatch()
   let navigate=useNavigate()
   let categories = useSelector(store => store.categories.categories)
-  console.log(categories);
+
 
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const SearchAndLogoNavbar = () => {
     }
 }, [])
   const [menuIsOpen, setMenuIsOpen] = useState(false)
-  console.log(menuIsOpen)
+
   return (
     <>
       <div className=" justify-center bg-[#FFFFFF] h-[100px] lg:h-[80px] flex lg:justify-between">
@@ -34,27 +35,8 @@ const SearchAndLogoNavbar = () => {
 </svg> </button>
 </div>
           <div className="flex items-center">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="rounded-l-full border-gray-300 bg-[#EDECEC] focus:outline-none focus:ring-2 focus:ring-black focus:border-black px-4 py-2 flex-1"
-            />
-            <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-r-full px-4 py-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-            </button>
+            <SearchBar/>
+           
           </div>
         </div>
         <div className=" lg:flex lg:justify-center lg:items-center lg:content-center lg:px-12 lg:gap-8">
