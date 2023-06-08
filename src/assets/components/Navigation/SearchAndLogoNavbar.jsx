@@ -48,8 +48,8 @@ const SearchAndLogoNavbar = () => {
               </svg> </button>
           </div>
           <div className="flex items-center">
-            <SearchBar/>
-           
+            <SearchBar />
+
           </div>
         </div>
         <div className=" lg:flex lg:justify-center lg:items-center lg:content-center lg:px-12 lg:gap-8">
