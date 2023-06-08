@@ -17,7 +17,10 @@ const Home = () => {
   let { cards_home_read } = cards_home
   const dispatch = useDispatch()
   let cards = useSelector(store => store.cardsHome.productsHome)
-
+  const navigate = useNavigate()
+  const redirectToAllProducts = () => {
+    navigate('/allproducts');
+  };
 
 useEffect(() => {
   if (cards.length === 0) {
@@ -42,7 +45,7 @@ const imageStyle = "h-[100%] w-[100%] transition-transform transform hover:scale
           {cards.map((car)=> (
         <div key={car._id} className='flex flex-col border border-orange-500 w-[100%] sm:w-[40%] lg:w-[20%] xl:w-[20%] 2xl:w-[16.66%]'>
   <div className='border border-black h-[70%]'>
-       <img className={imageStyle} src={car.photo} alt="" />
+       <img  onClick={()=>navigate(`/products/${car._id}`)} className={imageStyle} src={car.photo} alt="" />
      </div>
         <div className='border border-blue-500 h-[30%] flex flex-col justify-between'>
             <h2 className="text-2xl text-black font-semibold text-start">{car.name}</h2>
@@ -53,7 +56,7 @@ const imageStyle = "h-[100%] w-[100%] transition-transform transform hover:scale
     </div>
 ))}
         </div>
-        <div className="flex justify-center">  <button className='rounded-3xl py-2.5 w-[50%] sm:w-[25%] 2xl:w-[10%] md:py-3.5 bg-[#403d56] text-white font-semibold'> See all products</button></div>
+        <div className="flex justify-center">  <button   onClick={redirectToAllProducts} className='rounded-3xl py-2.5 w-[50%] sm:w-[25%] 2xl:w-[10%] md:py-3.5 bg-[#403d56] text-white font-semibold'> See all products</button></div>
       </div>
 
       {/* div de categorias  */}

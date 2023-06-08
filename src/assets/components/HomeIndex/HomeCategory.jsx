@@ -30,7 +30,9 @@ const HomeCategory = () => {
         <div className='flex flex-wrap border-black border justify-center gap-8'> 
         {categories.map((cat)=>( 
     <div key={cat._id} className='flex flex-col justify-center items-center  '>
+        <Anchor to={`/products/category/${cat._id}`}>
     <img className="rounded-full w-32 h-32 object-cover" src={cat.coverPhoto} alt="" />
+       </Anchor>
     <h2 className="text-xl mt-2">{cat.name}</h2>
   </div>
         ))}
