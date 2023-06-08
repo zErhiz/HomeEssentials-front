@@ -97,8 +97,8 @@ const AllProducts = () => {
 
         
       </div>
-      <Button shadow color="secondary" auto>
-          Add to cart
+      <Button shadow color="secondary" auto   onClick={()=>navigate(`/products/${prod._id}`)}>
+          Detail
         </Button>
     </div>
   </div>

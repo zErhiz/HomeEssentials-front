@@ -14,6 +14,7 @@ import AllProducts from "../assets/components/Products/AllProducts";
 import FormCV from "../pages/FormCV";
 
 import AdminPanel from "../pages/AdminPanel";
+import ProductDetail from "../assets/components/Products/ProductDetail";
 
 const routes = createBrowserRouter([
 
@@ -30,6 +31,7 @@ const routes = createBrowserRouter([
           {path:"/FormCV", element:<FormCV/>},
         
         { path:"/admin", element:<AdminPanel/>},
+        {path:"/products/:id", element:<ProductDetail/>}
 
     ],
 
