@@ -29,7 +29,7 @@ const CategoriesNav = () => {
 
       {categories.map((cat) => (
   <li key={cat._id}>
-    <Anchor to="#" className="text-black hover:text-purple-600">
+     <Anchor to={`/products/category/${cat._id}`} className="text-black hover:text-purple-600">
       {cat.name}
     </Anchor>
   </li>
