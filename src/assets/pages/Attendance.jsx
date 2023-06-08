@@ -1,0 +1,45 @@
+import React from 'react'
+
+const Attendance = () => {
+    return (
+        <div className="container mx-auto py-12 flex flex-wrap justify-center gap-12">
+            
+          <h2 className="text-2xl font-bold mb-4"> Attendance Frequently Asked Questions</h2>
+    
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold">What payment methods do you accept?</h3>
+              <p>We accept major credit cards such as Visa, Mastercard, and American Express. We also support payments through PayPal.</p>
+            </div>
+    
+            <div>
+              <h3 className="text-lg font-semibold">Do you offer international shipping?</h3>
+              <p>Yes, we offer international shipping to select countries. Please check our shipping policy for more information on eligible locations.</p>
+            </div>
+    
+            <div>
+              <h3 className="text-lg font-semibold">Can I return or exchange a product?</h3>
+              <p>Yes, we have a hassle-free return and exchange policy. If you are not satisfied with your purchase, you can return the product within 30 days for a refund or exchange.</p>
+            </div>
+    
+            <div>
+              <h3 className="text-lg font-semibold">How long does shipping usually take?</h3>
+              <p>Shipping times may vary depending on your location. Typically, domestic orders are delivered within 3-5 business days, while international orders may take longer.</p>
+            </div>
+    
+            <div>
+              <h3 className="text-lg font-semibold">Are your products eco-friendly?</h3>
+              <p>We strive to offer a range of eco-friendly products. Look for our "sustainable" label on product listings to identify environmentally friendly options.</p>
+            </div>
+    
+            <div>
+              <h3 className="text-lg font-semibold">Can I track my order?</h3>
+              <p>Yes, once your order is shipped, we will provide you with a tracking number. You can use this number to track the progress of your delivery.</p>
+            </div>
+          </div>
+        </div>
+      );
+    
+}
+
+export default Attendance

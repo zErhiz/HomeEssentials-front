@@ -10,6 +10,9 @@ import FormCV from "../pages/FormCV";
 import AdminPanel from "../pages/AdminPanel";
 import ProductDetail from "../assets/components/Products/ProductDetail";
 import CategoryProducts from "../assets/pages/CategoryDetail"
+import About from "../assets/pages/About";
+import Contact from "../assets/pages/Contact";
+import Attendance from "../assets/pages/Attendance";
 const routes = createBrowserRouter([
 
 
@@ -27,7 +30,10 @@ const routes = createBrowserRouter([
         
         { path:"/admin", element:<AdminPanel/>},
         {path:"/products/:id", element:<ProductDetail/>},
-        {path:"/products/category/:id", element:<CategoryProducts/>}
+        {path:"/products/category/:id", element:<CategoryProducts/>},
+        {path:"/about", element:<About/>},
+        {path:"/contact", element:<Contact/>},
+        {path:"/attendance", element:<Attendance/>},
     ],
 
 },
