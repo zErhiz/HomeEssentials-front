@@ -41,15 +41,15 @@ const SearchAndLogoNavbar = () => {
       <div className=" justify-center bg-[#FFFFFF] h-[100px] lg:h-[80px] flex lg:justify-between">
         <div className="px-4 lg:flex lg:gap-12 flex flex-col lg:flex-row justify-center items-center content-center lg:px-12">
           <div className=" flex flex-row gap-12">
-            <img className="w-24" onClick={home} src={logoNav} alt="logo" />
+            <img className="w-24 cursor-pointer" onClick={home} src={logoNav} alt="logo" />
             <button className="block lg:hidden" onClick={() => setMenuIsOpen(!menuIsOpen)}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg> </button>
           </div>
           <div className="flex items-center">
-            <SearchBar/>
-           
+            <SearchBar />
+
           </div>
         </div>
         <div className=" lg:flex lg:justify-center lg:items-center lg:content-center lg:px-12 lg:gap-8">
@@ -218,8 +218,9 @@ const SearchAndLogoNavbar = () => {
             <div className="flex  w-[100%] h-[46%]  justify-center  ">
 
               <ul className="flex flex-col w-[100%]  overflow-y-auto">
+              <li><Anchor to="/allproducts" className="text-black hover:text-purple-600"> <div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>Buy all</h2> </div> </Anchor></li>
                 {categories.map((cat) => (
-                  <li key={cat._id}><Anchor to="#" className="text-black hover:text-purple-600"> <div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>{cat.name}</h2> </div> </Anchor></li>
+                  <li key={cat._id}><Anchor to={`/products/category/${cat._id}`} className="text-black hover:text-purple-600"> <div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>{cat.name}</h2> </div> </Anchor></li>
                 ))}
               </ul>
 
