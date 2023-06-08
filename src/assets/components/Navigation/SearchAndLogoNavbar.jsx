@@ -1,18 +1,20 @@
 import React from "react";
 import { Link as Anchor } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import categories_actions from '../../../store/actions/categories'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logoNav from '../../../../public/images/Logos/logo-2-b.png'
 import Favourites from "./Favourites.jsx";
+import SearchBar from "./searchbar";
+
 
 const SearchAndLogoNavbar = () => {
   let { categories_read } = categories_actions
   const dispatch = useDispatch()
   let navigate = useNavigate()
   let categories = useSelector(store => store.categories.categories)
-  console.log(categories);
+
 
   const [fav, setFav] = useState(false)
 
@@ -30,7 +32,7 @@ const SearchAndLogoNavbar = () => {
   }, [])
 
   const [menuIsOpen, setMenuIsOpen] = useState(false)
-  console.log(menuIsOpen)
+
   return (
     <>
       {fav &&
@@ -46,27 +48,8 @@ const SearchAndLogoNavbar = () => {
               </svg> </button>
           </div>
           <div className="flex items-center">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="rounded-l-full border-gray-300 bg-[#e7e7e7] focus:outline-none focus:ring-2 focus:ring-transparent focus:border-black px-4 py-2 flex-1"
-            />
-            <button className="bg-[#7847E0] hover:bg-[#874fff] text-white rounded-r-full px-4 py-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-            </button>
+            <SearchBar/>
+           
           </div>
         </div>
         <div className=" lg:flex lg:justify-center lg:items-center lg:content-center lg:px-12 lg:gap-8">

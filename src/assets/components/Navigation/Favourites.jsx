@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 
 function Favourites() {
 
-    const dispatch = useDispatch()
-    const products = useSelector(store => store.products)
+    //const dispatch = useDispatch()
+    //const products = useSelector(store => store.products)
 
-    useEffect()
-    console.log(products)
+   /*  useEffect()
+    console.log(products) */
 
     return (
         <div className="absolute transition-all z-50 top-[7rem] right-16 mt-2 bg-white w-[20rem] shadow-[0_5px_10px_rgba(0,0,0,0.15)] rounded-md text-[#393939] items-center flex flex-col h-[38rem]">
