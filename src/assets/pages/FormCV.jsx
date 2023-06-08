@@ -1,8 +1,8 @@
 import  { useRef, useState } from "react"
-import { uploadFile } from "../../firebase";
+import { uploadFile } from "../../../firebase";
 import Grid from "react-loading-icons/dist/esm/components/grid";
 import axios from "axios";
-import apiUrl from "../../api"
+import apiUrl from "../../../api"
 
 export default function FormCV() {
 
