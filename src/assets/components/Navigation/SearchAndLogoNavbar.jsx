@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logoNav from '../../../../public/images/Logos/logo-2-b.png'
 import Favourites from "./Favourites.jsx";
-import SearchBar from "./searchbar";
+import SearchBar from "./SearchBar";
 import Carrito from "./Carrito"
 
 const SearchAndLogoNavbar = () => {

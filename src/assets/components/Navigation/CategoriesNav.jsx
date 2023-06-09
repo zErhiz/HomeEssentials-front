@@ -20,7 +20,7 @@ const CategoriesNav = () => {
   }, [])
 
   return (
-    <div className='h-[40px] bg-[#7847E0] lg:flex items-center content-center'>
+    <div className='h-[60px] bg-[#7847E0] hidden lg:block lg:flex items-center content-center'>
       <div className='text-white font-medium'>
         <ul className="flex justify-start px-12 space-x-4 items-center content-center flex-wrap h-fit">
 

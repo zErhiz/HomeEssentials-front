@@ -3,8 +3,8 @@ import axios from "axios";
 import apiUrl from "../../../api";
 const read_cart = createAsyncThunk('read_cart', async()=>{
   try {
-      let token = localStorage.getItem('token')
-      console.log(userId)
+      
+      let userId = "6480bafa03131bde973ed4d7"
       let res = await axios(apiUrl +`cart/${userId}`)
       console.log(res.data)
       return {

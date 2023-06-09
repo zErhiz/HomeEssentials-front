@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import apiUrl from '../../../api';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import backgroundImage from '../../../public/images/banners/Recurso8.png'
+import backgroundImage from '../../../public/images/banners/Signin.png'
 import logo from '../../../public/images/Logos/logo-solid-b.png'
 import { toast, ToastContainer } from 'react-toastify';
   import "react-toastify/dist/ReactToastify.css";
