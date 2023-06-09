@@ -1,21 +1,24 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import fondo from '../../../../public/images/banners/Home.png'
+
 const HomeFirstComponent = () => {
+
   const navigate = useNavigate()
+
   return (
     <>
-      <div className='py-8 gap-2 xl:py-0 xl:gap-0 h-[81.2vh] w-[100%] border border-black flex flex-col items-center xl:items-start xl:flex xl:flex-row xl:justify-end'>
-     <div className=' content-center items-center w-[50%] xl:w-[30%]  xl:h-[20%] 2xl:h-[20%] 2xl:w-[30%] xl:relative xl:z-10 xl:top-[30%] xl:left-[10%] border border-blue-500 gap-4 xl:flex-none flex flex-col'> 
-      <h2 className='text-xl md:text-5xl font-bold text-center'>Super prices on your favorite items</h2>
-      <h2 className='text-center md:text-start text-md md:text-xl text-gray-500'>Earn more for your money</h2>
-      <button onClick={()=>navigate(`/allproducts`)} className='rounded-3xl py-2.5 w-[60%] md:w-[40%] xl:w-[40%] md:py-3.5 bg-[#403d56] text-white font-semibold'>Buy now</button>
-      </div>   
-    <div className='h-[100%] w-[100%] xl:w-[75%] border border-orange-500'>
-      <img src='https://i.ibb.co/HCR11br/image.png' alt='image bg' className='w-full h-full object-contain' />
-    </div>
-  </div>
-    
-    
+      <div className='py-8 gap-2 shadow-[0_4px_5px_rgba(0,0,0,0.09)] selection:bg-[#7847E0] selection:text-[#ffe927] xl:py-0 xl:gap-0 h-[81.2vh] w-[100%] flex flex-col items-center xl:items-start xl:flex xl:flex-row xl:justify-end'>
+        <div className='content-center items-start w-[50%] xl:w-[30%] xl:h-fit 2xl:w-[30%] xl:relative xl:z-10 xl:top-[30%] xl:left-[10%] gap-4 xl:flex-none flex flex-col'>
+          <h2 className='text-xl md:text-5xl xl:text-5xl font-bold text-start'>Super prices on your favorite items</h2>
+          <p className='md:text-start text-md md:text-md w-full text-[#393939]'>Earn more for your money</p>
+          <button onClick={() => navigate(`/allproducts`)} className='rounded-full py-2.5 w-[40%] xl:w-[10rem] bg-[#7847E0] text-white font-semibold'>Buy now</button>
+        </div>
+        <div className='h-[100%] w-[100%] xl:w-[75%]'>
+          <img src={fondo} alt='image bg' className='w-full h-full object-contain' />
+        </div>
+      </div>
+
     </>
   )
 }
