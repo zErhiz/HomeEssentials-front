@@ -4,7 +4,6 @@ import apiUrl from '../../../api';
 import { useRef } from "react";
 import backgroundImage from '../../../public/images/banners/Signin.png'
 import logo from '../../../public/images/Logos/logo-solid-b.png'
-<<<<<<< HEAD
 import { useDispatch } from "react-redux";
 import userLogin_action from '../../store/actions/userLogin_action'
 const {SaveUserLogin} = userLogin_action
@@ -13,20 +12,11 @@ export default function Signin() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-=======
-import {Navigate,  useNavigate } from 'react-router-dom';
-export default function Signin() {
-const navigate = useNavigate()
->>>>>>> 26d04275f043bf7fccbe31448f673fcb935fe374
   const email = useRef()
   const password = useRef()
 
   const SignIn = (e) => {
-<<<<<<< HEAD
-    //toast("Wow so easy !")
-=======
  
->>>>>>> 26d04275f043bf7fccbe31448f673fcb935fe374
     e.preventDefault()
 
     let inputEmail = email.current.value
@@ -40,7 +30,6 @@ const navigate = useNavigate()
     axios.post(apiUrl + "auth/signin", dataUser)
       .then(res => {
         console.log(res)
-<<<<<<< HEAD
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("user", JSON.stringify(res.data.user))
         dispatch(SaveUserLogin({
@@ -50,9 +39,6 @@ const navigate = useNavigate()
       setTimeout(function(){
           navigate('/');
       }, 1000);
-=======
-        
->>>>>>> 26d04275f043bf7fccbe31448f673fcb935fe374
       })
 
       .catch(err => {

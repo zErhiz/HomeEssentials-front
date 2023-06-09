@@ -40,9 +40,9 @@ const UserPanel = () => {
               <div className="w-full lg:w-1/2 flex flex-col sm:flex-row lg:flex-col items-center justify-evenly">
                 <img src={infoUser?.photo} alt="" className="w-40 h-40 rounded-full object-cover" />
                 <div className="lg:w-full lg:px-2 px-2">
-                  <p className="my-4 text-xl font-semibold flex flex-col">Name: <spam className="font-normal">{infoUser?.name}</spam></p>
-                  <p className="my-4 text-xl font-semibold flex flex-col">Last Name: <spam className="font-normal">{infoUser?.lastName}</spam></p>
-                  <p className="my-4 text-xl font-semibold flex flex-col">Email:  <spam className="font-normal">{infoUser?.email}</spam></p>
+                  <p className="my-4 text-xl font-semibold flex flex-col">Name: <b className="font-normal">{infoUser?.name}</b></p>
+                  <p className="my-4 text-xl font-semibold flex flex-col">Last Name: <b className="font-normal">{infoUser?.lastName}</b></p>
+                  <p className="my-4 text-xl font-semibold flex flex-col">Email:  <b className="font-normal">{infoUser?.email}</b></p>
                 </div>
               </div>
               <form className="w-full lg:w-1/2 h-full flex flex-col justify-around">
