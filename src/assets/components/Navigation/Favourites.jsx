@@ -1,29 +1,25 @@
-import { useEffect } from 'react'
-import logo from '../../../../public/images/Logos/logo-solid-w.png'
 import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios'
+import apiUrl from '../../../../api'
+import FavList from './FavList'
 
 function Favourites() {
 
     //const dispatch = useDispatch()
-    //const products = useSelector(store => store.products)
+    const products = useSelector(store => store.products)
 
-   /*  useEffect()
-    console.log(products) */
+    let token = localStorage.getItem('token')
+    const remove = (id)=> {
+       axios.post(apiUrl + '/favourites' + id)
+    }
 
     return (
-        <div className="absolute transition-all z-40 top-[7rem] right-16 mt-2 bg-white w-[20rem] shadow-[0_5px_10px_rgba(0,0,0,0.15)] rounded-md text-[#393939] items-center flex flex-col h-[38rem]">
-            <h2 className="text-xl font-semibold">Favourites</h2>
-            <div className="w-[90%] bg-black min-h-[70%]">
-                <div className="w-full font-normal bg-white flex h-[3rem]">
-                    <img className="w-[20%] object-contain" src={logo} alt="" />
-                    <div className="w-[55%] bg-slate-400">
-                        <h2>Titulo</h2>
-                        <p>Descripcion</p>
-                    </div>
-                    <div className='text-sm'>
-                        <p>$ 5.000.00</p>
-                    </div>
-                </div>
+        <div className="absolute transition-all z-40 gap-3 top-[7rem] right-16 mt-2 bg-white w-[22rem] shadow-[0_5px_10px_rgba(0,0,0,0.15)] rounded-md text-[#393939] items-center flex flex-col h-fit py-[2rem]">
+                    
+            <FavList remove={remove} />    
+
+            <div className='bg-[#faf4ec] border-[1px] duration-100 hover:text-white text-sm hover:bg-[#ff4f4f] w-[7.5rem] flex items-center justify-center rounded-lg cursor-pointer h-[2rem] '>
+                <p>Remove all</p>
             </div>
         </div>
     )
