@@ -5,6 +5,7 @@ import manufacturersReducer from "./reducers/manufacturers_reducer";
 import productOne_reducer from './reducers/productOne_reducer';
 import products_reducer from './reducers/products_reducer';
 import carritoReducer from "./reducers/carrito_reducer";
+import userLogin_reducer from "./reducers/userLogin_reducer";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     products: products_reducer,
     oneProduct: productOne_reducer,
     carrito:carritoReducer,
+    userLogin: userLogin_reducer
   },
 });
 
