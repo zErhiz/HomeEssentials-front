@@ -27,7 +27,7 @@ const AllProducts = () => {
 {products.map((prod) => (
   
 
-<button className="  rounded-lg p-6 w-[100%] sm:w-[25%] gap-6 shadow-sm shadow-indigo-100">
+<button className="  rounded-lg p-6 w-[100%] sm:w-[50%] 2xl:w-[25%] gap-6 shadow-sm shadow-indigo-100">
   <img src={prod.photo}
     className="h-64 w-[100%] border rounded-2xl  object-cover"
   />
@@ -97,8 +97,8 @@ const AllProducts = () => {
 
         
       </div>
-      <Button shadow color="secondary" auto>
-          Add to cart
+      <Button shadow color="secondary" auto   onClick={()=>navigate(`/products/${prod._id}`)}>
+          Detail
         </Button>
     </div>
   </div>
