@@ -1,5 +1,3 @@
-import React from "react";
-
 const Contact = () => {
   return (
     <div className="h-fit xl:h-fit xl:min-h-[100vh] flex items-center flex-col gap-12 border border-black">
@@ -39,7 +37,7 @@ const Contact = () => {
           </h2>
               <form action="/enviar" method="post" className="max-w-md mx-auto">
                 <div className="mb-4">
-                  <label htmlFor="nombre" className="block font-bold mb-2">
+                  <label htmlFor="nombre" className="block font-bold mb-2 pl-2">
                     Name:
                   </label>
                   <input
@@ -52,7 +50,7 @@ const Contact = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="apellido" className="block font-bold mb-2">
+                  <label htmlFor="apellido" className="block font-bold mb-2 pl-2">
                     Lastname:
                   </label>
                   <input
@@ -65,7 +63,7 @@ const Contact = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="email" className="block font-bold mb-2">
+                  <label htmlFor="email" className="block font-bold mb-2 pl-2">
                     Email:
                   </label>
                   <input
@@ -78,7 +76,7 @@ const Contact = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="asunto" className="block font-bold mb-2">
+                  <label htmlFor="asunto" className="block font-bold mb-2 pl-2">
                     Affair:
                   </label>
                   <input
@@ -91,7 +89,7 @@ const Contact = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="mensaje" className="block font-bold mb-2">
+                  <label htmlFor="mensaje" className="block font-bold mb-2 pl-2">
                     Message:
                   </label>
                   <textarea

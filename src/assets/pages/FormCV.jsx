@@ -1,8 +1,8 @@
 import  { useRef, useState } from "react"
-import { uploadFile } from "../../firebase";
+import { uploadFile } from "../../../firebase";
 import Grid from "react-loading-icons/dist/esm/components/grid";
 import axios from "axios";
-import apiUrl from "../../api"
+import apiUrl from "../../../api"
 
 export default function FormCV() {
 
@@ -190,7 +190,9 @@ return (
                         onChange={e => e.target.value.length > 0 ? setStudies3(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
                     {countStudies > 0 ? (<button className="flex items-end rounded-full border-b-2 border-red-700 text-black mb-1 px-6 py-1 t-10 text-lg font-bold hover:text-red-700"
-                            onClick={() => handleStudies(false)}><b className="mr-2 text-red-700">X </b> Delete one option</button>) : (<></>)}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                handleStudies(false)}}><b className="mr-2 text-red-700">X </b> Delete one option</button>) : (<></>)}
                 </div>
                 <div className="pb-2 mb-5 border-[#403d56] border-b-4 border-dashed flex flex-col items-start">
                     <h2 className="text-2xl border-[#403d56] border-b-2 mb-3 px-3 text-[#403d56] font-bold">Work experience</h2>
@@ -216,7 +218,9 @@ return (
                         onChange={e => e.target.value.length > 0 ? setExperience3(e.target.value) : setNameInput("nothing")}/>
                     ) : (<></>)}
                     {countExperience > 0 ? (<button className="flex items-end rounded-full border-b-2 border-red-700 text-black mb-1 px-6 py-1 t-10 text-lg font-bold hover:text-red-700"
-                            onClick={() => handleExperience(false)}><b className="mr-2 text-red-700">X </b> Delete one option</button>) : (<></>)}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                handleExperience(false)}}><b className="mr-2 text-red-700">X </b> Delete one option</button>) : (<></>)}
                 </div>
                 <div className="pb-2 mb-5 border-[#403d56] border-b-4 border-dashed flex flex-col items-start">
                     <h2 className="text-2xl border-[#403d56] border-b-2 mb-3 px-3 text-[#403d56] font-bold">Employment References</h2>
@@ -243,7 +247,9 @@ return (
                     ) : (<></>)}
                     {countReferences > 0 ? (
                         <button className="flex items-end rounded-full border-b-2 border-red-700 text-black mb-1 px-6 py-1 t-10 text-lg font-bold hover:text-red-700"
-                        onClick={() => handleReferences(false)}><b className="mr-2 text-red-700">X </b> Delete one option</button>
+                            onClick={(e) => {
+                                e.preventDefault()
+                                handleExperience(false)}}><b className="mr-2 text-red-700">X </b> Delete one option</button>
                     ) : (<></>)}
                 </div>
             </div>
