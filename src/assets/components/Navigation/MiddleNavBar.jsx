@@ -10,7 +10,7 @@ const MiddleNavBar = () => {
           </svg>
           <h2 className='text-white text-xs 2xl:text-lg'>Free shipping on purchases over $499</h2>
         </div>
-        <div className=' hidden lg:block text-white flex justify-center items-center content-center   px-10 gap-12'>
+        <div className=' hidden lg:block text-white flex justify-center items-center content-center  py-1 px-10 gap-12'>
         <Anchor to='/about' className='mx-2 text-lg underline'> About</Anchor>
           <Anchor to='/contact' className='mx-2 text-lg underline'> Contact</Anchor>
           <Anchor to='/attendance' className='mx-2 text-lg underline'> Attendance</Anchor>

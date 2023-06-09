@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from '../../../api';
 import { useRef } from "react";
-import backgroundImage from '../../../public/images/banners/Recurso8.png'
+import backgroundImage from '../../../public/images/banners/Signin.png'
 import logo from '../../../public/images/Logos/logo-solid-b.png'
 
 export default function Signin() {
@@ -11,6 +11,7 @@ export default function Signin() {
   const password = useRef()
 
   const SignIn = (e) => {
+    toast("Wow so easy !")
     e.preventDefault()
 
     let inputEmail = email.current.value
@@ -33,30 +34,29 @@ export default function Signin() {
 
   }
 
-  return (
+  return ( 
     <>
       <div
-        className='z-20 min-h-screen flex font-sans font-semibold items-center'
+        className='z-20 min-h-screen flex font-semibold items-center'
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover"
         }}>
-        
-        <div className='relative flex flex-col z-20 sm:w-[40%] w-[100%] items-center text-[#7847E0] selection:bg-[#7847E0] selection:text-[#ffe927] ml-20'>
-          <div className='relative h-[6rem] w-[100%] bg-white flex items-center shadow-[0_5px_10px_rgba(0,0,0,0.15)] justify-center rounded-[8px_8px_0_0] mb-[2px]'>
+        <div className='relative flex flex-col z-20 sm:w-[40%] w-[100%] justify-center items-center text-[#7847E0] selection:bg-[#7847E0] selection:text-[#ffe927] ml-20'>
+          <div className='relative h-[6rem] w-[100%] bg-white flex justify-center items-center shadow-[0_5px_10px_rgba(0,0,0,0.15)] justify-center rounded-[8px_8px_0_0] mb-[2px]'>
             <h1 className='text-3xl font-bold'>Welcome back!</h1>
             <img className='absolute w-8 opacity-10 top-3 right-3' src={logo} alt="logo" />
           </div>
-          <form className='relative w-[100%] h-[30rem] bg-white p-9 flex flex-col justify-evenly rounded-[0_0_8px_8px] shadow-[0_5px_10px_rgba(0,0,0,0.15)]'>
+          <form className='xl:relative w-[100%] h-[30rem] bg-white xl:p-9 flex flex-col justify-evenly rounded-[0_0_8px_8px] shadow-[0_5px_10px_rgba(0,0,0,0.15)]'>
             <p className='absolute bottom-3 left-3 text-4xl font-bold text-[#E7E7E7]'>Login</p>
             <div className='flex justify-center w-full'>
               <div className='flex flex-col gap-4'>
                 <div className='flex flex-col w-full'>
                   <label htmlFor='send'>Email</label>
                   <input
-                    className='bg-[#E7E7E7] h-10 w-[25rem] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
+                    className='bg-[#E7E7E7] h-10 xl:w-[25rem] sm:w-[100%] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
                     type='text'
                     autoComplete="off"
                     ref={email}
@@ -66,7 +66,7 @@ export default function Signin() {
                 <div className='flex flex-col w-full'>
                   <label htmlFor="">Password</label>
                   <input
-                    className='bg-[#E7E7E7] h-10 w-[25rem] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
+                    className='bg-[#E7E7E7] h-10 xl:w-[25rem] sm:w-[100%] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
                     type='text'
                     autoComplete="off"
                     ref={password}

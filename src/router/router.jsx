@@ -8,6 +8,11 @@ import AllProducts from "../assets/components/Products/AllProducts";
 import FormCV from "../assets/pages/FormCV";
 import AdminPanel from "../pages/AdminPanel";
 import UserPanel from "../assets//pages/UserPanel";
+import ProductDetail from "../assets/components/Products/ProductDetail";
+import CategoryProducts from "../assets/pages/CategoryDetail"
+import About from "../assets/pages/About";
+import Contact from "../assets/pages/Contact";
+import Attendance from "../assets/pages/Attendance";
 
 const routes = createBrowserRouter([
         {
@@ -22,7 +27,12 @@ const routes = createBrowserRouter([
                         { path: "/FormCV", element: <FormCV /> },
                         { path: "/admin", element: <AdminPanel /> },
                         { path: "/userPanel", element: <UserPanel /> },
+                        {path:"/products/:id", element:<ProductDetail/>},
+                        {path:"/products/category/:id", element:<CategoryProducts/>},
+                        {path:"/about", element:<About/>},
+                        {path:"/contact", element:<Contact/>},
+                        {path:"/attendance", element:<Attendance/>},
                 ],
-        },
+        }
 ]);
 export default routes;

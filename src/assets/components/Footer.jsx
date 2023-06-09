@@ -59,7 +59,7 @@ const Footer = () => {
               <ul className="text-gray-700">
               {categories.map((cat) => (
                <li key={cat._id}>
-                  <Anchor to="#">{cat.name}</Anchor>
+                  <Anchor to={`/products/category/${cat._id}`}>{cat.name}</Anchor>
                 </li>
                ))}
               </ul>
@@ -80,7 +80,7 @@ const Footer = () => {
                   <Anchor to="/about">About</Anchor>
                 </li>
                 <li>
-                  <Anchor to="/jobs">Jobs</Anchor>
+                  <Anchor to="/formcv">Jobs</Anchor>
                 </li>
               </ul>
             </div>
