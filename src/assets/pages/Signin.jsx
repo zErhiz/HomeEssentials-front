@@ -25,10 +25,7 @@ const navigate = useNavigate()
     axios.post(apiUrl + "auth/signin", dataUser)
       .then(res => {
         console.log(res)
-        localStorage.setItem("token", res.data.token)
-        localStorage.setItem("user", JSON.stringify(res.data.user))
-        localStorage.setItem("photo",res.data.photo )
-        navigate ('/')
+        
       })
 
       .catch(err => {

@@ -16,12 +16,15 @@ export default function Signup() {
   const password = useRef()
   const email= useRef()
   const photo = useRef()
+  const name = useRef()
+  const lastName= useRef()
   function handleForm(e){
     e.preventDefault()
     let data={
       email:email.current.value,
       password:password.current.value,
-      photo:photo.current.value
+      photo:photo.current.value,
+     
     }
     axios.post(apiUrl + 'auth/signup', data)
     .then(res=> {
@@ -31,7 +34,7 @@ export default function Signup() {
       });
    
       
-        navigate ('/')
+        navigate ('/signin')
         
     })
   
@@ -64,6 +67,26 @@ export default function Signup() {
         <p className='absolute bottom-3 left-3 text-4xl font-bold text-[#E7E7E7]'>Sign Up</p>
         <div className='flex justify-center w-full'>
           <div className='flex flex-col gap-4'>
+          <div className='flex flex-col w-full'>
+              <label htmlFor='send'>Name</label>
+              <input
+                className='bg-[#E7E7E7] h-10 w-[100%] xl:w-[25rem] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
+                type='text'
+                autoComplete="off"
+                ref={name}
+                placeholder="Name"
+              />
+            </div>
+            <div className='flex flex-col w-full'>
+              <label htmlFor='send'>Last Name</label>
+              <input
+                className='bg-[#E7E7E7] h-10 w-[100%] xl:w-[25rem] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
+                type='text'
+                autoComplete="off"
+                ref={lastName}
+                placeholder="Last name"
+              />
+            </div>
             <div className='flex flex-col w-full'>
               <label htmlFor='send'>Email</label>
               <input
@@ -89,6 +112,7 @@ export default function Signup() {
         </div>
         <div className='flex flex-col justify-center items-center'>
         <input className='bg-orange-400 text-black xl:w-[25%] cursor-pointer border rounded-md p-2 text-white' type='submit' value='Register' />
+        <ToastContainer/>
           <h2 className='text-[#7847E0] text-sm'>Already registered? <strong><Link to='/signin'>Sign in</Link></strong></h2>
         </div>
       </form>
