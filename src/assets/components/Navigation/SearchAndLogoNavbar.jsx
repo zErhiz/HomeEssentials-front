@@ -8,12 +8,18 @@ import logoNav from '../../../../public/images/Logos/logo-2-b.png'
 import Favourites from "./Favourites.jsx";
 import SearchBar from "./SearchBar";
 import Carrito from "./Carrito"
+import axios from "axios";
+import apiUrl from '../../../../api';
+import userLogin_action from '../../../store/actions/userLogin_action'
+const {SaveUserLogin} = userLogin_action
 
 const SearchAndLogoNavbar = () => {
   let { categories_read } = categories_actions
   const dispatch = useDispatch()
   let navigate = useNavigate()
   let categories = useSelector(store => store.categories.categories)
+  const { userLogin } = useSelector(store => store)
+  console.log(userLogin);
 
   const [cart,setCart] = useState(false)
   const [fav, setFav] = useState(false)
@@ -36,7 +42,33 @@ const SearchAndLogoNavbar = () => {
   }, [])
 
   const [menuIsOpen, setMenuIsOpen] = useState(false)
-   let username =JSON.parse(localStorage.getItem('user'))
+  const [seeButtonsUser , setSeeButtonsUser] = useState(true)
+  const handlebutton = (boolean) => {
+    boolean ? setSeeButtonsUser(false) : setSeeButtonsUser(true)
+  }
+  let token = () => localStorage.getItem('token')
+  let headers = { headers: { 'authorization': `Bearer ${token()}` } }
+  const handleSignOut = () => {
+      axios.post(apiUrl + `auth/signout`, userLocalStorage.email, headers)
+      .then(() => {
+          localStorage.clear();
+          navigate('/')
+      })
+      .catch(err => alert(err))
+      dispatch(SaveUserLogin({
+        token: "",
+        user: {}
+    }))
+  }
+  const tokenLocalStorage = localStorage.getItem('token');
+  const userLocalStorage = JSON.parse(localStorage.getItem('user'));
+  let tokenCurrent = ""
+  userLogin.token.length > 0 ? tokenCurrent = userLogin.token : tokenCurrent = tokenLocalStorage
+  console.log(tokenCurrent);
+
+  let userCurrent = {}
+  userLogin.user.length > 0 ? userCurrent = userLogin.user : userCurrent = userLocalStorage
+  console.log(userCurrent);
 
   return (
     <>
@@ -62,7 +94,8 @@ const SearchAndLogoNavbar = () => {
         </div>
         <div className=" lg:flex lg:justify-center lg:items-center lg:content-center lg:px-12 lg:gap-8">
           <div className="hidden lg:block">
-            <Anchor
+            {!tokenCurrent ?(
+              <Anchor
               to="/signin"
               className=" mx-2 text-xl lg:gap-1  flex justify-center content-center items-center"
             >
@@ -82,6 +115,20 @@ const SearchAndLogoNavbar = () => {
               </svg>
               Enter
             </Anchor>
+            ) : (
+              <button onClick={() => {
+                handlebutton(seeButtonsUser)
+              }} className=" mx-2 text-xl lg:gap-1 flex justify-center content-center items-center relative">
+              <img src={userCurrent.photo} className="w-8 h-8 rounded-full object-cover"/>
+              <p>{userCurrent.name} {userCurrent.lastName}</p>
+              {!seeButtonsUser ? (
+                <div className="absolute top-10 left-0 w-40 h-20 bg-[#FFFFFF] rounded-b-lg">
+                <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> User Panel</button>
+                <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> Sign Out</button>
+            </div>
+              ) : ("")}
+            </button>
+            )}
 
           </div>
           <div className=" hidden lg:block flex justify-center content-center items-center">
