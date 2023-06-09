@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Attendance = () => {
   return (
     <div className="container mx-auto py-12 flex flex-wrap justify-center gap-12">
