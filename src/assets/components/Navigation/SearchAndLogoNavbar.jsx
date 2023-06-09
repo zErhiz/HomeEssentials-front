@@ -116,9 +116,9 @@ const SearchAndLogoNavbar = () => {
               Enter
             </Anchor>
             ) : (
-              <button onClick={() => {
+              <div onClick={() => {
                 handlebutton(seeButtonsUser)
-              }} className=" mx-2 text-xl lg:gap-1 flex justify-center content-center items-center relative">
+              }} className=" mx-2 text-xl lg:gap-1 flex justify-center content-center items-center relative cursor-pointer">
               <img src={userCurrent.photo} className="w-8 h-8 rounded-full object-cover"/>
               <p>{userCurrent.name} {userCurrent.lastName}</p>
               {!seeButtonsUser ? (
@@ -127,7 +127,7 @@ const SearchAndLogoNavbar = () => {
                 <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> Sign Out</button>
             </div>
               ) : ("")}
-            </button>
+            </div>
             )}
 
           </div>
