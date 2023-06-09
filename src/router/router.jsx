@@ -8,6 +8,7 @@ import Signin from "../assets/pages/Signin";
 import AllProducts from "../assets/components/Products/AllProducts";
 import FormCV from "../pages/FormCV";
 import AdminPanel from "../pages/AdminPanel";
+import Payment from "../pages/Payment";
 
 const routes = createBrowserRouter([
         {
@@ -21,6 +22,7 @@ const routes = createBrowserRouter([
                         { path: '/allproducts', element: <AllProducts /> },
                         { path: "/FormCV", element: <FormCV /> },
                         { path: "/admin", element: <AdminPanel /> },
+                        { path: "/payment", element: <Payment /> },
                 ],
         },
 ]);
