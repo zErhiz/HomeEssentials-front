@@ -4,14 +4,14 @@ import apiUrl from '../../../api';
 import { useRef } from "react";
 import backgroundImage from '../../../public/images/banners/Signin.png'
 import logo from '../../../public/images/Logos/logo-solid-b.png'
-
+import {Navigate,  useNavigate } from 'react-router-dom';
 export default function Signin() {
-
+const navigate = useNavigate()
   const email = useRef()
   const password = useRef()
 
   const SignIn = (e) => {
-    toast("Wow so easy !")
+ 
     e.preventDefault()
 
     let inputEmail = email.current.value
@@ -27,7 +27,10 @@ export default function Signin() {
         console.log(res)
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("user", JSON.stringify(res.data.user))
+        localStorage.setItem("photo",res.data.photo )
+        navigate ('/')
       })
+
       .catch(err => {
         console.log(err.response.data.message)
       })
