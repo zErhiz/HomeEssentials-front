@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from '../../../api';
 import { useRef } from "react";
-import backgroundImage from '../../../public/images/banners/Recurso8.png'
+import backgroundImage from '../../../public/images/banners/Signin.png'
 import logo from '../../../public/images/Logos/logo-solid-b.png'
 
 export default function Signin() {
@@ -34,17 +34,16 @@ export default function Signin() {
 
   }
 
-  return (
+  return ( 
     <>
       <div
-        className='z-20 min-h-screen flex font-sans font-semibold items-center'
+        className='z-20 min-h-screen flex font-semibold items-center'
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover"
         }}>
-        
         <div className='relative flex flex-col z-20 sm:w-[40%] w-[100%] justify-center items-center text-[#7847E0] selection:bg-[#7847E0] selection:text-[#ffe927] ml-20'>
           <div className='relative h-[6rem] w-[100%] bg-white flex justify-center items-center shadow-[0_5px_10px_rgba(0,0,0,0.15)] justify-center rounded-[8px_8px_0_0] mb-[2px]'>
             <h1 className='text-3xl font-bold'>Welcome back!</h1>
