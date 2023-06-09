@@ -22,12 +22,12 @@ export default function AdminPanel() {
 
 
     return (
-        <div className="container sm:p-4 flex flex-col items-center bg-[#E0E7F1]">
+        <div className="container p-2 sm:p-4 flex flex-col items-center bg-[#E0E7F1]">
             <h1 className="text-2xl font-bold mb-4 lg:text-3xl">Admin Panel</h1>
             <div className="grid grid-cols-1 gap-2 sm:gap-4 w-full justify-items-center text-[#393939]">
             <div className="bg-white p-2 sm:p-4 rounded shadow-lg w-full lg:w-5/6 flex flex-col items-center justify-center">
                     <h2 className="text-xl font-semibold mb-4 lg:text-2xl">User List</h2>
-                    <div className="w-full divide-y divide-[#393939] p-4 sm:p-8">
+                    <div className="w-full divide-y divide-[#393939] p-2 sm:p-8">
                         <div className="py-2 w-full">
                             <div className="grid grid-cols-5 sm:grid-cols-5">
                                 <h3 className="hidden sm:block col-span-2 font-medium lg:text-xl">Name</h3>
@@ -57,7 +57,7 @@ export default function AdminPanel() {
 
                 <div className="bg-white p-2 sm:p-4 rounded shadow-lg w-full lg:w-5/6 flex flex-col items-center justify-center">
                     <h2 className="text-xl font-semibold mb-4 sm:text-2xl">Off Sale List</h2>
-                    <div className="divide-y divide-white sm:w-full p-4 sm:p-8">
+                    <div className="divide-y divide-white sm:w-full p-2 sm:p-8">
                         {categories?.map((category) => (
                             <>
                                 <div className="py-2 sm:w-full sm:h-[15vh] sm:flex items-center justify-center" style={{backgroundColor: category.hover}}>

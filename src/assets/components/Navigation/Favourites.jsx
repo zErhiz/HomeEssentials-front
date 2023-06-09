@@ -11,7 +11,7 @@ function Favourites() {
     console.log(products) */
 
     return (
-        <div className="absolute transition-all z-50 top-[7rem] right-16 mt-2 bg-white w-[20rem] shadow-[0_5px_10px_rgba(0,0,0,0.15)] rounded-md text-[#393939] items-center flex flex-col h-[38rem]">
+        <div className="absolute transition-all z-40 top-[7rem] right-16 mt-2 bg-white w-[20rem] shadow-[0_5px_10px_rgba(0,0,0,0.15)] rounded-md text-[#393939] items-center flex flex-col h-[38rem]">
             <h2 className="text-xl font-semibold">Favourites</h2>
             <div className="w-[90%] bg-black min-h-[70%]">
                 <div className="w-full font-normal bg-white flex h-[3rem]">
