@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logoNav from '../../../../public/images/Logos/logo-2-b.png'
 import Favourites from "./Favourites.jsx";
-import SearchBar from "./searchbar";
-
+import SearchBar from "./SearchBar";
+import Carrito from "./Carrito"
 
 const SearchAndLogoNavbar = () => {
   let { categories_read } = categories_actions
@@ -15,8 +15,12 @@ const SearchAndLogoNavbar = () => {
   let navigate = useNavigate()
   let categories = useSelector(store => store.categories.categories)
 
-
+  const [cart,setCart] = useState(false)
   const [fav, setFav] = useState(false)
+
+  const carrito = () => {
+    setCart(!cart)
+  }
 
   const home = () => {
     navigate('/')
@@ -35,6 +39,9 @@ const SearchAndLogoNavbar = () => {
 
   return (
     <>
+    {cart &&
+    <Carrito/>
+    }
       {fav &&
         <Favourites />
       }
@@ -106,6 +113,7 @@ const SearchAndLogoNavbar = () => {
               strokeWidth={1.5}
               stroke="currentColor"
               className="w-6 h-6"
+              onClick={carrito}
             >
               <path
                 strokeLinecap="round"

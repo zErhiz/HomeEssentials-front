@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 import apiUrl from "../../../../api";
-
+import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
+  const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
   const handleSearchQueryChange = (event) => {
-    setSearchQuery(event.target.value);
+    const query = event.target.value;
+    setSearchQuery(query);
+    if (!query) {
+      setSearchResults([]); 
+    } else {
+      handleSearch();
+    }
   };
 
   const handleSearch = async () => {
+    if (!searchQuery) {
+      setSearchResults([]); 
+      return; 
+    }
+
     try {
       const response = await fetch(`${apiUrl}products/search?searchQuery=${searchQuery}`);
       const data = await response.json();
@@ -18,38 +31,58 @@ const SearchBar = () => {
     }
   };
 
-  return (
-    <div className="flex justify-center">
-     <input
-    type="text"
-    placeholder="Search..."
-    className="rounded-l-full border-gray-300 bg-[#EDECEC] focus:outline-none focus:ring-2 focus:ring-black focus:border-black px-4 py-2 flex-1"
-    value={searchQuery}
-    onChange={handleSearchQueryChange}
-      />
-     <button onClick={handleSearch} className="bg-purple-500 hover:bg-purple-600 text-white rounded-r-full px-4 py-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-            </button>
+  const showOverflowScroll = searchResults.length > 0;
 
-      <ul>
-        {searchResults.map((product) => (
-          <li key={product._id}>{product.name}</li>
-        ))}
-      </ul>
-    </div>
+  return (
+    <>
+      <div className="flex flex-col">
+        <div className="flex justify-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="rounded-l-full border-gray-300 bg-[#EDECEC] focus:outline-none focus:ring-2 focus:ring-black focus:border-black px-4 py-2 flex-1"
+            value={searchQuery}
+            onChange={handleSearchQueryChange}
+          />
+          <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-r-full px-4 py-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div
+          className={`absolute transition-all top-[7rem] left-16 flex flex-col z-50 overflow-x-hidden ${
+            showOverflowScroll ? "overflow-scroll" : ""
+          } h-[70%]`}
+        >
+          {searchResults.map((product) => (
+            <div onClick={() => navigate(`/products/${product._id}`)} key={product._id} className="cursor-pointer bg-white rounded-md shadow-md p-4 flex border justify-start">
+              <img
+                src={product.photo}
+                alt={product.name}
+                className="w-40 h-40 object-cover mb-4"
+              />
+              <div className="justify-center flex flex-col items-center content-center ">
+                <h3 className="text-lg font-semibold text-center">{product.name}</h3>
+                <p className="text-gray-600 text-center">${product.price}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
