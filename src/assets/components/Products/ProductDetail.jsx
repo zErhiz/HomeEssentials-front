@@ -39,6 +39,20 @@ export default function ProductDetail() {
           theme: "colored",
           });})
   }
+  //agregar producto a favoritos
+  const addFavorites = (product_id) => {
+    const data = {userEmail: email, productId: product_id}
+    axios.post(`${apiUrl}favorites`, data, headers).then(res => {
+        console.log(res.data)
+        toast.success("Article added to favorites", {
+            theme: "colored",
+            })
+    }).catch(err => {
+        console.log(err)
+        toast.error(err.response.data.message, {
+            theme: "colored",
+            });})
+  }
     
   useEffect(() => {
     axios(`${apiUrl}products/${id}`)
@@ -53,6 +67,9 @@ export default function ProductDetail() {
       .catch(err => console.log(err))
   }, [id])
   let result= (prodOne.price / 12).toFixed(2);
+
+
+
   return (
   
   
@@ -232,9 +249,10 @@ export default function ProductDetail() {
   
             <button
               type="button"
-              className="w-full rounded border border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold uppercase tracking-wide"
+              onClick={()=> addFavorites(prodOne._id)}
+              className="w-full rounded border border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold uppercase tracking-wide flex justify-center items-center"
             >
-              Notify when on sale
+              <span className='text-3xl'>💟 </span> Add Favorites
             </button>
           </form>
         </div>
