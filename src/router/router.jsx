@@ -14,6 +14,7 @@ import CategoryProducts from "../assets/pages/CategoryDetail"
 import About from "../assets/pages/About";
 import Contact from "../assets/pages/Contact";
 import Attendance from "../assets/pages/Attendance";
+import Cart from "../assets/pages/Cart";
 
 const routes = createBrowserRouter([
         {
@@ -24,16 +25,17 @@ const routes = createBrowserRouter([
                         { path: "/2", element: <Parte1 /> },
                         { path: "/signin", element: <Signin /> },
                         { path: "/signup", element: <Signup /> },
-                        { path: '/allproducts', element: <AllProducts /> },
+                        { path: "/allproducts", element: <AllProducts /> },
                         { path: "/FormCV", element: <FormCV /> },
                         { path: "/admin", element: <AdminPanel /> },
                         { path: "/userPanel", element: <UserPanel /> },
-                        { path:"/products/:id", element:<ProductDetail/>},
-                        { path:"/products/category/:id", element:<CategoryProducts/>},
-                        { path:"/about", element:<About/>},
-                        { path:"/contact", element:<Contact/>},
-                        { path:"/attendance", element:<Attendance/>},
+                        { path: "/products/:id", element:<ProductDetail/>},
+                        { path: "/products/category/:id", element:<CategoryProducts/>},
+                        { path: "/about", element:<About/>},
+                        { path: "/contact", element:<Contact/>},
+                        { path: "/attendance", element:<Attendance/>},
                         { path: "/payment", element: <Payment /> },
+                        { path: "/cart/:email", element: <Cart /> },
                 ],
         },
 ]);

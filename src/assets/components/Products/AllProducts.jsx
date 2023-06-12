@@ -27,7 +27,8 @@ const AllProducts = () => {
 {products.map((prod) => (
   
 
-<button className="  rounded-lg p-6 w-[100%] sm:w-[50%] 2xl:w-[25%] gap-6 shadow-sm shadow-indigo-100">
+<button className="  rounded-lg p-6 w-[100%] sm:w-[50%] 2xl:w-[25%] gap-6 shadow-sm shadow-indigo-100"
+key={prod.photo}>
   <img src={prod.photo}
     className="h-64 w-[100%] border rounded-2xl  object-cover"
   />
