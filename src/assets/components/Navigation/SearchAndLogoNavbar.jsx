@@ -1,4 +1,3 @@
-import React from "react";
 import { Link as Anchor } from "react-router-dom";
 import { useEffect, useState } from "react";
 import categories_actions from '../../../store/actions/categories'
@@ -19,8 +18,11 @@ const SearchAndLogoNavbar = () => {
   let navigate = useNavigate()
   let categories = useSelector(store => store.categories.categories)
   const { userLogin } = useSelector(store => store)
-  console.log(userLogin);
+  //console.log(userLogin);
 
+  const user = JSON.parse(localStorage.getItem('user')) || ""
+  const email = userLogin.email? userLogin.email : user.email
+  
   const [cart,setCart] = useState(false)
   const [fav, setFav] = useState(false)
 
@@ -64,11 +66,11 @@ const SearchAndLogoNavbar = () => {
   const userLocalStorage = JSON.parse(localStorage.getItem('user'));
   let tokenCurrent = ""
   userLogin.token.length > 0 ? tokenCurrent = userLogin.token : tokenCurrent = tokenLocalStorage
-  console.log(tokenCurrent);
+  //console.log(tokenCurrent);
 
   let userCurrent = {}
   userLogin.user.length > 0 ? userCurrent = userLogin.user : userCurrent = userLocalStorage
-  console.log(userCurrent);
+  //console.log(userCurrent);
 
   return (
     <>
@@ -131,7 +133,7 @@ const SearchAndLogoNavbar = () => {
             )}
 
           </div>
-          <div className=" hidden lg:block flex justify-center content-center items-center">
+          <div className="lg:block flex justify-center content-center items-center">
             <div
               className="mx-2 text-xl flex cursor-pointer justify-center items-center content-center gap-1"
               onClick={favos}
@@ -153,7 +155,8 @@ const SearchAndLogoNavbar = () => {
               Favorites
             </div>
           </div>
-          <div className=" lg:flex flex-row hidden lg:block">
+{/* BORRAR MAS ADELANTE */}<Anchor to={`/cart/${btoa(email)}`}>Boton provisorio carrito</Anchor>{/* BORRAR MAS ADELANTE */}
+          <div className="flex-row hidden lg:block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
