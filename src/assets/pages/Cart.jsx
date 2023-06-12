@@ -117,10 +117,10 @@ const Cart = () => {
                     <div className="w-[90%] h-28 flex items-center justify-end pr-10">
                         <button
                             type="submit"
-                            onClick={()=> "enviar a pagina de compra"}
+                            onClick={()=> navigate('/paymentpage')}
                             className="px-4 py-2 font-bold text-white bg-gradient-to-r from-purple-900 to-purple-600 
                                         rounded-lg hover:bg-purple-700 focus:outline-none focus:shadow-outline">
-                            Saved Changes
+                            Proceed to checkout
                         </button>
                     </div>
                 </div>

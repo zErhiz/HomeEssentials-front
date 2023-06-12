@@ -15,6 +15,7 @@ import About from "../assets/pages/About";
 import Contact from "../assets/pages/Contact";
 import Attendance from "../assets/pages/Attendance";
 import Cart from "../assets/pages/Cart";
+import PaymentPage from "../assets/components/Payments/PaymentPage";
 
 const routes = createBrowserRouter([
         {
@@ -36,6 +37,7 @@ const routes = createBrowserRouter([
                         { path: "/attendance", element:<Attendance/>},
                         { path: "/payment", element: <Payment /> },
                         { path: "/cart/:email", element: <Cart /> },
+                        {path:  '/paymentpage', element: <PaymentPage/>}
                 ],
         },
 ]);
