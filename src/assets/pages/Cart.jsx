@@ -27,28 +27,38 @@ const Cart = () => {
                 .catch(err => console.log(err))}, [])
     
     //agregar producto
-    const addProduct = (product_id) => { 
-        toast('Unit added');
+    const addProduct = (product_id) => {
         const data = {userEmail: email, productId: product_id}
         axios.post(`${apiUrl}cart/create`, data, headers).then(res => {
             console.log(res)
+            toast.success(res.data.message[0], {
+                theme: "colored",
+                })
             render()
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            console.log(err)
+            toast.error(err.response.data.message[0], {
+                theme: "colored",
+                });})
     }
     //Restar producto
     const substractProduct = (product_id) => { 
-        toast('Unit substracted');
         const data = {userEmail: email, productId: product_id}
         axios.put(`${apiUrl}cart/subtract`, data, headers).then(res => {
             console.log(res)
+            toast.warn(res.data.message[0], {
+                theme: "colored",
+                })
             render()
         }).catch(err => console.log(err))
     }
     //Eliminar producto
     const deleteProduct = (product_id) => { 
-        toast('Unit deleted');
         axios.delete(`${apiUrl}cart?userEmail=${email}&productId=${product_id}`, headers).then(res => {
             console.log(res)
+            toast.error(res.data.message[0], {
+                theme: "colored",
+                })
             render()
         }).catch(err => console.log(err))
     }
@@ -118,7 +128,7 @@ const Cart = () => {
             <ToastContainer
             transition={Flip}
             position="bottom-right"
-            autoClose={200}
+            autoClose={600}
             hideProgressBar
             newestOnTop={false}
             closeOnClick

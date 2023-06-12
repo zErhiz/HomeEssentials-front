@@ -10,15 +10,35 @@ import { useParams } from 'react-router-dom'
 import productOne_action from '../../../store/actions/productOne'
 import store from '../../../store/store'
 import { Button } from '@nextui-org/react';
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const {productOne}= productOne_action 
 export default function ProductDetail() {
     const navigate = useNavigate()
     let storeOne = useSelector(store=>store.product)
     const { id } = useParams()
-    console.log(id);
     const dispatch = useDispatch()
     let [prodOne, setProdOne]= useState([])
+    const user = JSON.parse(localStorage.getItem('user'))
+    const token = localStorage.getItem('token')
+    const email = user.email
+    let headers = { headers: { 'authorization': `Bearer ${token}` } }
+    
+    //agregar producto
+    const addProduct = (product_id) => { 
+      const data = {userEmail: email, productId: product_id}
+      axios.post(`${apiUrl}cart/create`, data, headers).then(res => {
+          console.log(res.data.message)
+          toast.success(res.data.message[0], {
+            theme: "colored",
+            })
+      }).catch(err => {
+        console.log(err)
+        toast.error(err.response.data.message[0], {
+          theme: "colored",
+          });})
+  }
     
   useEffect(() => {
     axios(`${apiUrl}products/${id}`)
@@ -201,6 +221,10 @@ export default function ProductDetail() {
   
             <button
               type="submit"
+              onClick={(e)=> {
+                e.preventDefault()
+                addProduct(prodOne._id)
+              }}
               className="w-full rounded bg-violet-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition ease-in-out delay-150 bg-orange-500 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 duration-300"
             >
               Add to cart
@@ -224,6 +248,18 @@ export default function ProductDetail() {
         </div>
       </div>
     </div>
+            <ToastContainer
+            transition={Flip}
+            position="bottom-right"
+            autoClose={1000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"/>
   </section>
   )
 }
