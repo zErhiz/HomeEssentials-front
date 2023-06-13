@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import categories_actions from '../../../store/actions/categories'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import logoNav from '../../../../public/images/Logos/logo-2-b.png'
 import Favourites from "./Favourites.jsx";
 import SearchBar from "./SearchBar";
 import Carrito from "./Carrito"
@@ -83,7 +82,7 @@ const SearchAndLogoNavbar = () => {
       <div className=" justify-center bg-[#FFFFFF] h-[100px] lg:h-[80px] flex lg:justify-between">
         <div className="px-4 lg:flex lg:gap-12 flex flex-col lg:flex-row justify-center items-center content-center lg:px-12">
           <div className=" flex flex-row gap-12">
-            <img className="w-24 cursor-pointer" onClick={home} src={logoNav} alt="logo" />
+            <img className="w-24 object-cover cursor-pointer" onClick={home} src="images/Logos/logo-2-b.png" alt="logo" />
             <button className="block lg:hidden" onClick={() => setMenuIsOpen(!menuIsOpen)}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -121,8 +120,10 @@ const SearchAndLogoNavbar = () => {
               <div onClick={() => {
                 handlebutton(seeButtonsUser)
               }} className=" mx-2 text-xl lg:gap-1 flex justify-center content-center items-center relative cursor-pointer">
-              <img src={userCurrent.photo} className="w-8 h-8 rounded-full object-cover"/>
-              <p>{userCurrent.name} {userCurrent.lastName}</p>
+              <div className="w-40 flex">
+                <img src={userCurrent.photo} className="w-8 h-8 rounded-full object-cover"/>
+                <p>{userCurrent.name} {userCurrent.lastName}</p>
+              </div>
               {!seeButtonsUser ? (
                 <div className="absolute top-10 left-0 w-40 h-20 bg-[#FFFFFF] rounded-b-lg">
                 <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> User Panel</button>
@@ -155,7 +156,7 @@ const SearchAndLogoNavbar = () => {
               Favorites
             </div>
           </div>
-{/* BORRAR MAS ADELANTE */}<Anchor to={`/cart/${btoa(email)}`}>Boton provisorio carrito</Anchor>{/* BORRAR MAS ADELANTE */}
+{/* BORRAR MAS ADELANTE */}<Anchor to={`/cart/${btoa(email)}`}>Cart</Anchor>{/* BORRAR MAS ADELANTE */}
           <div className="flex-row hidden lg:block">
             <svg
               xmlns="http://www.w3.org/2000/svg"

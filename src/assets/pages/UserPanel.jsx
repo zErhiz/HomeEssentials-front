@@ -3,12 +3,14 @@ import axios from "axios";
 import apiUrl from "../../../api"
 import { uploadFile } from "../../../firebase";
 import Grid from "react-loading-icons/dist/esm/components/grid";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast, Flip } from 'react-toastify';
 
 const UserPanel = () => {
   const [infoUser, setInfoUser] = useState(null) 
   const user = JSON.parse(localStorage.getItem("user"))
   //console.log("user", user);
-  console.log("infoUser", infoUser);
+  //console.log("infoUser", infoUser);
 
   useEffect(
     () => {
@@ -26,7 +28,7 @@ const UserPanel = () => {
   const [img, setImg] = useState(null)
   const [buttonSend, setButtonSend] = useState(false)
   let [loading, setLoading] = useState(false)
-  console.log(name);
+  //console.log(name);
 
   const data = {}
 
@@ -36,11 +38,17 @@ const UserPanel = () => {
     email ? data.email = email : ""
     password ? data.password = password : ""
     img ? data.img = img : ""
-    console.log(data);
+    //console.log(data);
 
     let token = () => localStorage.getItem('token')
     let headers = { headers: { 'authorization': `Bearer ${token()}` } }
-    axios.post(apiUrl + `users/${infoUser._id}`, data, headers).then(res => setInfoUser(res.data.response)).catch(err => console.log(err))
+    axios.post(apiUrl + `users/${infoUser._id}`, data, headers).then(res => {
+                                                                      setInfoUser(res.data.response)
+                                                                      console.log(res.data.message);
+                                                                      toast.success(res.data.message, {
+                                                                        theme: "colored",
+                                                                        })
+                                                                    }).catch(err => console.log(err))
   }
   const handleSubmit = async (img) => {
     try {
@@ -59,7 +67,7 @@ const UserPanel = () => {
 
 
   return (
-    <div className='bg-[#FFFFFF] p-4 h-[80vh] flex flex-col justify-center items-center'>
+    <div className='bg-[#FFFFFF] p-4 h-[80vh] flex flex-col justify-center items-center mt-12 sm:mt-0'>
       {!loading ? (<></>) : (<Grid className="fixed bg-[#00000073] p-2 rounded-lg"/>)}
             <div className='flex justify-center items-center pb-4'>
               <h3 className='font-bold text-gray-700 text-3xl'>User Panel</h3>
@@ -82,6 +90,7 @@ const UserPanel = () => {
                 </div>
               </div>
               <form onSubmit={(e)=> {
+                                e.target.reset()
                                 e.preventDefault()
                                 handleForm()
               }} className="w-full lg:w-1/2 h-full flex flex-col justify-around">
@@ -137,6 +146,18 @@ const UserPanel = () => {
                   </div>
               </form>
             </div>
+            <ToastContainer
+            transition={Flip}
+            position="bottom-right"
+            autoClose={600}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"/>
         </div>
   );
 }
