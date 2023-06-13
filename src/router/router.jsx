@@ -15,7 +15,9 @@ import About from "../assets/pages/About";
 import Contact from "../assets/pages/Contact";
 import Attendance from "../assets/pages/Attendance";
 import Cart from "../assets/pages/Cart";
-
+import Orders from "../pages/AdminComponents/Orders";
+import ProductsAdmin from "../pages/AdminComponents/ProductsAdmin"
+import Users from "../pages/AdminComponents/Users";
 const routes = createBrowserRouter([
         {
                 path: "/",
@@ -36,6 +38,9 @@ const routes = createBrowserRouter([
                         { path: "/attendance", element:<Attendance/>},
                         { path: "/payment", element: <Payment /> },
                         { path: "/cart/:email", element: <Cart /> },
+                        { path: "/admin/order", element: <Orders /> },
+                        { path: "/admin/products", element: <ProductsAdmin /> },
+                        { path: "/admin/users", element: <Users /> },
                 ],
         },
 ]);
