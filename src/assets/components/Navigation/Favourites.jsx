@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Favourites() {
+// eslint-disable-next-line react/prop-types
+function Favourites({openModal, onCloseModal}) {
     const { userLogin } = useSelector(store => store)
     const user = JSON.parse(localStorage.getItem('user')) || ""
     const email = userLogin.email? userLogin.email : user.email
@@ -41,10 +42,13 @@ function Favourites() {
                                                                                                 })
                                                                                             })
     }
-
+    if(!openModal) return null
     return (
+        <div className='w-full'>
+            
+            <div className='w-full h-screen top-0 z-30 fixed'
+                        onClick={() => onCloseModal(false)}></div>
         <div className="absolute transition-all z-40 gap-3 top-[7rem] right-16 mt-2 bg-white w-[22rem] shadow-[0_5px_10px_rgba(0,0,0,0.15)] rounded-md text-[#393939] items-center flex flex-col h-fit py-[2rem]">
-                    
                 {favorites?.map(product => (
                     <div key={product.product_id._id} className="w-[90%] cursor-pointer bg-white hover:scale-[1.03] shadow-[0_0_3px_rgba(0,0,0,0.20)] hover:shadow-[0_1px_7px_rgba(0,0,0,0.2)] rounded-md h-fit">
                         <div className="font-normal my-2 text-[#393939] flex items-center justify-between min-h-[3rem] h-fit px-3">
@@ -84,6 +88,7 @@ function Favourites() {
             draggable
             pauseOnHover
             theme="dark"/>
+        </div>
         </div>
     )
 }
