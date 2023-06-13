@@ -1,7 +1,6 @@
 import React from 'react';
-import fondo from '../../public/images/Logos/hoe-b.png'
 import { Link as Anchor } from 'react-router-dom';
-const AdminPanel = () => {
+const Orders = () => {
   return (
     <div className="h-screen flex bg-gray-100">
       {/* Barra de al lado */}
@@ -13,7 +12,7 @@ const AdminPanel = () => {
 
         {/* Navigation */}
         <nav className="py-4">
-        <ul>
+          <ul>
           <Anchor to="/admin"> 
             <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
               Dashboard
@@ -40,11 +39,11 @@ const AdminPanel = () => {
 
       {/* Content */}
       <div className="flex-1 p-8">
-        <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
+        <h2 className="text-2xl font-bold mb-4">Orders</h2>
         {/* Content goes here */}
       </div>
     </div>
   );
 };
 
-export default AdminPanel;
+export default Orders;
