@@ -29,10 +29,9 @@ const AllProducts = () => {
 <div className="  rounded-lg p-6 w-[100%] sm:w-[50%] 2xl:w-[25%] gap-6 shadow-sm shadow-indigo-100"
 key={prod.photo}>
   
-  <div className=' cursor-pointer' onClick={()=>navigate(`/products/${prod._id}`)}>
-  <img src={prod.photo}
-    className="h-64 w-[100%] border rounded-2xl  object-cover"
-  /></div>
+  <div className=' cursor-pointer relative' onClick={()=>navigate(`/products/${prod._id}`)}>
+  <img src={prod.photo} className="h-64 w-[100%] border rounded-2xl  object-cover"/>
+  </div>
 
   <div className="mt-2">
       <div>
