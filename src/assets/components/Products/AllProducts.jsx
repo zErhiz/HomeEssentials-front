@@ -18,35 +18,28 @@ const AllProducts = () => {
   useEffect(() => {
     if (products.length === 0) {
         dispatch(products_read())
-       
     }
 }, [])
   return (
 <>
 <h1 className='p-9 text-center font-bold text-3xl'>Take a look of our products!</h1>
+<div className='w-full flex flex-wrap'>
 {products.map((prod) => (
   
-
-<button className="  rounded-lg p-6 w-[100%] sm:w-[50%] 2xl:w-[25%] gap-6 shadow-sm shadow-indigo-100"
+<div className="  rounded-lg p-6 w-[100%] sm:w-[50%] 2xl:w-[25%] gap-6 shadow-sm shadow-indigo-100"
 key={prod.photo}>
+  
+  <div className=' cursor-pointer' onClick={()=>navigate(`/products/${prod._id}`)}>
   <img src={prod.photo}
     className="h-64 w-[100%] border rounded-2xl  object-cover"
-  />
+  /></div>
 
   <div className="mt-2">
-    <dl>
       <div>
-      
+        <dd className="font-semibold text-xl pl-5">{prod.name}</dd>
       </div>
 
-      <div>
-        <dt className="sr-only">Address</dt>
-
-        <dd className="font-semibold text-xl">{prod.name}</dd>
-      </div>
-    </dl>
-
-    <div className="mt-6 flex items-center gap-8 text-xs">
+    <div className="mt-6 flex items-center gap-8 text-xs justify-around w-full">
       <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
         <svg
           className="h-4 w-4 text-indigo-700"
@@ -85,42 +78,16 @@ key={prod.photo}>
             d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
           />
         </svg>
-
         <div className="mt-1.5 sm:mt-0">
           <p className="text-gray-500 text-base">Price</p>
-
           <p className="font-medium text-base">${prod.price}</p>
         </div>
       </div>
-
-      <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-      
-
-        
-      </div>
-      <Button shadow color="secondary" auto   onClick={()=>navigate(`/products/${prod._id}`)}>
-          Detail
-        </Button>
     </div>
   </div>
-</button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+</div>
 ))}
+</div>
 </>
 )}
 

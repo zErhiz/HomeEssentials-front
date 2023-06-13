@@ -5,13 +5,19 @@ import { uploadFile } from "../../../firebase";
 import Grid from "react-loading-icons/dist/esm/components/grid";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast, Flip } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const UserPanel = () => {
+  let navigate=useNavigate()
   const [infoUser, setInfoUser] = useState(null) 
   const user = JSON.parse(localStorage.getItem("user"))
   //console.log("user", user);
   //console.log("infoUser", infoUser);
+  const token = localStorage.getItem("token");
+  let headers = { headers: { 'authorization': `Bearer ${token}` } }
 
+  const [favorites, setFavorite] = useState([])
+  useEffect(() => {axios.get(`${apiUrl}favorites?userEmail=${email}`, headers).then(res => setFavorite(res.data.response)).catch(err => console.log(err))}, [])
   useEffect(
     () => {
       /* let token = localStorage.getItem('token')
@@ -67,12 +73,12 @@ const UserPanel = () => {
 
 
   return (
-    <div className='bg-[#FFFFFF] p-4 h-[80vh] flex flex-col justify-center items-center mt-12 sm:mt-0'>
+    <div className='bg-[#FFFFFF] p-4 min-h-[80vh] flex flex-col justify-center items-center mt-12 sm:mt-0'>
       {!loading ? (<></>) : (<Grid className="fixed bg-[#00000073] p-2 rounded-lg"/>)}
             <div className='flex justify-center items-center pb-4'>
               <h3 className='font-bold text-gray-700 text-3xl'>User Panel</h3>
             </div>
-            <div className="p-4 sm:w-[70vw] rounded-lg shadow-lg bg-[#E7E7E7] flex flex-col lg:flex-row">
+            <div className="p-4 sm:w-[70vw] rounded-lg shadow-lg bg-[#E7E7E7] flex flex-col lg:flex-row lg:h-[28rem]">
               <div className="w-full lg:w-1/2 flex flex-col sm:flex-row lg:flex-col items-center justify-evenly">
               <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full rounded-lg cursor-pointer">
                                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -145,6 +151,27 @@ const UserPanel = () => {
                       </button>
                   </div>
               </form>
+            </div>
+            <div className='flex justify-center items-center pb-4'>
+              <h3 className='font-bold text-gray-700 text-3xl mt-16'>Your favorites</h3>
+            </div>
+            <div className="p-4 sm:w-[70vw] rounded-lg shadow-lg flex flex-col lg:flex-row flex-wrap justify-evenly">
+            {favorites.map((product) => (
+                    <div key={product.product_id._id} className="mb-10 cursor-pointer bg-white hover:scale-[1.03] shadow-[0_0_3px_rgba(0,0,0,0.20)] hover:shadow-[0_1px_7px_rgba(0,0,0,0.2)] rounded-md h-fit">
+                        <div className="font-normal my-2 text-[#393939] flex items-center justify-between min-h-[3rem] h-fit px-3">
+                            <img className="w-[6rem] h-[6rem] object-cover rounded-md " src={product.product_id.photo} alt="" />
+                            <div className="w-[8rem]">
+                                <h2 className='text-xs ml-1'>{product.product_id.name}</h2>
+                            </div>
+                            <div className='text-md flex justify-end pr-2 w-[6.5rem]'>
+                                <p>$ {product.product_id.price}</p>
+                            </div>
+                        </div>
+                        <div
+                            className='flex text-[#ff3b3b] bg-[#faf4ec] cursor-pointer border-t-[1px] rounded-b-md justify-end text-xs items-center pr-2 h-6'>
+                        </div>
+                    </div>
+                ))}
             </div>
             <ToastContainer
             transition={Flip}
