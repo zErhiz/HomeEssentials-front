@@ -1,16 +1,18 @@
 import React from "react";
 import { Link as Anchor } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
-
+import NavigationComponent from "./NavigationComponent";
 import { useSelector, useDispatch } from "react-redux";
 import categories_actions from "../../store/actions/categories";
 import manufacturers_actions from "../../store/actions/manufacturers";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import apiUrl from "../../../api";
 const Products = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let { categories_read } = categories_actions;
   let { manufacturers_read } = manufacturers_actions;
   let categories = useSelector((store) => store.categories);
@@ -38,13 +40,11 @@ const Products = () => {
     const totalPages = productData.totalPages;
 
     if (page < totalPages) {
-      
       setPage((prevPage) => prevPage + 1);
     }
   }
   function HandleArrowPrev() {
     if (page > 1) {
-  
       setPage((prevPage) => prevPage - 1);
     }
   }
@@ -75,29 +75,37 @@ const Products = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to create this product?',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "Do you want to create this product?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, create it!',
-      cancelButtonText: 'No, cancel!',
+      confirmButtonText: "Yes, create it!",
+      cancelButtonText: "No, cancel!",
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        setIsModalOpen(!isModalOpen)
+        setIsModalOpen(!isModalOpen);
         axios
           .post(`${apiUrl}admin/products`, formData)
           .then((response) => {
-            Swal.fire('Product created!', 'The product has been created successfully.', 'success');
+            Swal.fire(
+              "Product created!",
+              "The product has been created successfully.",
+              "success"
+            );
             console.log(response.data);
           })
           .catch((error) => {
             console.error(error);
           });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire('Cancelled', 'The product creation has been cancelled.', 'error');
+        Swal.fire(
+          "Cancelled",
+          "The product creation has been cancelled.",
+          "error"
+        );
       }
     });
   };
@@ -105,11 +113,11 @@ const Products = () => {
   const handleModalClick = () => {
     setIsModalOpen(!isModalOpen);
   };
- const handleModal2Click = (product) => {
-  setSelectedProductId(product._id);
-  setSelectedProduct(product);
-  setIsModal2Open(!isModal2Open);
-};
+  const handleModal2Click = (product) => {
+    setSelectedProductId(product._id);
+    setSelectedProduct(product);
+    setIsModal2Open(!isModal2Open);
+  };
   useEffect(() => {
     if (categories.length === 0) {
       dispatch(categories_read());
@@ -141,141 +149,211 @@ const Products = () => {
     });
   };
 
-{/* logica de eliminar producto */}
-
-const handleDelete = (productId) => {
- 
-  Swal.fire({
-    title: 'Are you sure?',
-    text: 'You will not be able to recover this product!',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: 'Deleted!',
-        text: 'Product has been deleted.',
-        icon: 'success',
-        position: 'top-center',
-      });
-
-      axios
-        .delete(`${apiUrl}admin/deleteone/${productId}`)
-        .then((response) => {
-          console.log(response.data);
-       
-          setProductData(prevData => {
-            const updatedData = prevData.products.filter(product => product._id !== productId);
-            return {
-              ...prevData,
-              products: updatedData
-            };
-          });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      Swal.fire('be careful next time');
-    }
-  });
-};
-
-
-const [formDataEdit, setFormDataEdit] = useState({
-  name: "",
-  description: "",
-  price: 0,
-  price_offer: 0,
-  percentage_offer: 0,
-  photo: "",
-  stock_Available: 0,
-  category_id: "",
-  manufacturer_id: "",
-});
-const handleSubmitEdit = (productId) => (event) => {
-  event.preventDefault();
-  axios
-    .post(`${apiUrl}admin/update/${productId}`, formDataEdit)
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
-
-useEffect(() => {
-  if (selectedProduct) {
-    setFormDataEdit({
-      name: selectedProduct.name,
-      description: selectedProduct.description,
-      price: selectedProduct.price,
-      price_offer: selectedProduct.price_offer,
-      percentage_offer: selectedProduct.percentage_offer,
-      photo: selectedProduct.photo,
-      stock_Available: selectedProduct.stock_Available,
-      category_id: selectedProduct.category_id,
-      manufacturer_id: selectedProduct.manufacturer_id,
-    });
+  {
+    /* logica de eliminar producto */
   }
-}, [selectedProduct]);
 
+  const handleDelete = (productId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will not be able to recover this product!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Product has been deleted.",
+          icon: "success",
+          position: "top-center",
+        });
 
+        axios
+          .delete(`${apiUrl}admin/deleteone/${productId}`)
+          .then((response) => {
+            console.log(response.data);
 
-const handleInputChangeName = (event) => {
-  const { name, value } = event.target;
-  setFormDataEdit((prevFormData) => ({
+            setProductData((prevData) => {
+              const updatedData = prevData.products.filter(
+                (product) => product._id !== productId
+              );
+              return {
+                ...prevData,
+                products: updatedData,
+              };
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        Swal.fire("be careful next time");
+      }
+    });
+  };
+  {
+    /* logica editar productp */
+  }
+
+  const [formDataEdit, setFormDataEdit] = useState({
+    name: "",
+    description: "",
+    price: 0,
+    price_offer: 0,
+    percentage_offer: 0,
+    photo: "",
+    stock_Available: 0,
+    category_id: "",
+    manufacturer_id: "",
+  });
+  const handleSubmitEdit = (productId) => (event) => {
+    event.preventDefault();
+  
+    // Mostrar alerta de confirmación antes de la edición
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to edit this product?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsModal2Open(!isModal2Open)
+        axios
+          .put(`${apiUrl}admin/update/${productId}`, formDataEdit)
+          .then((response) => {
+           
+            setProductData((prevData) => {
+              const updatedProducts = prevData.products.map((product) => {
+                if (product._id === productId) {
+                
+                  return {
+                    ...product,
+                    name: formDataEdit.name,
+                    description: formDataEdit.description,
+                    price: formDataEdit.price,
+                    price_offer: formDataEdit.price_offer,
+                    percentage_offer: formDataEdit.percentage_offer,
+                    photo: formDataEdit.photo,
+                    stock_Available: formDataEdit.stock_Available,
+                    category_id: formDataEdit.category_id,
+                    manufacturer_id: formDataEdit.manufacturer_id,
+                  };
+                }
+                return product;
+              });
+              return {
+                ...prevData,
+                products: updatedProducts,
+              };
+            });
+  
+            Swal.fire('Success!', 'Your product has been edited.', 'success');
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        Swal.fire('Be careful next time');
+      }
+    });
+  };
+  const handleInputChangeName = (event) => {
+    const { name, value } = event.target;
+    setFormDataEdit((prevFormData) => ({
+      ...prevFormData,
+      name: value,
+    }));
+  };
+const handleInputChangeDescription = (event) =>{
+  const {name, value} = event.target;
+  setFormDataEdit((prevFormData)=>({
     ...prevFormData,
-    [name]: value,
-  }));
-};
+    description: value
+  }))
+}
+const handleInputChangePrice = (event) =>{
+  const {name, value} = event.target;
+  setFormDataEdit((prevFormData)=>({
+    ...prevFormData,
+    price: value
+  }))
+}
+const handleInputChangePriceOffer = (event) =>{
+  const {name, value} = event.target;
+  setFormDataEdit((prevFormData)=>({
+    ...prevFormData,
+    price_offer:value
+  }))
+}
+const handleInputChangePercentageOffer = (event) =>{
+  const {name, value} = event.target;
+  setFormDataEdit((prevFormData)=>({
+    ...prevFormData,
+    percentage_offer:value
+  }))
+}
+const handleInputChangePhoto = (event) =>{
+  const {name, value} = event.target;
+  setFormDataEdit((prevFormData)=>({
+    ...prevFormData,
+    photo:value
+  }))
+}
+const handleInputChangeStock = (event) =>{
+  const {name, value} = event.target;
+  setFormDataEdit((prevFormData)=>({
+    ...prevFormData,
+    stock_Available:value
+  }))
+}
+
+const handleInputChangeCategorieEdit = (event) =>{
+  const {name, value} = event.target;
+  setFormDataEdit((prevFormData)=>({
+    ...prevFormData,
+    category_id:value
+  }))
+}
+const handleInputChangeBrandEdit = (event) =>{
+  const {name, value} = event.target;
+  setFormDataEdit((prevFormData)=>({
+    ...prevFormData,
+    manufacturer_id:value
+  }))
+}
 
 
+  useEffect(() => {
+    if (selectedProduct) {
+      setFormDataEdit({
+        name: selectedProduct.name,
+        description: selectedProduct.description,
+        price: selectedProduct.price,
+        price_offer: selectedProduct.price_offer,
+        percentage_offer: selectedProduct.percentage_offer,
+        photo: selectedProduct.photo,
+        stock_Available: selectedProduct.stock_Available,
+        category_id: selectedProduct.category_id,
+        manufacturer_id: selectedProduct.manufacturer_id,
+      });
+    }
+  }, [selectedProduct]);
 
+ 
 
   return (
     <div className="h-screen flex bg-gray-100">
-      {/* Barra de al lado */}
-      <div className="w-64 bg-white border-r">
-        <div className="h-20 flex items-center justify-center">
-          <h1 className="text-2xl font-bold">Admin Panel</h1>
-        </div>
-
-        {/* Navigation */}
-        <nav className="py-4">
-          <ul>
-            <Anchor to="/admin">
-              <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                Dashboard
-              </li>
-            </Anchor>
-            <Anchor to="/admin/products">
-              <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                Products
-              </li>
-            </Anchor>
-            <Anchor to="/admin/order">
-              <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                Orders
-              </li>
-            </Anchor>
-            <Anchor to="/admin/users">
-              <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                Users
-              </li>
-            </Anchor>
-          </ul>
-        </nav>
-      </div>
+      <NavigationComponent />
 
       {/* Productos */}
 
       <div className="flex-1 p-8 overflow-scroll">
-
         <h2 className="text-2xl font-bold mb-4">Products</h2>
         <div className="flex flex-row gap-3 items-center mb-4 justify-center content-center">
           <h2 className="text-2xl font-bold -mt-2 ">Add a new product</h2>
@@ -311,7 +389,7 @@ const handleInputChangeName = (event) => {
                     stroke="currentColor"
                     className={`w-6 h-6 absolute top-2 left-2 z-10 cursor-pointer transition-transform transform hover:scale-150`}
                     onClick={() => handleModal2Click(car)}
-                 >
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -327,7 +405,7 @@ const handleInputChangeName = (event) => {
                     stroke="currentColor"
                     className={`w-6 h-6 absolute top-2 right-2 z-10 cursor-pointer transition-transform transform hover:scale-150`}
                     onClick={() => handleDelete(car._id)}
-                 >
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -360,178 +438,183 @@ const handleInputChangeName = (event) => {
         {/* Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-md">
-            <div className="justify-end flex">
-              <svg
-                onClick={handleModalClick}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 cursor-pointer"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+            <div className="bg-white p-4 rounded-md">
+              <div className="justify-end flex">
+                <svg
+                  onClick={handleModalClick}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 cursor-pointer"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-lg font-semibold mb-2">Add a new product</h2>
+              <form className="flex flex-col" onSubmit={handleSubmit}>
+                <label className="mb-2">
+                  Name:
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </label>
+                <label className="mb-2">
+                  Description:
+                  <input
+                    type="text"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </label>
+                <label className="mb-2">
+                  Price:
+                  <input
+                    type="number"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </label>
+                <label className="mb-2">
+                  Price offer:
+                  <input
+                    type="number"
+                    name="price_offer"
+                    value={formData.price_offer}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </label>
+                <label className="mb-2">
+                  Percentage offer:
+                  <input
+                    type="number"
+                    name="percentage_offer"
+                    value={formData.percentage_offer}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </label>
+                <label className="mb-2">
+                  photo:
+                  <input
+                    type="text"
+                    name="photo"
+                    value={formData.photo}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </label>
+                <label className="mb-2">
+                  stock Available:
+                  <input
+                    type="number"
+                    name="stock_Available"
+                    value={formData.stock_Available}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </label>
+                <label className="mb-2">
+                  Categorie:
+                  <select
+                    name="category_id"
+                    value={formData.category_id}
+                    onChange={handleCategoryChange}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="">Select a category</option>
+                    {categories2?.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="mb-2">
+                  Brand:
+                  <select
+                    name="manufacturer_id"
+                    value={formData.manufacturer_id}
+                    onChange={handleManufacturerChange}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="">Select the brand of the product</option>
+                    {manufacturers?.map((manufacturer) => (
+                      <option key={manufacturer._id} value={manufacturer._id}>
+                        {manufacturer.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <button
+                  type="submit"
+                  className="bg-purple-500 text-white font-bold py-2 px-4 mt-4 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                >
+                  Create Product
+                </button>
+              </form>
             </div>
-            <h2 className="text-lg font-semibold mb-2">Add a new product</h2>
-            <form className="flex flex-col" onSubmit={handleSubmit}>
-              <label className="mb-2">
-                Name:
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </label>
-              <label className="mb-2">
-                Description:
-                <input
-                  type="text"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                  className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </label>
-              <label className="mb-2">
-                Price:
-                <input
-                  type="number"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleInputChange}
-                  className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </label>
-              <label className="mb-2">
-                Price offer:
-                <input
-                  type="number"
-                  name="price_offer"
-                  value={formData.price_offer}
-                  onChange={handleInputChange}
-                  className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </label>
-              <label className="mb-2">
-                Percentage offer:
-                <input
-                  type="number"
-                  name="percentage_offer"
-                  value={formData.percentage_offer}
-                  onChange={handleInputChange}
-                  className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </label>
-              <label className="mb-2">
-                photo:
-                <input
-                  type="text"
-                  name="photo"
-                  value={formData.photo}
-                  onChange={handleInputChange}
-                  className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </label>
-              <label className="mb-2">
-                stock Available:
-                <input
-                  type="number"
-                  name="stock_Available"
-                  value={formData.stock_Available}
-                  onChange={handleInputChange}
-                  className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </label>
-              <label className="mb-2">
-                Categorie:
-                <select
-                  name="category_id"
-                  value={formData.category_id}
-                  onChange={handleCategoryChange}
-                  className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                >
-                  <option value="">Select a category</option>
-                  {categories2?.map((category) => (
-                    <option key={category._id} value={category._id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="mb-2">
-                Brand:
-                <select
-                  name="manufacturer_id"
-                  value={formData.manufacturer_id}
-                  onChange={handleManufacturerChange}
-                  className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                >
-                  <option value="">Select the brand of the product</option>
-                  {manufacturers?.map((manufacturer) => (
-                    <option key={manufacturer._id} value={manufacturer._id}>
-                      {manufacturer.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-        
-              <button
-                type="submit"
-                className="bg-purple-500 text-white font-bold py-2 px-4 mt-4 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              >
-                Create Product
-              </button>
-            </form>
           </div>
-        </div>
         )}
         {/* modal2 */}
         {isModal2Open && selectedProduct && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-    <div className="bg-white p-4 rounded-md">
-      <div className=" justify-end flex">
-        <svg
-          onClick={handleModal2Click}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6 cursor-pointer"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      </div>
-      <h2 className="text-lg font-semibold mb-2">Edit the product</h2>
-      <form className="flex flex-col" onSubmit={() => handleSubmitEdit(selectedProductId)}>
-        <label>
-          Name:
-          <input
-  type="text"
-  name="nameEdit"
-  value={formDataEdit.name || ""}
-  onChange={handleInputChange}
-/>
-        </label>
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded-md">
+              <div className=" justify-end flex">
+                <svg
+                  onClick={handleModal2Click}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 cursor-pointer"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-lg font-semibold mb-2">Edit the product</h2>
+              <form
+                className="flex flex-col"
+                onSubmit={handleSubmitEdit(selectedProductId)} 
+              >
                 <label>
+                  Name:
+                  <input
+                    type="text"
+                    name="nameEdit"
+                    value={formDataEdit.name}
+                    onChange={handleInputChangeName}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </label>
+                     <label>
                   Description:
                   <input
                     type="text"
                     name="descriptionEdit"
                     value={formDataEdit.description || ""}
-                    onChange={handleInputChange}
+                    onChange={handleInputChangeDescription}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label>
@@ -540,7 +623,8 @@ const handleInputChangeName = (event) => {
                     type="number"
                     name="priceEdit"
                     value={formDataEdit.price || ""}
-                    onChange={handleInputChange}
+                    onChange={handleInputChangePrice}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label>
@@ -549,7 +633,8 @@ const handleInputChangeName = (event) => {
                     type="number"
                     name="price_offerEdit"
                     value={formDataEdit.price_offer || ""}
-                    onChange={handleInputChange}
+                    onChange={handleInputChangePriceOffer}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label>
@@ -558,7 +643,8 @@ const handleInputChangeName = (event) => {
                     type="number"
                     name="percentage_offerEdit"
                     value={formDataEdit.percentage_offer || ""}
-                    onChange={handleInputChange}
+                    onChange={handleInputChangePercentageOffer}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label>
@@ -567,7 +653,8 @@ const handleInputChangeName = (event) => {
                     type="text"
                     name="photoEdit"
                     value={formDataEdit.photo || ""} 
-                    onChange={handleInputChange}
+                    onChange={handleInputChangePhoto}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label>
@@ -576,7 +663,8 @@ const handleInputChangeName = (event) => {
                     type="number"
                     name="stock_AvailableEdit"
                     value={formDataEdit.stock_Available || ""} 
-                    onChange={handleInputChange}
+                    onChange={handleInputChangeStock}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label>
@@ -584,7 +672,8 @@ const handleInputChangeName = (event) => {
                   <select
                     name="category_idEdit"
                     value={formDataEdit.category_id || ""}
-                    onChange={handleCategoryChange}
+                    onChange={handleInputChangeCategorieEdit}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     <option value="">Select a category</option>
                     {categories2?.map((category) => (
@@ -599,7 +688,8 @@ const handleInputChangeName = (event) => {
                   <select
                     name="manufacturer_id"
                     value={formDataEdit.manufacturer_id || ""}
-                    onChange={handleManufacturerChange}
+                    onChange={handleInputChangeBrandEdit}
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     <option value="">Select the brand of the product</option>
                     {manufacturers?.map((manufacturer) => (
@@ -609,7 +699,6 @@ const handleInputChangeName = (event) => {
                     ))}
                   </select>
                 </label>
-
                 <button
                   type="submit"
                   className="bg-purple-500 text-white font-bold"
