@@ -45,8 +45,7 @@ function Favourites() {
     return (
         <div className="absolute transition-all z-40 gap-3 top-[7rem] right-16 mt-2 bg-white w-[22rem] shadow-[0_5px_10px_rgba(0,0,0,0.15)] rounded-md text-[#393939] items-center flex flex-col h-fit py-[2rem]">
                     
-                    {
-                favorites.map((product) => (
+                {favorites?.map(product => (
                     <div key={product.product_id._id} className="w-[90%] cursor-pointer bg-white hover:scale-[1.03] shadow-[0_0_3px_rgba(0,0,0,0.20)] hover:shadow-[0_1px_7px_rgba(0,0,0,0.2)] rounded-md h-fit">
                         <div className="font-normal my-2 text-[#393939] flex items-center justify-between min-h-[3rem] h-fit px-3">
                             <img className="w-[2.8rem] h-[3rem] object-cover rounded-md " src={product.product_id.photo} alt="" />
@@ -67,7 +66,7 @@ function Favourites() {
                         </div>
                     </div>
                 ))
-            }  
+            }
 
             <button className='bg-[#faf4ec] border-[1px] duration-100 hover:text-white text-sm hover:bg-[#ff4f4f] w-[7.5rem] flex items-center justify-center rounded-lg cursor-pointer h-[2rem] '
             onClick={() => removeAll()}>
