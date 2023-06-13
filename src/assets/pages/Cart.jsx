@@ -12,21 +12,16 @@ const Cart = () => {
     const params = useParams()
     const email = atob(params.email)
     const [products, setProducts] = useState([])
-    console.log(products);
-    let totalPurchase = 0
-    products.forEach(product => totalPurchase += (product.product_id.price * product.quantity))
-    const [token, setToken] = useState(null)
+    const token = localStorage.getItem('token')
     let headers = { headers: { 'authorization': `Bearer ${token}` } }
+    let totalPurchase = 0
     
-    const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => setProducts(res.data.response)).catch(err => console.log(err))}
-    useEffect(() => {() => setToken(localStorage.getItem('token'))}, [])
-
+    //capturar productos
     useEffect(() => {
         axios.get(`${apiUrl}cart/${email}`, headers)
                 .then(res => setProducts(res.data.response))
-                // eslint-disable-next-line react-hooks/exhaustive-deps
-                .catch(err => console.log(err))}, [])
-    
+                .catch(err => console.log(err))}, []
+    )
     //agregar producto
     const addProduct = (product_id) => {
         const data = {userEmail: email, productId: product_id}
@@ -71,13 +66,16 @@ const Cart = () => {
         }).catch(err => console.log(err))
     } */
     
+    products.forEach(product => totalPurchase += (product.product_id.price * product.quantity))
+    const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => setProducts(res.data.response)).catch(err => console.log(err))}
+
     return (
         <div className="w-full min-h-[85vh] flex flex-col items-center">
             <div className='w-[90%] max-w-[1024px] min-h-[70vh] mt-10 flex flex-col items-center bg-[#E7E7E7] rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.56)] relative'>
                 <div className='w-full flex items-center flex-col pb-56'>
                     <p className='p-4 pl-12 pt-10 w-[90%] border-b-2 border-b-[#7847E0] text-lg font-medium text-[#7847E0] mb-5'>Carrito ({products?.length})</p>
-
-                        {products?.map(product => {
+                        {products.length > 0 ? 
+                        (products?.map(product => {
                             return <div className='pl-4 pt-5 flex flex-col justify-start items-center w-[90%] border-b-2 border-white'
                             key={product.product_id._id}>
                             <div className='flex justify-start items-center w-full flex-col sm:flex-row'>
@@ -113,7 +111,23 @@ const Cart = () => {
                                         onClick={()=>navigate(`/allproducts`)}>More Products
                                 </button>
                             </div>
-                        </div>})}
+                        </div>})
+                        ): (
+                            <div className='w-[80%]'>
+                                <div className='pt-5 flex flex-row justify-center items-center w-full min-h-[30vh]'>
+                                    <img className='h-[30vh] w-40' src="/shopping.png" alt="" />
+                                    <div className='h-[30vh] flex flex-col items-center justify-center'>
+                                        <p className='text-2xl font-medium px-10 py-5'>Nothing here... come back to see available products</p>
+                                        <p className='text-2xl px-10 py-5'>Come back to see available products</p>
+                                        <button className='font-medium text-blue-600 border border-blue-600 px-12 py-2 rounded-full 
+                                                        hover:bg-blue-200 hover:shadow-[0px_0px_5px_rgba(0,0,0,0.56)] my-5 text-xl'
+                                                onClick={()=>navigate(`/allproducts`)}>More Products
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                            
 
                 </div>
                 <div className='absolute bottom-0 flex w-full flex-col items-center'>

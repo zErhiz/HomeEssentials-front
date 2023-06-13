@@ -16,9 +16,6 @@ function Carrito() {
 
   console.log(carritoItems);
 
-  const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user'));
-
   return (
     <div className="absolute transition-all z-50 top-[7rem] right-0 mt-2 bg-white w-[20rem] shadow-[0_5px_10px_rgba(0,0,0,0.15)] rounded-md text-[#393939] items-center flex flex-col h-[45rem]">
       <h2 className="text-xl font-semibold">Shopping cart</h2>
