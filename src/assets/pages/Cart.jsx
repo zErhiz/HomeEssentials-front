@@ -24,6 +24,7 @@ const Cart = () => {
     useEffect(() => {
         axios.get(`${apiUrl}cart/${email}`, headers)
                 .then(res => setProducts(res.data.response))
+                // eslint-disable-next-line react-hooks/exhaustive-deps
                 .catch(err => console.log(err))}, [])
     
     //agregar producto
@@ -79,27 +80,32 @@ const Cart = () => {
                         {products?.map(product => {
                             return <div className='pl-4 pt-5 flex flex-col justify-start items-center w-[90%] border-b-2 border-white'
                             key={product.product_id._id}>
-                            <div className='flex justify-start items-center w-full'>
-                                <button className='w-2/12 h-24 overflow-hidden shadow-[0px_0px_5px_rgba(0,0,0,0.56)]' onClick={()=>navigate(`/products/${product.product_id._id}`)}>
-                                <img className='w-full h-full object-cover ' src={product.product_id.photo} alt="" /></button>
-                                <div className='w-5/12 flex flex-col'>
-                                    <button className='w-full flex' onClick={()=>navigate(`/products/${product.product_id._id}`)}>
-                                    <p className='pl-10 text-xl font-medium'>{product.product_id.name}</p></button>
-                                    <p className='pl-10 text-sm font-small'>{product.product_id.description}</p> 
-                                </div>
-                                <div className='w-2/12 flex flex-col'>
-                                    <div className='w-full h-3/4 flex flex-row justify-evenly items-center  border border-gray-200'>
-                                        <button className='w-2/6 text-2xl font-medium pb-1 hover:text-red-600 hover:font-semibold'
-                                                onClick={()=> substractProduct(product.product_id._id)}>–</button>
-                                        <p className='w-2/6 text-xl text-center'>{product.quantity}</p>
-                                        <button className='w-2/6 text-2xl font-medium pb-1 hover:text-blue-600 hover:font-bold'
-                                                onClick={()=> addProduct(product.product_id._id)}>+</button>
+                            <div className='flex justify-start items-center w-full flex-col sm:flex-row'>
+                                <div className='w-full sm:w-7/12 flex'>
+                                    <button className='w-[120px] h-24 overflow-hidden shadow-[0px_0px_5px_rgba(0,0,0,0.56)]' onClick={()=>navigate(`/products/${product.product_id._id}`)}>
+                                        <img className='w-full h-full object-cover ' src={product.product_id.photo} alt="" />
+                                    </button>
+                                    <div className='w-5/6 sm:w-4/6 pr-2 flex flex-col'>
+                                        <button className='w-full flex text-start' onClick={()=>navigate(`/products/${product.product_id._id}`)}>
+                                        <p className='pl-10 text-xl font-medium'>{product.product_id.name}</p></button>
+                                        <p className='pl-10 text-sm font-small'>{product.product_id.description}</p> 
                                     </div>
-                                    <p className='text-center text-gray-500'>{`${product.product_id.stock_Available} availables`}</p>
                                 </div>
-                                <p className='w-4/12 flex items-center justify-center text-xl font-medium'>USD {(product.product_id.price * product.quantity).toFixed(2)}</p>
+                                <div className='w-full sm:w-5/12 flex justify-between pt-5 sm:pt-0'>
+                                    <div className='w-4/6 sm:w-2/6 flex sm:flex-col border-r-2 border-gray-300 mr-5 sm:border-none sm:mr-0 sm: pr-0'>
+                                        <div className='w-full h-3/4 flex flex-row justify-evenly items-center  border border-gray-200'>
+                                            <button className='w-2/6 text-2xl font-medium pb-1 hover:text-red-600 hover:font-semibold'
+                                                    onClick={()=> substractProduct(product.product_id._id)}>–</button>
+                                            <p className='w-2/6 text-xl text-center'>{product.quantity}</p>
+                                            <button className='w-2/6 text-2xl font-medium pb-1 hover:text-blue-600 hover:font-bold'
+                                                    onClick={()=> addProduct(product.product_id._id)}>+</button>
+                                        </div>
+                                        <p className='text-center text-gray-500'>{`${product.product_id.stock_Available} availables`}</p>
+                                    </div>
+                                    <p className='w-2/6 sm:w-4/6 flex items-center justify-center text-xl font-medium'>USD {(product.product_id.price * product.quantity).toFixed(2)}</p>
+                                </div>
                             </div>
-                            <div className='w-[90%] pl-10 p-5'>
+                            <div className='w-full sm:w-[90%] py-5 sm:pl-10 sm:p-5 flex justify-between sm:justify-start'>
                                 <button className='text-red-600 font-medium border border-red-600 px-5 rounded-full hover:bg-red-200 hover:shadow-[0px_0px_5px_rgba(0,0,0,0.56)]'
                                                 onClick={()=> deleteProduct(product.product_id._id)}>Delete</button>
                                 <button className='ml-10 font-medium text-blue-600 border border-blue-600 px-5 rounded-full 
