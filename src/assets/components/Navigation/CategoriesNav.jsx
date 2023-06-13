@@ -1,14 +1,11 @@
-import React from 'react'
-import { useEffect, useState, useRef } from "react";
+import { useEffect} from "react";
 import { Link as Anchor } from 'react-router-dom'
 import categories_actions from '../../../store/actions/categories'
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const CategoriesNav = () => {
   let { categories_read } = categories_actions
   const dispatch = useDispatch()
-  let navigate = useNavigate()
   let categories = useSelector(store => store.categories.categories)
 
 
