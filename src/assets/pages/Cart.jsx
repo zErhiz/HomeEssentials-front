@@ -24,6 +24,7 @@ const Cart = () => {
     useEffect(() => {
         axios.get(`${apiUrl}cart/${email}`, headers)
                 .then(res => setProducts(res.data.response))
+                // eslint-disable-next-line react-hooks/exhaustive-deps
                 .catch(err => console.log(err))}, [])
     
     //agregar producto
@@ -91,7 +92,7 @@ const Cart = () => {
                                     </div>
                                 </div>
                                 <div className='w-full sm:w-5/12 flex justify-between pt-5 sm:pt-0'>
-                                    <div className='w-4/6 sm:w-2/6 flex sm:flex-col border-r-2 border-gray-300 pr-5 mr-5 sm:border-none sm:mr-0 sm: pr-0'>
+                                    <div className='w-4/6 sm:w-2/6 flex sm:flex-col border-r-2 border-gray-300 mr-5 sm:border-none sm:mr-0 sm: pr-0'>
                                         <div className='w-full h-3/4 flex flex-row justify-evenly items-center  border border-gray-200'>
                                             <button className='w-2/6 text-2xl font-medium pb-1 hover:text-red-600 hover:font-semibold'
                                                     onClick={()=> substractProduct(product.product_id._id)}>–</button>

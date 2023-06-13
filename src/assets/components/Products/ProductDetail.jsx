@@ -1,22 +1,14 @@
-import React from 'react'
-
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import apiUrl from '../../../../api'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link as Anchor } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import productOne_action from '../../../store/actions/productOne'
-import store from '../../../store/store'
-import { Button } from '@nextui-org/react';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const {productOne}= productOne_action 
 export default function ProductDetail() {
-    const navigate = useNavigate()
-    let storeOne = useSelector(store=>store.product)
     const { id } = useParams()
     const dispatch = useDispatch()
     let [prodOne, setProdOne]= useState([])
@@ -65,6 +57,7 @@ export default function ProductDetail() {
         }))
       })
       .catch(err => console.log(err))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
   let result= (prodOne.price / 12).toFixed(2);
 
@@ -101,9 +94,6 @@ export default function ProductDetail() {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
                 />
               </svg>
@@ -153,7 +143,7 @@ export default function ProductDetail() {
               <legend className="text-lg font-bold">Color</legend>
   
               <div className="mt-2 flex flex-wrap gap-1">
-                <label for="color_green" className="cursor-pointer">
+                <label htmlFor="color_green" className="cursor-pointer">
                   <input
                     type="radio"
                     id="color_green"
@@ -167,7 +157,7 @@ export default function ProductDetail() {
                   ></span>
                 </label>
   
-                <label for="color_blue" class="cursor-pointer">
+                <label htmlFor="color_blue" className="cursor-pointer">
                   <input
                     type="radio"
                     id="color_blue"
@@ -180,7 +170,7 @@ export default function ProductDetail() {
                   ></span>
                 </label>
   
-                <label for="color_pink" class="cursor-pointer">
+                <label htmlFor="color_pink" className="cursor-pointer">
                   <input
                     type="radio"
                     id="color_pink"
@@ -193,7 +183,7 @@ export default function ProductDetail() {
                   ></span>
                 </label>
   
-                <label for="color_red" class="cursor-pointer">
+                <label htmlFor="color_red" className="cursor-pointer">
                   <input
                     type="radio"
                     id="color_red"
@@ -206,7 +196,7 @@ export default function ProductDetail() {
                   ></span>
                 </label>
   
-                <label for="color_indigo" class="cursor-pointer">
+                <label htmlFor="color_indigo" className="cursor-pointer">
                   <input
                     type="radio"
                     id="color_indigo"
@@ -220,10 +210,6 @@ export default function ProductDetail() {
                 </label>
               </div>
             </fieldset>
-  
-        
-             
-  
             <div className="rounded border bg-gray-100 p-4">
               <p className="text-sm">
                 <span className="block"> Pay as low as ${result}/mo with 0% APR in 12 installments. </span>
@@ -242,7 +228,7 @@ export default function ProductDetail() {
                 e.preventDefault()
                 addProduct(prodOne._id)
               }}
-              className="w-full rounded bg-violet-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition ease-in-out delay-150 bg-orange-500 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 duration-300"
+              className="w-full rounde px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition ease-in-out delay-150 bg-orange-500 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 duration-300"
             >
               Add to cart
             </button>
