@@ -43,7 +43,6 @@ function Carrito() {
       imageAlt:
         'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
     },
-    // More products...
   ]
 
   return (
