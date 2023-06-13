@@ -100,7 +100,7 @@ const Orders = () => {
               {order?.product.map((product) => (
                 <div key={product._id} className="mt-4">
                   <h4 className="text-base font-semibold">{product?.name}</h4>
-                  <p className="text-sm">Price: {product?.price}</p>
+                  <p className="text-sm">Price: ${product?.price}</p>
                   <p className="text-sm">Quantity: {product?.quantity}</p>
                 </div>
               ))}
