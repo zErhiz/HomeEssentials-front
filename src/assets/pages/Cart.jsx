@@ -3,11 +3,32 @@ import { useParams } from 'react-router-dom'
 import {  } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../../api'
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = () => {
+    initMercadoPago('TEST-043a661b-8206-4019-af80-17e2ff37dc98')
+    const [preferenceId, setPreferenceId] = useState(false);
+    const [amount, setAmount] = useState(0);
+
+
+    
+    const handlePayment = async (amount) => {
+        try {
+            const response = await axios.post(`${apiUrl}payment`, {
+                unit_price: amount,
+            });
+            const preferenceId = response.data.preferenceId;
+
+            setPreferenceId(preferenceId);
+
+            setAmount(amount)
+        } catch (error) {
+            console.error(error);
+        }
+    };
     let navigate=useNavigate()
     const params = useParams()
     const email = atob(params.email)
@@ -135,13 +156,14 @@ const Cart = () => {
                         <p className='text-2xl font-medium'><span className='mr-4'>Total Purchase:</span>  USD {totalPurchase.toFixed(2)}</p>
                     </div>
                     <div className="w-[90%] h-28 flex items-center justify-end pr-10">
-                        <button
+                        <button 
                             type="submit"
-                            onClick={()=> navigate('/paymentpage')}
+                            onClick={()=>handlePayment(totalPurchase.toFixed(2)) }
                             className="px-4 py-2 font-bold text-white bg-gradient-to-r from-purple-900 to-purple-600 
                                         rounded-lg hover:bg-purple-700 focus:outline-none focus:shadow-outline">
-                            Proceed to checkout
+                            Proccess payment
                         </button>
+                        <Wallet initialization={{ preferenceId: preferenceId, redirectMode: 'blank' }} />
                     </div>
                 </div>
             </div>
