@@ -94,7 +94,10 @@ const Orders = () => {
               <h3 className="text-lg font-semibold mb-2">{order?.user?.name} {order?.user?.lastName}</h3>
               <p className="text-sm mb-2">Email: {order?.user?.email}</p>
               <p className="text-sm mb-2">Status: {order?.order?.status}</p>
-              <p className="text-sm mb-2">Address: {order?.order?.address}</p>
+              <p className="text-sm mb-2">Address: {order?.user?.address}</p>
+              <p className="text-sm mb-2">Country: {order?.user?.country}</p>
+              <p className="text-sm mb-2">Dni: {order?.user?.dni}</p>
+              <p className="text-sm mb-2">Phone: {order?.user?.phoneNumber}</p>
               <h4 className="text-base font-semibold">Date</h4>
               <p className="text-sm mb-2">Order date: {order.createdAt.slice(0, -14)}</p>
               {order?.product.map((product) => (
