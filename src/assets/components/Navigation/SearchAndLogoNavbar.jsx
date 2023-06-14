@@ -9,6 +9,7 @@ import Carrito from "./Carrito"
 import axios from "axios";
 import apiUrl from '../../../../api';
 import userLogin_action from '../../../store/actions/userLogin_action'
+import logo from "../../../../public/images/Logos/logo-2-b.png"
 const {SaveUserLogin} = userLogin_action
 
 const SearchAndLogoNavbar = () => {
@@ -85,7 +86,7 @@ const SearchAndLogoNavbar = () => {
       <div className=" justify-center bg-[#FFFFFF] h-[100px] lg:h-[80px] flex lg:justify-between">
         <div className="px-4 lg:flex lg:gap-12 flex flex-col lg:flex-row justify-center items-center content-center lg:px-12">
           <div className=" flex flex-row gap-12">
-            <img className="w-24 object-cover cursor-pointer" onClick={home} src="images/Logos/logo-2-b.png" alt="logo" />
+            <img className="w-24 object-cover cursor-pointer" onClick={home} src={logo} alt="logo" />
             <button className="block lg:hidden" onClick={() => setMenuIsOpen(!menuIsOpen)}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
