@@ -12,8 +12,6 @@ const Cart = () => {
     initMercadoPago('TEST-043a661b-8206-4019-af80-17e2ff37dc98')
     const [preferenceId, setPreferenceId] = useState(false);
     const [amount, setAmount] = useState(0);
-
-
     
     const handlePayment = async (amount) => {
         try {
@@ -21,8 +19,10 @@ const Cart = () => {
                 unit_price: amount,
             });
             const preferenceId = response.data.preferenceId;
+            console.log("response", response);
 
             setPreferenceId(preferenceId);
+            console.log("preferenceId", preferenceId);
 
             setAmount(amount)
         } catch (error) {
@@ -80,15 +80,30 @@ const Cart = () => {
         }).catch(err => console.log(err))
     }
     //finalizar compra
-    /* const purchase = () => { 
+    const purchase = () => { 
         toast('Unit deleted');
-        axios.post(`${apiUrl}cart/confirm?userEmail=${email}`, headers).then(res => {
+        const body = {
+            address: address,
+            country: country,
+            dni: dni,
+            phoneNumber: phoneNumber
+        }
+        axios.post(`${apiUrl}cart/confirm?userEmail=${email}`, body, headers).then(res => {
             console.log(res)
         }).catch(err => console.log(err))
-    } */
+    }
     
     products.forEach(product => totalPurchase += (product.product_id.price * product.quantity))
     const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => setProducts(res.data.response)).catch(err => console.log(err))}
+    const [viewForm, setViewForm] = useState(false)
+    const [ address, setAddress ] = useState("")
+    const [ country, setCountry] = useState("")
+    const [ dni, setDni] = useState("")
+    const [ phoneNumber, setPhoneNumber] = useState("")
+
+    const buttonProcess = () => {
+        products.length > 0? setViewForm(true) : toast.error("No items in the cart", {theme: "colored",})
+    }
 
     return (
         <div className="w-full min-h-[85vh] flex flex-col items-center">
@@ -158,15 +173,69 @@ const Cart = () => {
                     <div className="w-[90%] h-28 flex items-center justify-end pr-10">
                         <button 
                             type="submit"
-                            onClick={()=>handlePayment(totalPurchase.toFixed(2)) }
-                            className="px-4 py-2 font-bold text-white bg-gradient-to-r from-purple-900 to-purple-600 
+                            onClick={()=>{
+                                buttonProcess()
+                            } }
+                            className="px-4 py-3 font-bold text-white bg-gradient-to-r from-purple-900 to-purple-600 
                                         rounded-lg hover:bg-purple-700 focus:outline-none focus:shadow-outline">
-                            Proccess payment
+                            Continue with the payment process
                         </button>
-                        <Wallet initialization={{ preferenceId: preferenceId, redirectMode: 'blank' }} />
                     </div>
                 </div>
             </div>
+            {viewForm? (
+                    <div className='fixed top-0 w-full h-full bg-[#000000de] flex flex-col justify-center items-center'>
+                        <div className=' bg-[#ffffffde] p-10 pt-5 rounded-lg border-2 border-purple-900 relative flex flex-col'>
+                            <img className='h-8 w-8 absolute top-1 right-1 cursor-pointer' src="/exit.svg" alt="" 
+                                        onClick={()=> setViewForm(false)}/>
+                            <p className='mb-5 w-full text-center font-medium text-lg'>Give us an address where to deliver your order</p>
+                            <input type="address" id="address" name="address"
+                                    placeholder="Insert your address"
+                                    onChange={e => {
+                                        e.preventDefault();
+                                        setAddress(e.target.value)
+                                    }}
+                                    className="w-96 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent my-2"/>
+                            <input type="country" id="country" name="country"
+                                    placeholder="Insert your country"
+                                    onChange={e => {
+                                        e.preventDefault();
+                                        setCountry(e.target.value)
+                                    }}
+                                    className="w-96 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent my-2"/>
+                            <input type="dni" id="dni" name="dni"
+                                    placeholder="Insert your dni"
+                                    onChange={e => {
+                                        e.preventDefault();
+                                        setDni(e.target.value)
+                                    }}
+                                    className="w-96 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent my-2"/>
+                            <input type="phone" id="phoneNumber" name="phoneNumber"
+                                    placeholder="Insert your telephon number"
+                                    onChange={e => {
+                                        e.preventDefault();
+                                        setPhoneNumber(e.target.value)
+                                    }}
+                                    className="w-96 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent my-2"/>
+                            <div className='h-full flex items-center pt-[20px] ml-5 flex-col'>
+                                {preferenceId? (
+                                    <Wallet initialization={{ preferenceId: preferenceId, redirectMode: 'modal' }} />
+                                    ) : (
+                                    <button 
+                                        type="submit"
+                                        onClick={()=>{
+                                            purchase()
+                                            handlePayment(totalPurchase.toFixed(2))
+                                        } }
+                                        className="px-4 py-3 font-bold text-white bg-gradient-to-r from-purple-900 to-purple-600 
+                                                    rounded-lg hover:bg-purple-700 focus:outline-none focus:shadow-outline ">
+                                        Pay with mercadopago
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                ) : ("")}
             <ToastContainer
             transition={Flip}
             position="bottom-right"
