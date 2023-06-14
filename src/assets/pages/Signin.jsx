@@ -69,7 +69,7 @@ export default function Signin() {
                   <label htmlFor='send'>Email</label>
                   <input
                     className='bg-[#E7E7E7] h-10 xl:w-[25rem] sm:w-[100%] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
-                    type='text'
+                    type='email'
                     autoComplete="off"
                     ref={email}
                     placeholder="example@email.com"
@@ -79,7 +79,7 @@ export default function Signin() {
                   <label htmlFor="">Password</label>
                   <input
                     className='bg-[#E7E7E7] h-10 xl:w-[25rem] sm:w-[100%] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
-                    type='text'
+                    type='password'
                     autoComplete="off"
                     ref={password}
                     placeholder="min. 8 characters"

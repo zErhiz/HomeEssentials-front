@@ -12,8 +12,8 @@ export default function ProductDetail() {
     const { id } = useParams()
     const dispatch = useDispatch()
     let [prodOne, setProdOne]= useState([])
-    const user = JSON.parse(localStorage.getItem('user'))
-    const token = localStorage.getItem('token')
+    const user = JSON.parse(localStorage.getItem('user')) || ""
+    const token = localStorage.getItem('token')|| ""
     const email = user.email
     let headers = { headers: { 'authorization': `Bearer ${token}` } }
     
@@ -236,7 +236,7 @@ export default function ProductDetail() {
             <button
               type="button"
               onClick={()=> addFavorites(prodOne._id)}
-              className="w-full rounded border border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold uppercase tracking-wide flex justify-center items-center"
+              className="w-full rounded border border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold uppercase tracking-wide flex justify-center items-center hover:scale-110 duration-300"
             >
               <span className='text-3xl'>💟 </span> Add Favorites
             </button>

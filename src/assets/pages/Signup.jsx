@@ -91,7 +91,7 @@ export default function Signup() {
                 <label htmlFor='send'>Email</label>
                 <input
                   className='bg-[#E7E7E7] h-10 w-[100%] xl:w-[25rem] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
-                  type='text'
+                  type='email'
                   autoComplete="off"
                   ref={email}
                   placeholder="example@email.com"
@@ -101,7 +101,7 @@ export default function Signup() {
                 <label htmlFor="">Password</label>
                 <input
                   className='bg-[#E7E7E7] h-10 w-[100%] xl:w-[25rem] rounded-md focus:outline-none focus:bg-[#7747e03f] focus:text-[#393939] pl-[0.5rem] duration-100'
-                  type='text'
+                  type='password'
                   autoComplete="off"
                   ref={password}
                   placeholder="min. 8 characters"

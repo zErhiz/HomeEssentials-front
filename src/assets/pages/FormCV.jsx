@@ -3,8 +3,13 @@ import { uploadFile } from "../../../firebase";
 import Grid from "react-loading-icons/dist/esm/components/grid";
 import axios from "axios";
 import apiUrl from "../../../api"
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+
 
 export default function FormCV() {
+    let navigate=useNavigate()
 
 let name = useRef()
 let email = useRef()
@@ -51,6 +56,7 @@ const handleSubmitCV = async (cv) => {
 
 
 const handleForm = (e) => {
+    e.preventDefault()
     const data = {
         name: name.current.value,
         img: img,
@@ -78,7 +84,13 @@ const handleForm = (e) => {
     axios.post(apiUrl+"curriculums", data)
     .then(res =>{
         console.log(res)
-        e.target.reset()
+        toast.success(`${res.data.Curriculums.name}, your cv was successfully saved`, {
+                theme: "colored",
+                })
+        setTimeout(function(){
+            e.target.reset()
+            navigate("/")
+        }, 2000);
     }) 
     .catch(err => {
         console.error(err.response.data.message)
@@ -126,14 +138,14 @@ return (
                                         onChange={e => e.target.value.length > 0 ? setNameInput(e.target.value) : setNameInput("Curriculum Vitae")}
                                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent"
                                         ref = {name}/>
-                                <input type="email" id="email" name="email"
-                                        placeholder="Insert your email"
-                                        className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent"
-                                        ref = {email}/>
                                 <input type="lastName" id="lastName" name="lastName"
                                         placeholder="Insert your last name"
                                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black"
                                         ref = {lastName}/>
+                                <input type="email" id="email" name="email"
+                                        placeholder="Insert your email"
+                                        className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent"
+                                        ref = {email}/>
                                 <input type="number" id="name" name="name"
                                         placeholder="Insert how old are you"
                                         className="w-[90%] appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black mb-2 focus:bg-transparent"
@@ -264,10 +276,23 @@ return (
             </div>
             <button disabled={buttonSend} 
                     className="rounded-full bg-[#403d56] p-2 px-16 py-2 text-white t-10 text-lg font-bold mt-5  disabled:opacity-50" 
-                    type="submit" value={"send"}>Send
+                    type="submit" value={"send"}>Send 
             </button>
             {!loading ? (<></>) : (<Grid className="fixed bg-[#00000073] p-2 rounded-lg"/>)}
         </form>
+        
+        <ToastContainer
+            transition={Flip}
+            position="bottom-right"
+            autoClose={2000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"/>
         </section>
     </>
     )
