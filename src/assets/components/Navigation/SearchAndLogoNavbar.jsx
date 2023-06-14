@@ -23,17 +23,11 @@ const SearchAndLogoNavbar = () => {
   const email = userLogin.email? userLogin.email : user.email
   
   const [cart,setCart] = useState(false)
+  //console.log("cart", cart);
   const [fav, setFav] = useState(false)
-
-  const carrito = () => {
-    setCart(!cart)
-  }
 
   const home = () => {
     navigate('/')
-  }
-  const favos = () => {
-    setFav(!fav)
   }
 
   useEffect(() => {
@@ -71,14 +65,21 @@ const SearchAndLogoNavbar = () => {
   userLogin.user.length > 0 ? userCurrent = userLogin.user : userCurrent = userLocalStorage
   //console.log(userCurrent);
 
+  const [products, setProducts] = useState([])
+  useEffect(() => {
+      //capturar productos
+      axios.get(`${apiUrl}cart/${email}`, headers)
+              .then(res => setProducts(res.data.response))
+              .catch(err => console.log(err))
+  }, []);
+
   return (
     <>
-    {cart &&
-    <Carrito/>
-    }
-      {fav &&
-        <Favourites />
-      }
+    <Carrito openModal={cart} 
+              onCloseModal={()=> setCart(false)}/>
+      <Favourites openModal={fav} 
+              onCloseModal={()=> setFav(false)}/>
+
       <div className=" justify-center bg-[#FFFFFF] h-[100px] lg:h-[80px] flex lg:justify-between">
         <div className="px-4 lg:flex lg:gap-12 flex flex-col lg:flex-row justify-center items-center content-center lg:px-12">
           <div className=" flex flex-row gap-12">
@@ -117,28 +118,29 @@ const SearchAndLogoNavbar = () => {
               Enter
             </Anchor>
             ) : (
-              <div onClick={() => {
-                handlebutton(seeButtonsUser)
+              <div onClick={() => {handlebutton(seeButtonsUser)
               }} className=" mx-2 text-xl lg:gap-1 flex justify-center content-center items-center relative cursor-pointer">
-              <div className="w-40 flex">
+              <div className="min-w-40 flex">
                 <img src={userCurrent.photo} className="w-8 h-8 rounded-full object-cover"/>
                 <p>{userCurrent.name} {userCurrent.lastName}</p>
               </div>
               {!seeButtonsUser ? (
-                <div className="absolute top-10 left-0 w-40 h-20 bg-[#FFFFFF] rounded-b-lg">
-                <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> User Panel</button>
-                <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> Sign Out</button>
-            </div>
+                <div className="absolute top-10 left-0 w-40 h-20 bg-[#FFFFFF] rounded-b-lg z-30">
+                  <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> User Panel</button>
+                  <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> Sign Out</button>
+                </div>
               ) : ("")}
             </div>
             )}
-
           </div>
+          {!seeButtonsUser ? (
+                <div className="absolute w-full h-full top-0 right-0 z-20"
+                        onClick={() => {handlebutton(seeButtonsUser)}}></div>
+              ) : ("")}
           <div className="lg:block flex justify-center content-center items-center">
             <div
               className="mx-2 text-xl flex cursor-pointer justify-center items-center content-center gap-1"
-              onClick={favos}
-            >
+              onClick={()=> setFav(true)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -156,26 +158,24 @@ const SearchAndLogoNavbar = () => {
               Favorites
             </div>
           </div>
-{/* BORRAR MAS ADELANTE */}<Anchor to={`/cart/${btoa(email)}`}>Cart</Anchor>{/* BORRAR MAS ADELANTE */}
-          <div className="flex-row hidden lg:block">
+          <div className="flex flex-row cursor-pointer px-5"
+              onClick={()=> setCart(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
-              onClick={carrito}
-            >
+              className="w-8 h-8">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
-            <h2 className="w-6 h-6 rounded-full bg-black text-white flex justify-center items-center">
-              0
-            </h2>
+            {/* <h2 className="w-6 h-6 rounded-full bg-black text-white flex justify-center items-center mx-2">
+              {products.length}
+            </h2> */}
           </div>
         </div>
         <div

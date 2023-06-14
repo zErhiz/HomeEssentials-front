@@ -8,6 +8,7 @@ import carritoReducer from "./reducers/carrito_reducer";
 import userLogin_reducer from "./reducers/userLogin_reducer";
 import usersAdmin_reducer from "./reducers/usersAdmin_reducer"
 import productsAdmin_reducer from "./reducers/products_admin_reducer"
+import orders_reducer from "./reducers/orders_reducer"
 const store = configureStore({
   reducer: {
     categories: category_reducer,
@@ -19,6 +20,7 @@ const store = configureStore({
     userLogin: userLogin_reducer,
     userget: usersAdmin_reducer,
     productsAdmin: productsAdmin_reducer,
+    ordersget: orders_reducer,
   },
 });
 
