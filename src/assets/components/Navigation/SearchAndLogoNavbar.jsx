@@ -57,6 +57,8 @@ const SearchAndLogoNavbar = () => {
   }
   const tokenLocalStorage = localStorage.getItem('token');
   const userLocalStorage = JSON.parse(localStorage.getItem('user'));
+  const role = user?.role
+  console.log(role)
   let tokenCurrent = ""
   userLogin.token.length > 0 ? tokenCurrent = userLogin.token : tokenCurrent = tokenLocalStorage
   //console.log(tokenCurrent);
@@ -128,6 +130,11 @@ const SearchAndLogoNavbar = () => {
                 <div className="absolute top-10 left-0 w-40 h-20 bg-[#FFFFFF] rounded-b-lg z-30">
                   <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> User Panel</button>
                   <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> Sign Out</button>
+                  {role === 1 || role === 2 ? (
+  <button onClick={() => navigate('/admin/products')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10">
+    Admin Panel
+  </button>
+) : null}
                 </div>
               ) : ("")}
             </div>
