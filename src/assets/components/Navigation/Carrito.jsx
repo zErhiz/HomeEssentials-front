@@ -4,9 +4,12 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useDispatch, useSelector } from 'react-redux'
+import  cartNav_action from '../../../store/actions/cartNav'
+const {cartNav}= cartNav_action 
 // eslint-disable-next-line react/prop-types
 function Carrito({openModal, onCloseModal}) {
+  const dispatch= useDispatch()
   const navigate = useNavigate();
   //console.log("openModal", openModal);
   const [products, setProducts] = useState([])
@@ -21,7 +24,15 @@ function Carrito({openModal, onCloseModal}) {
               .then(res => setProducts(res.data.response))
               .catch(err => console.log(err))
   }, [openModal]);
-  const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => setProducts(res.data.response)).catch(err => console.log(err))}
+  const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => {setProducts(res.data.response)
+       
+    dispatch((cartNav({
+        
+        cart:res.data.response.length
+
+    })))
+    
+    }).catch(err => console.log(err))}
   
     //Eliminar producto
     const deleteProduct = (product_id) => { 

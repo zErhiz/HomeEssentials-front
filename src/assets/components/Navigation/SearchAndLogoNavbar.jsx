@@ -10,10 +10,13 @@ import axios from "axios";
 import apiUrl from '../../../../api';
 import userLogin_action from '../../../store/actions/userLogin_action'
 import logo from "../../../../public/images/Logos/logo-2-b.png"
+import  cartNav_action from '../../../store/actions/cartNav'
 const {SaveUserLogin} = userLogin_action
+const {cartNav}= cartNav_action 
 
 const SearchAndLogoNavbar = () => {
   let { categories_read } = categories_actions
+  let count = useSelector(store=>store.cartNavReducer.cart)
   const dispatch = useDispatch()
   let navigate = useNavigate()
   let categories = useSelector(store => store.categories.categories)
@@ -37,6 +40,9 @@ const SearchAndLogoNavbar = () => {
     }
   }, [])
 
+  
+  
+  
   const [menuIsOpen, setMenuIsOpen] = useState(false)
   const [seeButtonsUser, setSeeButtonsUser] = useState(true)
   const handlebutton = (boolean) => {
@@ -44,6 +50,18 @@ const SearchAndLogoNavbar = () => {
   }
   let token = () => localStorage.getItem('token')
   let headers = { headers: { 'authorization': `Bearer ${token()}` } }
+  useEffect(()=>{
+
+    axios.get(`${apiUrl}cart/${email}`, headers).then(res => {
+       
+      dispatch((cartNav({
+          
+          cart:res.data.response.length
+  
+      })))
+      
+      }).catch(err => console.log(err))
+  },[])
   const handleSignOut = () => {
     axios.post(apiUrl + `auth/signout`, userLocalStorage.email, headers)
       .then(() => {
@@ -72,9 +90,14 @@ const SearchAndLogoNavbar = () => {
 //capturar productos
 useEffect(() => {
   axios.get(`${apiUrl}cart/${email}`, headers)
-          .then(res => setProducts(res.data.response))
+
+          .then(res => setProducts(res.data.response)   )
           .catch(err => console.log(err))}, []
 )
+
+
+
+
 //agregar producto
 const addProduct = (product_id) => {
   const data = {userEmail: email, productId: product_id}
@@ -127,6 +150,7 @@ const purchase = () => {
 
 
 const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => setProducts(res.data.response)).catch(err => console.log(err))}
+
 
   return (
     <>
@@ -235,7 +259,9 @@ const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => 
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
-            <h2 className="text-black">({products?.length})</h2>
+
+            <h2 className="text-black">{count.cart}</h2>
+
           </div>
         </div>
         <div
