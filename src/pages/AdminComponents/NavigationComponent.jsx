@@ -14,7 +14,7 @@ const NavigationComponent = () => {
           <ul>
             <Anchor to="/admin">
               <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                Dashboard
+              Curriculums
               </li>
             </Anchor>
             <Anchor to="/admin/products">
