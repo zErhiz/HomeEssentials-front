@@ -9,7 +9,8 @@ import Carrito from "./Carrito"
 import axios from "axios";
 import apiUrl from '../../../../api';
 import userLogin_action from '../../../store/actions/userLogin_action'
-const {SaveUserLogin} = userLogin_action
+const { SaveUserLogin } = userLogin_action
+import logo from '../../../../public/images/Logos/logo-2-b.png'
 
 const SearchAndLogoNavbar = () => {
   let { categories_read } = categories_actions
@@ -20,9 +21,9 @@ const SearchAndLogoNavbar = () => {
   //console.log(userLogin);
 
   const user = JSON.parse(localStorage.getItem('user')) || ""
-  const email = userLogin.email? userLogin.email : user.email
-  
-  const [cart,setCart] = useState(false)
+  const email = userLogin.email ? userLogin.email : user.email
+
+  const [cart, setCart] = useState(false)
   //console.log("cart", cart);
   const [fav, setFav] = useState(false)
 
@@ -37,22 +38,22 @@ const SearchAndLogoNavbar = () => {
   }, [])
 
   const [menuIsOpen, setMenuIsOpen] = useState(false)
-  const [seeButtonsUser , setSeeButtonsUser] = useState(true)
+  const [seeButtonsUser, setSeeButtonsUser] = useState(true)
   const handlebutton = (boolean) => {
     boolean ? setSeeButtonsUser(false) : setSeeButtonsUser(true)
   }
   let token = () => localStorage.getItem('token')
   let headers = { headers: { 'authorization': `Bearer ${token()}` } }
   const handleSignOut = () => {
-      axios.post(apiUrl + `auth/signout`, userLocalStorage.email, headers)
+    axios.post(apiUrl + `auth/signout`, userLocalStorage.email, headers)
       .then(() => {
-          localStorage.clear();
-          navigate('/')
+        localStorage.clear();
+        navigate('/')
       })
       .catch(err => alert(err))
-      dispatch(SaveUserLogin({
-        token: "",
-        user: {}
+    dispatch(SaveUserLogin({
+      token: "",
+      user: {}
     }))
   }
   const tokenLocalStorage = localStorage.getItem('token');
@@ -69,23 +70,23 @@ const SearchAndLogoNavbar = () => {
 
   const [products, setProducts] = useState([])
   useEffect(() => {
-      //capturar productos
-      axios.get(`${apiUrl}cart/${email}`, headers)
-              .then(res => setProducts(res.data.response))
-              .catch(err => console.log(err))
+    //capturar productos
+    axios.get(`${apiUrl}cart/${email}`, headers)
+      .then(res => setProducts(res.data.response))
+      .catch(err => console.log(err))
   }, []);
 
   return (
     <>
-    <Carrito openModal={cart} 
-              onCloseModal={()=> setCart(false)}/>
-      <Favourites openModal={fav} 
-              onCloseModal={()=> setFav(false)}/>
+      <Carrito openModal={cart}
+        onCloseModal={() => setCart(false)} />
+      <Favourites openModal={fav}
+        onCloseModal={() => setFav(false)} />
 
-      <div className=" justify-center bg-[#FFFFFF] h-[100px] lg:h-[80px] flex lg:justify-between">
+      <div className="justify-center bg-[#FFFFFF] h-[100px] lg:h-[70px] 2xl:h-[80px] flex lg:justify-between">
         <div className="px-4 lg:flex lg:gap-12 flex flex-col lg:flex-row justify-center items-center content-center lg:px-12">
           <div className=" flex flex-row gap-12">
-            <img className="w-24 object-cover cursor-pointer" onClick={home} src="images/Logos/logo-2-b.png" alt="logo" />
+            <img className="w-24 object-cover cursor-pointer" onClick={home} src={logo} alt="logo" />
             <button className="block lg:hidden" onClick={() => setMenuIsOpen(!menuIsOpen)}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -93,68 +94,70 @@ const SearchAndLogoNavbar = () => {
           </div>
           <div className="flex items-center">
             <SearchBar />
-
           </div>
         </div>
-        <div className=" lg:flex lg:justify-center lg:items-center lg:content-center lg:px-12 lg:gap-8">
+        <div className="lg:flex lg:justify-center font-semibold lg:items-center lg:px-12 lg:gap-3">
           <div className="hidden lg:block">
-            {!tokenCurrent ?(
+            {!tokenCurrent ? (
               <Anchor
-              to="/signin"
-              className=" mx-2 text-xl lg:gap-1  flex justify-center content-center items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-8 h-8 "
+                to="/signin"
+                className=" mx-2 text-xl lg:gap-1  flex justify-center content-center items-center"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-              Enter
-            </Anchor>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 "
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                Enter
+              </Anchor>
             ) : (
-              <div onClick={() => {handlebutton(seeButtonsUser)
-              }} className=" mx-2 text-xl lg:gap-1 flex justify-center content-center items-center relative cursor-pointer">
-              <div className="min-w-40 flex">
-                <img src={userCurrent.photo} className="w-8 h-8 rounded-full object-cover"/>
-                <p>{userCurrent.name} {userCurrent.lastName}</p>
-              </div>
-              {!seeButtonsUser ? (
-                <div className="absolute top-10 left-0 w-40 h-20 bg-[#FFFFFF] rounded-b-lg z-30">
-                  <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> User Panel</button>
-                  <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> Sign Out</button>
-                  {role === 1 || role === 2 ? (
-  <button onClick={() => navigate('/admin/products')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10">
-    Admin Panel
-  </button>
-) : null}
+              <div
+                onClick={() => {
+                  handlebutton(seeButtonsUser)
+                }}
+                className="mx-2 text-[#393939] lg:gap-1 flex justify-center items-center relative cursor-pointer">
+                <div className="min-w-40 flex items-center gap-3">
+                  <p>{userCurrent.name}</p>
+                  <img src={userCurrent.photo} className="w-8 h-8 rounded-full object-cover" />
                 </div>
-              ) : ("")}
-            </div>
+                {!seeButtonsUser ? (
+                  <div className="absolute top-10 lg:w-[7rem] 2xl:h-[5rem] 2xl:2-[10rem] lg:h-[4.5rem] bg-[#ffffff] shadow-[0_1px_10px_rgba(0,0,0,0.09)] drop-shadow-[0_0_1px_rgba(0,0,0,0.05)] rounded-lg z-30">
+                    <button onClick={() => navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:bg-[#c6c6c621] hover:dark:shadow-black/10 text-sm"> User Panel</button>
+                    <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner border-t-[1.5px] hover:bg-[#c6c6c621] 2xl:border-t-[2px] hover:dark:shadow-black/10 text-[#7847E0] text-sm"> Sign Out</button>
+                    {role === 1 || role === 2 ? (
+                      <button onClick={() => navigate('/admin/products')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10">
+                        Admin Panel
+                      </button>
+                    ) : null}
+                  </div>
+                ) : ("")}
+              </div>
             )}
           </div>
           {!seeButtonsUser ? (
-                <div className="absolute w-full h-full top-0 right-0 z-20"
-                        onClick={() => {handlebutton(seeButtonsUser)}}></div>
-              ) : ("")}
+            <div className="absolute w-full h-full top-0 right-0 z-20"
+              onClick={() => { handlebutton(seeButtonsUser) }}></div>
+          ) : ("")}
           <div className="lg:block flex justify-center content-center items-center">
             <div
-              className="mx-2 text-xl flex cursor-pointer justify-center items-center content-center gap-1"
-              onClick={()=> setFav(true)}>
+              className="mx-2 text-[#393939] flex cursor-pointer justify-center items-center content-center gap-1"
+              onClick={() => setFav(true)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-8 h-8 cursor-pointer"
+                className="2xl:w-8 2xl:h-8 h-6 w-6 cursor-pointer"
               >
                 <path
                   strokeLinecap="round"
@@ -166,14 +169,14 @@ const SearchAndLogoNavbar = () => {
             </div>
           </div>
           <div className="flex flex-row cursor-pointer px-5"
-              onClick={()=> setCart(true)}>
+            onClick={() => setCart(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              strokeWidth="1.5"
               stroke="currentColor"
-              className="w-8 h-8">
+              className="2xl:w-8 2xl:h-8 h-6 w-6">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -202,7 +205,6 @@ const SearchAndLogoNavbar = () => {
                 <div className="flex flex-row-reverse justify-center content-center items-center">
                   <Anchor to="/enter" className="block my-2">
                     Enter
-
                   </Anchor>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -264,7 +266,6 @@ const SearchAndLogoNavbar = () => {
               <div className="bg-white p-4 flex gap-8 ">
                 <div className="flex flex-row-reverse justify-center content-center items-center">
 
-
                   <div className='text-black flex flex-col justify-center items-center content-center gap-1'>
                     <Anchor to='/about' className='mx-2 text-lg underline'> About</Anchor>
                     <Anchor to='/contact' className='mx-2 text-lg underline'> Contact</Anchor>
@@ -272,27 +273,9 @@ const SearchAndLogoNavbar = () => {
                     <a className='text-black text-lg ' href='tel:+5213312345678'> Call to +52-1-33-12345678 </a>
                   </div>
 
-
-
-
-
-
-
-
                 </div>
               </div>
             </div>
-            <div className="flex  w-[100%] h-[46%]  justify-center  ">
-
-              <ul className="flex flex-col w-[100%]  overflow-y-auto">
-              <li><Anchor to="/allproducts" className="text-black hover:text-purple-600"> <div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>Buy all</h2> </div> </Anchor></li>
-                {categories.map((cat) => (
-                  <li key={cat._id}><Anchor to={`/products/category/${cat._id}`} className="text-black hover:text-purple-600"> <div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>{cat.name}</h2> </div> </Anchor></li>
-                ))}
-              </ul>
-
-            </div>
-
           </div>
         </div>
       </div>
