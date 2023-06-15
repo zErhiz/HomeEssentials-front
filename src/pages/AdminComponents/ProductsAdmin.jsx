@@ -82,6 +82,8 @@ const Products = () => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, create it!",
+      confirmButtonColor: "#7847E0",
+      cancelButtonColor: "#d33",
       cancelButtonText: "No, cancel!",
       reverseButtons: true,
     }).then((result) => {
@@ -159,7 +161,7 @@ const Products = () => {
       text: "You will not be able to recover this product!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#7847E0",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
@@ -220,6 +222,8 @@ const Products = () => {
       showCancelButton: true,
       confirmButtonText: 'Yes',
       cancelButtonText: 'No',
+      cancelButtonColor: "#d33",
+      confirmButtonColor: "#7847E0",
     }).then((result) => {
       if (result.isConfirmed) {
         setIsModal2Open(!isModal2Open)
