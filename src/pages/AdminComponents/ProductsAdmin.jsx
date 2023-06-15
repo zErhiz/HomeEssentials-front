@@ -82,6 +82,8 @@ const Products = () => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, create it!",
+      confirmButtonColor: "#7847E0",
+      cancelButtonColor: "#d33",
       cancelButtonText: "No, cancel!",
       reverseButtons: true,
     }).then((result) => {
@@ -159,7 +161,7 @@ const Products = () => {
       text: "You will not be able to recover this product!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#7847E0",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
@@ -220,6 +222,8 @@ const Products = () => {
       showCancelButton: true,
       confirmButtonText: 'Yes',
       cancelButtonText: 'No',
+      cancelButtonColor: "#d33",
+      confirmButtonColor: "#7847E0",
     }).then((result) => {
       if (result.isConfirmed) {
         setIsModal2Open(!isModal2Open)
@@ -465,7 +469,7 @@ const handleInputChangeBrandEdit = (event) =>{
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[110px] p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label className="mb-2">
@@ -475,7 +479,7 @@ const handleInputChangeBrandEdit = (event) =>{
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[70px] p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label className="mb-2">
@@ -485,7 +489,7 @@ const handleInputChangeBrandEdit = (event) =>{
                     name="price"
                     value={formData.price}
                     onChange={handleInputChange}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[115px] p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label className="mb-2">
@@ -495,7 +499,7 @@ const handleInputChangeBrandEdit = (event) =>{
                     name="price_offer"
                     value={formData.price_offer}
                     onChange={handleInputChange}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-20 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label className="mb-2">
@@ -505,7 +509,7 @@ const handleInputChangeBrandEdit = (event) =>{
                     name="percentage_offer"
                     value={formData.percentage_offer}
                     onChange={handleInputChange}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label className="mb-2">
@@ -515,7 +519,7 @@ const handleInputChangeBrandEdit = (event) =>{
                     name="photo"
                     value={formData.photo}
                     onChange={handleInputChange}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-28 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label className="mb-2">
@@ -525,7 +529,7 @@ const handleInputChangeBrandEdit = (event) =>{
                     name="stock_Available"
                     value={formData.stock_Available}
                     onChange={handleInputChange}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-12  p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
                 <label className="mb-2">
@@ -534,7 +538,7 @@ const handleInputChangeBrandEdit = (event) =>{
                     name="category_id"
                     value={formData.category_id}
                     onChange={handleCategoryChange}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[85px]  p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     <option value="">Select a category</option>
                     {categories2?.map((category) => (
@@ -550,7 +554,7 @@ const handleInputChangeBrandEdit = (event) =>{
                     name="manufacturer_id"
                     value={formData.manufacturer_id}
                     onChange={handleManufacturerChange}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-28 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     <option value="">Select the brand of the product</option>
                     {manufacturers?.map((manufacturer) => (
@@ -597,83 +601,83 @@ const handleInputChangeBrandEdit = (event) =>{
                 className="flex flex-col"
                 onSubmit={handleSubmitEdit(selectedProductId)} 
               >
-                <label>
+                    <label className="mb-2">
                   Name:
                   <input
                     type="text"
                     name="nameEdit"
                     value={formDataEdit.name}
                     onChange={handleInputChangeName}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[110px] p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
-                     <label>
+                <label className="mb-2">
                   Description:
                   <input
                     type="text"
                     name="descriptionEdit"
                     value={formDataEdit.description || ""}
                     onChange={handleInputChangeDescription}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[70px] p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
-                <label>
+                <label className="mb-2">
                   Price:
                   <input
                     type="number"
                     name="priceEdit"
                     value={formDataEdit.price || ""}
                     onChange={handleInputChangePrice}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[115px] p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
-                <label>
+                <label className="mb-2">
                   Price offer:
                   <input
                     type="number"
                     name="price_offerEdit"
                     value={formDataEdit.price_offer || ""}
                     onChange={handleInputChangePriceOffer}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-20 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
-                <label>
+                <label className="mb-2">
                   Percentage offer:
                   <input
                     type="number"
                     name="percentage_offerEdit"
                     value={formDataEdit.percentage_offer || ""}
                     onChange={handleInputChangePercentageOffer}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[35px] p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
-                <label>
-                  photo:
+                <label className="mb-2">
+                  Photo:
                   <input
                     type="text"
                     name="photoEdit"
                     value={formDataEdit.photo || ""} 
                     onChange={handleInputChangePhoto}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-28 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
-                <label>
-                  stock Available:
+                <label className="mb-2">
+                  Stock Available:
                   <input
                     type="number"
                     name="stock_AvailableEdit"
                     value={formDataEdit.stock_Available || ""} 
                     onChange={handleInputChangeStock}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-12  p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </label>
-                <label>
+                <label className="mb-2">
                   Categorie:
                   <select
                     name="category_idEdit"
                     value={formDataEdit.category_id || ""}
                     onChange={handleInputChangeCategorieEdit}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-[85px]  p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     <option value="">Select a category</option>
                     {categories2?.map((category) => (
@@ -683,13 +687,13 @@ const handleInputChangeBrandEdit = (event) =>{
                     ))}
                   </select>
                 </label>
-                <label>
+                <label className="mb-2">
                   Brand:
                   <select
                     name="manufacturer_id"
                     value={formDataEdit.manufacturer_id || ""}
                     onChange={handleInputChangeBrandEdit}
-                    className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="border  w-[50%] border-gray-300 rounded-md ml-28 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     <option value="">Select the brand of the product</option>
                     {manufacturers?.map((manufacturer) => (
@@ -701,7 +705,7 @@ const handleInputChangeBrandEdit = (event) =>{
                 </label>
                 <button
                   type="submit"
-                  className="bg-purple-500 text-white font-bold"
+                  className="bg-purple-500 text-white font-bold py-2 px-4 mt-4 rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
                 >
                   Edit the product
                 </button>
