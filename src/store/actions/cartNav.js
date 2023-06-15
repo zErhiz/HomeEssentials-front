@@ -1,3 +1,4 @@
+
 import { createAction } from "@reduxjs/toolkit";
 
 const cartNav = createAction(
@@ -16,3 +17,4 @@ const cartNav = createAction(
   const actions = {cartNav}
   
   export default actions
+
