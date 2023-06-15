@@ -17,7 +17,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     if (products.length === 0) {
-        dispatch(products_read())
+        dispatch(products_read()) 
     }
 }, [])
   return (

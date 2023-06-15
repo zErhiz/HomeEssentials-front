@@ -43,8 +43,8 @@ const UserPanel = () => {
     lastName ? data.lastName = lastName : ""
     email ? data.email = email : ""
     password ? data.password = password : ""
-    img ? data.img = img : ""
-    //console.log(data);
+    img ? data.photo = img : ""
+    console.log(data);
 
     let token = () => localStorage.getItem('token')
     let headers = { headers: { 'authorization': `Bearer ${token()}` } }

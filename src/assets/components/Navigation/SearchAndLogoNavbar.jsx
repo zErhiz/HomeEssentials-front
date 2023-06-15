@@ -128,14 +128,13 @@ const SearchAndLogoNavbar = () => {
                 <p>{userCurrent.name} {userCurrent.lastName}</p>
               </div>
               {!seeButtonsUser ? (
-                <div className="absolute top-10 left-0 w-40 h-20 bg-[#FFFFFF] rounded-b-lg z-30">
-                  <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> User Panel</button>
-                  <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> Sign Out</button>
+                <div className="absolute top-10 left-0 w-52 mt-4 z-30 bg-white shadow-[0_5px_10px_rgba(0,0,0,0.55)] rounded-md text-[#393939] items-center">
                   {role === 1 || role === 2 ? (
-  <button onClick={() => navigate('/admin/products')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10">
-    Admin Panel
-  </button>
-) : null}
+                  <button onClick={() => navigate('/admin/products')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10 p-2">
+                    Admin Panel
+                  </button>) : null}
+                  <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10 p-2"> User Panel</button>
+                  <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10 p-2"> Sign Out</button>
                 </div>
               ) : ("")}
             </div>

@@ -167,8 +167,9 @@ const Cart = () => {
 
                 </div>
                 <div className='absolute bottom-0 flex w-full flex-col items-center'>
-                    <div className='w-[90%] h-28 flex items-center justify-end pr-10 border-y-2 border-white bg-[#E7E7E7]'>
-                        <p className='text-2xl font-medium'><span className='mr-4'>Total Purchase:</span>  USD {totalPurchase.toFixed(2)}</p>
+                    <div className='w-[90%] sm:h-28 flex flex-col sm:flex-row items-start sm:items-center justify-center sm:justify-end pr-10 border-y-2 border-white bg-[#E7E7E7]'>
+                        <p className='text-2xl font-medium'>Total Purchase:</p>
+                        <p className='text-2xl font-medium'>USD {totalPurchase.toFixed(2)}</p>
                     </div>
                     <div className="w-[90%] h-28 flex items-center justify-end pr-10">
                         <button 
