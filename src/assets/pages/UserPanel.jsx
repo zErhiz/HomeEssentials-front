@@ -73,13 +73,13 @@ const UserPanel = () => {
 
 
   return (
-    <div className='bg-[#FFFFFF] p-4 min-h-[80vh] flex flex-col justify-center items-center mt-12 sm:mt-0'>
+    <div className='bg-[#E7E7E7] p-4 min-h-[80vh] h-screen flex flex-col justify-center items-center mt-12 sm:mt-0'>
       {!loading ? (<></>) : (<Grid className="fixed bg-[#00000073] p-2 rounded-lg"/>)}
             <div className='flex justify-center items-center pb-4'>
-              <h3 className='font-bold text-gray-700 text-3xl'>User Panel</h3>
+              <h3 className='font-bold text-gray-700 text-2xl'>User Panel</h3>
             </div>
-            <div className="p-4 sm:w-[70vw] rounded-lg shadow-lg bg-[#E7E7E7] flex flex-col lg:flex-row lg:h-[28rem]">
-              <div className="w-full lg:w-1/2 flex flex-col sm:flex-row lg:flex-col items-center justify-evenly">
+            <div className="p-4 sm:w-[70vw] rounded-lg shadow-lg bg-[#fff] flex flex-col lg:flex-row lg:h-[28rem]">
+              <div className="w-full lg:w-1/2 flex flex-col sm:flex-row lg:flex-col items-center justify-center">
               <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full rounded-lg cursor-pointer">
                                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                       <img src={!img? infoUser?.photo : img} alt="" className="w-40 h-40 rounded-full object-cover" />
@@ -89,19 +89,19 @@ const UserPanel = () => {
                                             onChange={e => handleSubmit(e.target.files[0])} 
                                             className="hidden" />
                                     </label>
-                <div className="lg:w-full lg:px-2 px-2">
-                  <p className="my-4 text-xl font-semibold flex flex-col">Name: <b className="font-normal">{infoUser?.name}</b></p>
-                  <p className="my-4 text-xl font-semibold flex flex-col">Last Name: <b className="font-normal">{infoUser?.lastName}</b></p>
-                  <p className="my-4 text-xl font-semibold flex flex-col">Email:  <b className="font-normal">{infoUser?.email}</b></p>
+                <div className="flex flex-col px-2">
+                  <p className="my-1 2xl:text-xl text-md font-normal"> {infoUser?.name}</p>
+                  <p className="my-1 2xl:text-xl text-sm font-normal"> {infoUser?.lastName}</p>
+                  <p className="my-1 2xl:text-xl text-sm font-normal"> {infoUser?.email}</p>
                 </div>
               </div>
               <form onSubmit={(e)=> {
                                 e.target.reset()
                                 e.preventDefault()
                                 handleForm()
-              }} className="w-full lg:w-1/2 h-full flex flex-col justify-around">
+              }} className="w-full text-[#7847E0] lg:w-1/2 h-full flex flex-col justify-around">
                   <h2 className="bock text-center font-bold text-gray-700 text-2xl mb-4">Edit data</h2>
-                  <div className="mb-4 flex border border-purple-900 rounded-lg">
+                  <div className="mb-4 flex border border-[#7847E0] rounded-lg">
                       <label className="w-1/2 px-3 py-2 font-semibold">
                           Name:
                       </label>
@@ -111,7 +111,7 @@ const UserPanel = () => {
                           className="w-full px-3 py-2 appearance-none focus:outline-none focus:shadow-outline  rounded-r-lg"
                           placeholder="New name"/>
                   </div>
-                  <div className="mb-4 flex border border-purple-900 rounded-lg">
+                  <div className="mb-4 flex border border-[#7847E0] rounded-lg">
                       <label className="w-1/2 px-3 py-2 font-semibold">
                           Last Name:
                       </label>
@@ -121,7 +121,7 @@ const UserPanel = () => {
                           className="w-full px-3 py-2 appearance-none focus:outline-none focus:shadow-outline  rounded-r-lg"
                           placeholder="New Last Name"/>
                   </div>
-                  <div className="mb-4 flex border border-purple-900 rounded-lg">
+                  <div className="mb-4 flex border border-[#7847E0] rounded-lg">
                       <label className="w-1/2 px-3 py-2 font-semibold" htmlFor="email">
                           Email:
                       </label>
@@ -131,7 +131,7 @@ const UserPanel = () => {
                           className="w-full px-3 py-2 appearance-none focus:outline-none focus:shadow-outline  rounded-r-lg"
                           placeholder="New Email"/>
                   </div>
-                  <div className="mb-4 flex border border-purple-900 rounded-lg">
+                  <div className="mb-4 flex border border-[#7847E0] rounded-lg">
                       <label className="w-1/2 px-3 py-2 font-semibold" htmlFor="password">
                           Password:
                       </label>
@@ -145,14 +145,15 @@ const UserPanel = () => {
                       <button
                           disabled={buttonSend} 
                           type="submit"
-                          className="px-4 py-2 font-bold text-white bg-gradient-to-r from-purple-900 to-purple-600 
+                          className="px-4 py-2 font-bold text-white bg-gradient-to-r from-[#7847E0] to-purple-500 
                                       rounded hover:bg-purple-700 focus:outline-none focus:shadow-outline">
                           Saved Changes
                       </button>
                   </div>
               </form>
             </div>
-            <div className='flex justify-center items-center pb-4'>
+           
+            {favorites.length < 0 && <div><div className='flex justify-center items-center pb-4'>
               <h3 className='font-bold text-gray-700 text-3xl mt-16'>Your favorites</h3>
             </div>
             <div className="p-4 sm:w-[70vw] rounded-lg shadow-lg flex flex-col lg:flex-row flex-wrap justify-evenly">
@@ -172,7 +173,7 @@ const UserPanel = () => {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div></div>}
             <ToastContainer
             transition={Flip}
             position="bottom-right"
