@@ -13,9 +13,6 @@ const CategoriesNav = () => {
   let manufacturers = useSelector(store => store.manufacturerHome.manufacturers)
   console.log(manufacturers);
 
-
-
-
   //
   const [filterPrice , setFilterPrice] = useState(1)
   //capturar categorias chekeadas
@@ -43,9 +40,10 @@ useEffect(() => {
     dispatch(categories_read())
   }
 }, [])
+
 useEffect(() => {
       dispatch(products_read({categoriesCheked , manufacturerCheked , filterPrice}))
-}, [categoriesCheked, manufacturerCheked,filterPrice])
+}, [categoriesCheked, manufacturerCheked, filterPrice])
 
   return (
     <div className='h-[60px] bg-[#7847E0] hidden lg:flex items-center content-center pl-5'>
@@ -55,7 +53,12 @@ useEffect(() => {
       ) : null}
       <button
         className="text-white font-medium w-44 mx-4 py-1 rounded-md shadow-inner hover:shadow-black border border-white z-10"
-        onClick={()=> navigate(`/allproducts`)}>
+        onClick={()=> {
+          navigate(`/allproducts`)
+          setCategoriesCheked([])
+          setManufacturerCheked([])
+          setFilterPrice(1)
+        }}>
         View All Products
       </button>
       <div className="w-46 mx-4 h-full relative flex items-center justify-center z-10">

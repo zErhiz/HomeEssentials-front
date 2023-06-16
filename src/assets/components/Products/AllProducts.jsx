@@ -3,15 +3,18 @@ import React from 'react'
 import { useEffect, useState, useRef } from "react";
 import { Link as Anchor } from 'react-router-dom'
 import products_actions from '../../../store/actions/products'
+import manufacturers_action from '../../../store/actions/manufacturers'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from '@nextui-org/react';
 
 const AllProducts = () => {
     let { products_read } = products_actions
+    let { manufacturers_read } = manufacturers_action
   const dispatch = useDispatch()
   let navigate=useNavigate()
   let products = useSelector(store => store.products.products)
+  let manufacturers = useSelector(store => store.manufacturerHome.manufacturers)
   console.log(products);
 
 
@@ -20,9 +23,15 @@ const AllProducts = () => {
         dispatch(products_read()) 
     }
 }, [])
+useEffect(() => {
+  if (manufacturers.length === 0) {
+    dispatch(manufacturers_read())
+
+  }
+}, [])
   return (
 <>
-<h1 className='p-9 text-center font-bold text-3xl'>Take a look of our products!</h1>
+<h1 className='p-5 text-center font-bold text-3xl'>Take a look of our products!</h1>
 <div className='w-full flex flex-wrap justify-evenly'>
 {products.map((prod) => (
   
