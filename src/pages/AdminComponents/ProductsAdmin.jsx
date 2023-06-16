@@ -358,9 +358,9 @@ const handleInputChangeBrandEdit = (event) =>{
       {/* Productos */}
 
       <div className="flex-1 p-8 overflow-scroll">
-        <h2 className="text-2xl font-bold mb-4">Products</h2>
+        <h2 className="text-xl md:text-2xl font-bold mb-4">Products</h2>
         <div className="flex flex-row gap-3 items-center mb-4 justify-center content-center">
-          <h2 className="text-2xl font-bold -mt-2 ">Add a new product</h2>
+          <h2 className="text-xl md:text-2x font-bold -mt-2 ">Add a new product</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -384,7 +384,7 @@ const handleInputChangeBrandEdit = (event) =>{
                 key={car._id}
                 className="flex flex-col hover:shadow-[0_4px_10px_rgba(0,0,0,0.10)] transition-transform transform hover:scale-105 hover:rounded-sm shadow-[0_0_4px_rgba(0,0,0,0.15)] cursor-pointer w-[100%] sm:w-[40%] xl:w-[11vw] 2xl:w-[16.66%]"
               >
-                <div className="h-[12vw] relative">
+                <div className="h-[30vw] sm:h-[20vw] md:h-[12vw] relative">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -715,13 +715,13 @@ const handleInputChangeBrandEdit = (event) =>{
         )}
         <div className="flex justify-between">
           <button
-            className="bg-purple-500 border w-[10%] border-black text-white font-bold"
+            className="bg-purple-500 border rounded-lg w-[45%] sm:w-[20%] lg:w-[15%] 2xl:w-[5%] border-black text-white font-bold"
             onClick={HandleArrowPrev}
           >
             Prev
           </button>
           <button
-            className="bg-purple-500 border w-[10%] border-black text-white font-bold"
+            className="bg-purple-500 border w-[45%] sm:w-[20%] lg:w-[15%]  2xl:w-[5%] rounded-lg border-black text-white font-bold"
             onClick={HandleArrowNext}
           >
             Next

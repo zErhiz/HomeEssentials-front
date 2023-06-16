@@ -81,8 +81,8 @@ export default function Signup() {
         backgroundSize: "cover",
 
       }}>
-      <div className='relative flex flex-col z-20 sm:w-[40%] w-[100%] items-center text-[#7847E0] selection:bg-[#7847E0] selection:text-[#ffe927] mr-20'>
-        <div className='relative h-[6rem] w-[100%] bg-white flex items-center shadow-[0_5px_10px_rgba(0,0,0,0.15)] justify-center rounded-[8px_8px_0_0] mb-[2px]'>
+      <div className='relative flex flex-col z-20 sm:w-[60%] md:w-[55%] lg:w-[40%] w-[50%] items-center text-[#7847E0] selection:bg-[#7847E0] selection:text-[#ffe927] mr-20'>
+        <div className='relative h-[6rem] w-[100%] sm:w-[100%] bg-white flex items-center shadow-[0_5px_10px_rgba(0,0,0,0.15)] justify-center rounded-[8px_8px_0_0] mb-[2px]'>
           <h1 className='text-3xl font-bold'>Welcome!</h1>
           <img className='absolute w-8 opacity-10 top-3 right-3' src={logo} alt="logo" />
         </div>

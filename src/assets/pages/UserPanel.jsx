@@ -73,7 +73,7 @@ const UserPanel = () => {
 
 
   return (
-    <div className='bg-[#E7E7E7] p-4 min-h-[80vh] h-screen flex flex-col justify-center items-center mt-12 sm:mt-0'>
+    <div className='bg-[#E7E7E7] p-4 h-fit flex flex-col justify-center items-center mt-12 sm:mt-0'>
       {!loading ? (<></>) : (<Grid className="fixed bg-[#00000073] p-2 rounded-lg"/>)}
             <div className='flex justify-center items-center pb-4'>
               <h3 className='font-bold text-gray-700 text-2xl'>User Panel</h3>
