@@ -63,7 +63,7 @@ const SearchBar = () => {
         </div>
 
         <div
-          className={`absolute transition-all top-[7rem] left-16 flex flex-col z-50 overflow-x-hidden ${showOverflowScroll ? "overflow-scroll" : ""
+          className={`absolute transition-all top-[7rem] left-16 flex flex-col z-50 overflow-x-hidden ${showOverflowScroll ? "overflow-auto" : ""
             } h-[70%]`}
         >
           {searchResults.map((product) => (
