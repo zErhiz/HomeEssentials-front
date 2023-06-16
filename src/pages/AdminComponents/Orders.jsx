@@ -82,37 +82,37 @@ const Orders = () => {
 
   return (
     <>
-    <div className="h-screen flex bg-gray-100">
-      <NavigationComponent />
-      <div className="flex-1 p-8 overflow-scroll">
-        <h2 className="text-2xl font-bold mb-4">Orders</h2>
-        <div className="grid grid-cols-4 sm:grid-cols-4 gap-2">
-          <h3 className="hidden sm:block col-span-1 font-medium lg:text-xl">User Orders</h3>
+   <div className="h-screen flex bg-gray-100">
+  <NavigationComponent />
+  <div className="flex-1 p-8 overflow-scroll">
+    <h2 className="text-2xl font-bold mb-4">Orders</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <h3 className="hidden sm:block col-span-1 font-medium lg:text-xl">User Orders</h3>
 
-          {orders.map((order) => (
-            <div className="border border-gray-200 rounded p-4 shadow-md" key={order._id}>
-              <h3 className="text-lg font-semibold mb-2">{order?.user?.name} {order?.user?.lastName}</h3>
-              <p className="text-sm mb-2">Email: {order?.user?.email}</p>
-              <p className="text-sm mb-2">Status: {order?.order?.status}</p>
-              <p className="text-sm mb-2">Address: {order?.user?.address}</p>
-              <p className="text-sm mb-2">Country: {order?.user?.country}</p>
-              <p className="text-sm mb-2">Dni: {order?.user?.dni}</p>
-              <p className="text-sm mb-2">Phone: {order?.user?.phoneNumber}</p>
-              <h4 className="text-base font-semibold">Date</h4>
-              <p className="text-sm mb-2">Order date: {order.createdAt.slice(0, -14)}</p>
-              {order?.product.map((product) => (
-                <div key={product._id} className="mt-4">
-                  <h4 className="text-base font-semibold">{product?.name}</h4>
-                  <p className="text-sm">Price: ${product?.price}</p>
-                  <p className="text-sm">Quantity: {product?.quantity}</p>
-                </div>
-              ))}
-              <button className="bg-purple-600 text-white font-bold py-1 rounded-xl w-[50%]" onClick={() => openModal(order._id)}>change status</button>
+      {orders.map((order) => (
+        <div className="w-[70vw] sm:w-[35vw] md:w-[30vw] lg:w-[20vw] xl:w-[25vw] border border-gray-200 rounded p-4 shadow-md" key={order._id}>
+          <h3 className="text-lg font-semibold mb-2">{order?.user?.name} {order?.user?.lastName}</h3>
+          <p className="text-sm mb-2">Email: {order?.user?.email}</p>
+          <p className="text-sm mb-2">Status: {order?.order?.status}</p>
+          <p className="text-sm mb-2">Address: {order?.user?.address}</p>
+          <p className="text-sm mb-2">Country: {order?.user?.country}</p>
+          <p className="text-sm mb-2">Dni: {order?.user?.dni}</p>
+          <p className="text-sm mb-2">Phone: {order?.user?.phoneNumber}</p>
+          <h4 className="text-base font-semibold">Date</h4>
+          <p className="text-sm mb-2">Order date: {order.createdAt.slice(0, -14)}</p>
+          {order?.product.map((product) => (
+            <div key={product._id} className="mt-4">
+              <h4 className="text-base font-semibold">{product?.name}</h4>
+              <p className="text-sm">Price: ${product?.price}</p>
+              <p className="text-sm">Quantity: {product?.quantity}</p>
             </div>
           ))}
+          <button className="bg-purple-600 text-white font-bold py-1 rounded-xl w-full sm:w-[50%]" onClick={() => openModal(order._id)}>Change Status</button>
         </div>
-      </div>
+      ))}
     </div>
+  </div>
+</div>
     {modalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-4 rounded-md">

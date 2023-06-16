@@ -203,7 +203,7 @@ console.log(count)
             </div>
             {viewForm? (
                     <div className='fixed top-0 w-full h-full bg-[#000000de] flex flex-col justify-center items-center'>
-                        <div className=' bg-[#ffffffde] p-10 pt-5 rounded-lg border-2 border-purple-900 relative flex flex-col'>
+                        <div className=' bg-[#ffffffde] w-[100%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[35%] 2xl:w-[25%] sm:p-10 pt-5 rounded-lg border-2 border-purple-900 relative flex flex-col'>
                             <img className='h-8 w-8 absolute top-1 right-1 cursor-pointer' src="/exit.svg" alt="" 
                                         onClick={()=> setViewForm(false)}/>
                             <p className='mb-5 w-full text-center font-medium text-lg'>Give us an address where to deliver your order</p>
@@ -237,7 +237,7 @@ console.log(count)
                                     className="w-96 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 text-black focus:bg-transparent my-2"/>
                             <div className='h-full flex items-center pt-[20px] ml-5 flex-col'>
                                 {preferenceId? (
-                                    <Wallet initialization={{ preferenceId: preferenceId, redirectMode: 'modal' }} />
+                                    <Wallet initialization={{ preferenceId: preferenceId, redirectMode: 'self' }} />
                                     ) : (
                                     <button 
                                         type="submit"
