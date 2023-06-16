@@ -7,7 +7,7 @@ const MiddlePhotoSection = () => {
         <div className="w-[60%] xl:block hidden">
           <img className="h-[100%] object-cover rounded-md w-[100%]" src="https://i.ibb.co/2gz02R4/image.png" alt="" />
         </div>
-        <div className='flex items-center'>
+        <div className='flex items-center  sm:relative sm:top-10 lg:top-24 md:top-20 xl:static'>
           <div className="flex flex-col h-[80%] ml-[2rem] w-[80%] justify-evenly items-center xl:items-start xl:justify-evenly">
             <h2 className="text-sm lg:text-lg xl:text-lg text-[#393939]">Season deals</h2>
             <h2 className="text-lg lg:text-2xl xl:text-5xl text-black font-bold">With this purchase you save 50%</h2>

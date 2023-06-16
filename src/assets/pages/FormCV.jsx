@@ -119,8 +119,8 @@ const handleReferences = (res) => {
 
 return (
     <>
-    <section className="h-full w-full flex p-10 justify-center text-slate-300 bg-[#dfe1e6]">
-        <form onSubmit={(e)=>handleForm(e)} className="w-[80%] flex flex-col items-center space-y-6 border-2 border-black p-10 bg-white max-w-[800px]">
+    <section className="h-full w-full flex md:p-10 justify-center text-slate-300 border border-orange-500 bg-[#dfe1e6]">
+        <form onSubmit={(e)=>handleForm(e)} className="  border-blue-500 w-[100%] md:w-[80%] flex flex-col items-center space-y-6 border-2 border-black  md:p-10 bg-white lg:max-w-[800px]">
             <div>
                 <input
                     type="text"
@@ -128,7 +128,7 @@ return (
                     value={nameInput}
                     className="w-full p-2 px-4 bg-transparent text-center text-4xl mb-3 text-[#403d56] border-b-2 border-[#403d56] font-bold"/>
             </div>
-            <div className="w-full flex justify-between">
+            <div className="w-full border border-fuchsia-500 flex justify-between">
                 <div className="flex flex-col w-full items-start">
                     <h2 className="text-2xl border-[#403d56] border-b-2 mb-3 px-3 text-[#403d56] font-bold">Personal information</h2>
                         <div className="flex border-[#403d56] border-b-4 border-dashed w-full pt-1">
