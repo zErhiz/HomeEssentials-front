@@ -20,16 +20,16 @@ console.log(curriculums)
 
 
   return (
-    <div className="h-fit flex bg-gray-100">
+    <div className="h-screen flex bg-gray-100">
       {/* Barra de al lado */}
     <NavigationComponent/>
       {/* Content */}
-      <div > 
-        <h2 className="text-2xl font-bold relative top-5 p-2 ">Curriculums</h2>
-        </div>
-      <div className="flex flex-wrap p-8 overflow-scroll gap-2">
+     
+      <div className=" flex-1 p-8 overflow-scroll">
+        <h2 className='text-2xl font-bold mb-4'>Curriculums</h2>
+        <div className='w-[100%] flex flex-wrap gap-2 p-2'> 
         {curriculums.map((curriculum) => (
-          <div key={curriculum._id} className="bg-white w-[49%] p-4 rounded-lg shadow mb-4">
+          <div key={curriculum._id} className="bg-white w-[30%] p-4 rounded-lg shadow mb-4">
             <div className='flex flex-row justify-between'> 
             <div> 
             <h3 className="text-xl font-bold">{curriculum.name} {curriculum.lastName}</h3>
@@ -58,6 +58,7 @@ console.log(curriculums)
             
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

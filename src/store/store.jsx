@@ -13,7 +13,7 @@ import orders_reducer from "./reducers/orders_reducer"
 import cartNav_reducer from './reducers/cartNav_reducer'
 
 import curruculums_reducer from "./reducers/curriculums_reducer"
-
+import contact_reducer from "./reducers/contact_reducer"
 const store = configureStore({
   reducer: {
     categories: category_reducer,
@@ -30,7 +30,7 @@ const store = configureStore({
     cartNavReducer: cartNav_reducer,
 
     curriculumsget: curruculums_reducer,
-
+    contactget: contact_reducer
   },
 });
 
