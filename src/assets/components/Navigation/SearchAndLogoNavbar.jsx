@@ -10,10 +10,13 @@ import axios from "axios";
 import apiUrl from '../../../../api';
 import userLogin_action from '../../../store/actions/userLogin_action'
 import logo from "../../../../public/images/Logos/logo-2-b.png"
+import  cartNav_action from '../../../store/actions/cartNav'
 const {SaveUserLogin} = userLogin_action
+const {cartNav}= cartNav_action 
 
 const SearchAndLogoNavbar = () => {
   let { categories_read } = categories_actions
+  let count = useSelector(store=>store.cartNavReducer.cart)
   const dispatch = useDispatch()
   let navigate = useNavigate()
   let categories = useSelector(store => store.categories.categories)
@@ -21,9 +24,9 @@ const SearchAndLogoNavbar = () => {
   //console.log(userLogin);
 
   const user = JSON.parse(localStorage.getItem('user')) || ""
-  const email = userLogin.email? userLogin.email : user.email
-  
-  const [cart,setCart] = useState(false)
+  const email = userLogin.email ? userLogin.email : user.email
+
+  const [cart, setCart] = useState(false)
   //console.log("cart", cart);
   const [fav, setFav] = useState(false)
 
@@ -99,27 +102,27 @@ const SearchAndLogoNavbar = () => {
         </div>
         <div className=" lg:flex lg:justify-center lg:items-center lg:content-center lg:px-12 lg:gap-8">
           <div className="hidden lg:block">
-            {!tokenCurrent ?(
+            {!tokenCurrent ? (
               <Anchor
-              to="/signin"
-              className=" mx-2 text-xl lg:gap-1  flex justify-center content-center items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-8 h-8 "
+                to="/signin"
+                className=" mx-2 text-xl lg:gap-1  flex justify-center content-center items-center"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-              Enter
-            </Anchor>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 "
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                Enter
+              </Anchor>
             ) : (
               <div onClick={() => {handlebutton(seeButtonsUser)
               }} className=" mx-2 text-xl lg:gap-1 flex justify-center content-center items-center relative cursor-pointer">
@@ -128,33 +131,34 @@ const SearchAndLogoNavbar = () => {
                 <p>{userCurrent.name} {userCurrent.lastName}</p>
               </div>
               {!seeButtonsUser ? (
-                <div className="absolute top-10 left-0 w-52 mt-4 z-30 bg-white shadow-[0_5px_10px_rgba(0,0,0,0.55)] rounded-md text-[#393939] items-center">
+                <div className="absolute top-10 left-0 w-40 h-20 bg-[#FFFFFF] rounded-b-lg z-30">
+                  <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> User Panel</button>
+                  <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> Sign Out</button>
                   {role === 1 || role === 2 ? (
-                  <button onClick={() => navigate('/admin/products')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10 p-2">
-                    Admin Panel
-                  </button>) : null}
-                  <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10 p-2"> User Panel</button>
-                  <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10 p-2"> Sign Out</button>
+  <button onClick={() => navigate('/admin/products')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10">
+    Admin Panel
+  </button>
+) : null}
                 </div>
               ) : ("")}
             </div>
             )}
           </div>
           {!seeButtonsUser ? (
-                <div className="absolute w-full h-full top-0 right-0 z-20"
-                        onClick={() => {handlebutton(seeButtonsUser)}}></div>
-              ) : ("")}
+            <div className="absolute w-full h-full top-0 right-0 z-20"
+              onClick={() => { handlebutton(seeButtonsUser) }}></div>
+          ) : ("")}
           <div className="lg:block flex justify-center content-center items-center">
             <div
-              className="mx-2 text-xl flex cursor-pointer justify-center items-center content-center gap-1"
-              onClick={()=> setFav(true)}>
+              className="mx-2 text-[#393939] flex cursor-pointer justify-center items-center content-center gap-1"
+              onClick={() => setFav(true)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-8 h-8 cursor-pointer"
+                className="2xl:w-8 2xl:h-8 h-6 w-6 cursor-pointer"
               >
                 <path
                   strokeLinecap="round"
@@ -166,23 +170,23 @@ const SearchAndLogoNavbar = () => {
             </div>
           </div>
           <div className="flex flex-row cursor-pointer px-5"
-              onClick={()=> setCart(true)}>
+            onClick={() => setCart(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              strokeWidth="1.5"
               stroke="currentColor"
-              className="w-8 h-8">
+              className="2xl:w-8 2xl:h-8 h-6 w-6">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
-            {/* <h2 className="w-6 h-6 rounded-full bg-black text-white flex justify-center items-center mx-2">
-              {products.length}
-            </h2> */}
+
+            <h2 className="text-black">{count.cart}</h2>
+
           </div>
         </div>
         <div
@@ -202,7 +206,6 @@ const SearchAndLogoNavbar = () => {
                 <div className="flex flex-row-reverse justify-center content-center items-center">
                   <Anchor to="/enter" className="block my-2">
                     Enter
-
                   </Anchor>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -254,7 +257,7 @@ const SearchAndLogoNavbar = () => {
                       d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
                     />
                   </svg>
-                  <h2 className="w-6 h-6 rounded-full bg-black text-white flex justify-center items-center">
+                  <h2 className="w-6 h-6 rounded-full bg-black text-black flex justify-center items-center">
                     0
                   </h2>
                 </div>
@@ -264,7 +267,6 @@ const SearchAndLogoNavbar = () => {
               <div className="bg-white p-4 flex gap-8 ">
                 <div className="flex flex-row-reverse justify-center content-center items-center">
 
-
                   <div className='text-black flex flex-col justify-center items-center content-center gap-1'>
                     <Anchor to='/about' className='mx-2 text-lg underline'> About</Anchor>
                     <Anchor to='/contact' className='mx-2 text-lg underline'> Contact</Anchor>
@@ -272,27 +274,9 @@ const SearchAndLogoNavbar = () => {
                     <a className='text-black text-lg ' href='tel:+5213312345678'> Call to +52-1-33-12345678 </a>
                   </div>
 
-
-
-
-
-
-
-
                 </div>
               </div>
             </div>
-            <div className="flex  w-[100%] h-[46%]  justify-center  ">
-
-              <ul className="flex flex-col w-[100%]  overflow-y-auto">
-              <li><Anchor to="/allproducts" className="text-black hover:text-purple-600"> <div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>Buy all</h2> </div> </Anchor></li>
-                {categories.map((cat) => (
-                  <li key={cat._id}><Anchor to={`/products/category/${cat._id}`} className="text-black hover:text-purple-600"> <div className="bg-[#EDECEC] justify-center items-center content-center flex border-b border-black">  <h2>{cat.name}</h2> </div> </Anchor></li>
-                ))}
-              </ul>
-
-            </div>
-
           </div>
         </div>
       </div>

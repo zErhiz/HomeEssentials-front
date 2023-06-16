@@ -3,10 +3,13 @@ import { useParams } from 'react-router-dom'
 import {  } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../../api'
+import { useDispatch, useSelector } from 'react-redux'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import  cartNav_action from '../../store/actions/cartNav.js'
 import 'react-toastify/dist/ReactToastify.css';
+const {cartNav}= cartNav_action 
 
 const Cart = () => {
     initMercadoPago('TEST-043a661b-8206-4019-af80-17e2ff37dc98')
@@ -29,6 +32,12 @@ const Cart = () => {
             console.error(error);
         }
     };
+    const dispatch = useDispatch()
+   
+
+   
+    let count = useSelector(store=>store.cartNavReducer.cart)
+console.log(count)
     let navigate=useNavigate()
     const params = useParams()
     const email = atob(params.email)
@@ -43,7 +52,7 @@ const Cart = () => {
                 .then(res => setProducts(res.data.response))
                 .catch(err => console.log(err))}, []
     )
-    //agregar producto
+  
     const addProduct = (product_id) => {
         const data = {userEmail: email, productId: product_id}
         axios.post(`${apiUrl}cart/create`, data, headers).then(res => {
@@ -58,7 +67,7 @@ const Cart = () => {
                 theme: "colored",
                 });})
     }
-    //Restar producto
+
     const substractProduct = (product_id) => { 
         const data = {userEmail: email, productId: product_id}
         axios.put(`${apiUrl}cart/subtract`, data, headers).then(res => {
@@ -69,7 +78,7 @@ const Cart = () => {
             render()
         }).catch(err => console.log(err))
     }
-    //Eliminar producto
+
     const deleteProduct = (product_id) => { 
         axios.delete(`${apiUrl}cart?userEmail=${email}&productId=${product_id}`, headers).then(res => {
             console.log(res)
@@ -94,7 +103,15 @@ const Cart = () => {
     }
     
     products.forEach(product => totalPurchase += (product.product_id.price * product.quantity))
-    const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => setProducts(res.data.response)).catch(err => console.log(err))}
+    const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => {setProducts(res.data.response)
+       
+    dispatch((cartNav({
+        
+        cart:res.data.response.length
+
+    })))
+    
+    }).catch(err => console.log(err))}
     const [viewForm, setViewForm] = useState(false)
     const [ address, setAddress ] = useState("")
     const [ country, setCountry] = useState("")

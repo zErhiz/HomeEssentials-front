@@ -10,7 +10,7 @@ const SearchBar = () => {
     const query = event.target.value;
     setSearchQuery(query);
     if (!query) {
-      setSearchResults([]); 
+      setSearchResults([]);
     } else {
       handleSearch();
     }
@@ -18,8 +18,8 @@ const SearchBar = () => {
 
   const handleSearch = async () => {
     if (!searchQuery) {
-      setSearchResults([]); 
-      return; 
+      setSearchResults([]);
+      return;
     }
 
     try {
@@ -44,7 +44,7 @@ const SearchBar = () => {
             value={searchQuery}
             onChange={handleSearchQueryChange}
           />
-          <button className="bg-[#7847E0] hover:bg-purple-600 text-white rounded-r-full px-4 py-2">
+          <button className="bg-[#7847E0] hover:bg-[#8450f4] text-white rounded-r-full px-4 py-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -63,9 +63,8 @@ const SearchBar = () => {
         </div>
 
         <div
-          className={`absolute transition-all top-[7rem] left-16 flex flex-col z-50 overflow-x-hidden ${
-            showOverflowScroll ? "overflow-scroll" : ""
-          } h-[70%]`}
+          className={`absolute transition-all top-[7rem] left-16 flex flex-col z-50 overflow-x-hidden ${showOverflowScroll ? "overflow-scroll" : ""
+            } h-[70%]`}
         >
           {searchResults.map((product) => (
             <div onClick={() => navigate(`/products/${product._id}`)} key={product._id} className="cursor-pointer bg-white rounded-md shadow-md p-4 flex border justify-start">

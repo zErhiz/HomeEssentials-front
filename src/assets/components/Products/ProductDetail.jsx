@@ -1,14 +1,18 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import apiUrl from '../../../../api'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import productOne_action from '../../../store/actions/productOne'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import  cartNav_action from '../../../store/actions/cartNav'
+const {cartNav}= cartNav_action 
 
 const {productOne}= productOne_action 
 export default function ProductDetail() {
+  let count = useSelector(store=>store.cartNavReducer.cart)
+  console.log('count', count)
     const { id } = useParams()
     const dispatch = useDispatch()
     let [prodOne, setProdOne]= useState([])
@@ -22,9 +26,24 @@ export default function ProductDetail() {
       const data = {userEmail: email, productId: product_id}
       axios.post(`${apiUrl}cart/create`, data, headers).then(res => {
           console.log(res.data.message)
+          axios.get(`${apiUrl}cart/${email}`, headers).then(res => {
+       
+            dispatch((cartNav({
+                
+                cart:res.data.response.length
+        
+            })))
+            
+            }).catch(err => console.log(err))
+
           toast.success(res.data.message[0], {
             theme: "colored",
-            })
+                  })
+           
+           
+             
+
+
       }).catch(err => {
         console.log(err)
         toast.error(err.response.data.message[0], {

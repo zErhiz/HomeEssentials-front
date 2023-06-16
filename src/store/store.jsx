@@ -9,6 +9,11 @@ import userLogin_reducer from "./reducers/userLogin_reducer";
 import usersAdmin_reducer from "./reducers/usersAdmin_reducer"
 import productsAdmin_reducer from "./reducers/products_admin_reducer"
 import orders_reducer from "./reducers/orders_reducer"
+
+import cartNav_reducer from './reducers/cartNav_reducer'
+
+import curruculums_reducer from "./reducers/curriculums_reducer"
+import contact_reducer from "./reducers/contact_reducer"
 const store = configureStore({
   reducer: {
     categories: category_reducer,
@@ -21,6 +26,11 @@ const store = configureStore({
     userget: usersAdmin_reducer,
     productsAdmin: productsAdmin_reducer,
     ordersget: orders_reducer,
+
+    cartNavReducer: cartNav_reducer,
+
+    curriculumsget: curruculums_reducer,
+    contactget: contact_reducer
   },
 });
 

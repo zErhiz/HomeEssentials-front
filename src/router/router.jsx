@@ -15,7 +15,7 @@ import About from "../assets/pages/About";
 import Contact from "../assets/pages/Contact";
 import Attendance from "../assets/pages/Attendance";
 import Cart from "../assets/pages/Cart";
-
+import ContactAdmin from "../pages/AdminComponents/Contact"
 import PaymentPage from "../assets/components/Payments/PaymentPage";
 
 
@@ -49,7 +49,7 @@ const routes = createBrowserRouter([
                         { path: "/admin/order", element: <Orders /> },
                         { path: "/admin/products", element: <ProductsAdmin /> },
                         { path: "/admin/users", element: <Users /> },
-
+                        { path: "/admin/contact", element: <ContactAdmin /> },
                 ],
         },
 ]);
