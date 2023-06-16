@@ -162,7 +162,7 @@ console.log(count)
                                         </div>
                                         <p className='text-center text-gray-500'>{`${product.product_id.stock_Available} availables`}</p>
                                     </div>
-                                    <p className='w-2/6 sm:w-4/6 flex items-center justify-center text-xl font-medium'>USD {(product.product_id.price * product.quantity).toFixed(2)}</p>
+                                    <p className='w-2/6 sm:w-4/6 flex items-center justify-center text-xl font-medium'>  {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format((product.product_id.price * product.quantity).toFixed(2))}</p>
                                 </div>
                             </div>
                             <div className='w-full sm:w-[90%] py-5 sm:pl-10 sm:p-5 flex justify-between sm:justify-start'>
@@ -193,9 +193,9 @@ console.log(count)
 
                 </div>
                 <div className='absolute bottom-0 flex w-full flex-col items-center'>
-                    <div className='w-[90%] sm:h-28 flex flex-col sm:flex-row items-start sm:items-center justify-center sm:justify-end pr-10 border-y-2 border-white bg-[#E7E7E7]'>
-                        <p className='text-2xl font-medium'>Total Purchase:</p>
-                        <p className='text-2xl font-medium'>USD {totalPurchase.toFixed(2)}</p>
+                    <div className='w-[90%] sm:h-28 flex flex-col gap-2 sm:flex-row items-start sm:items-center justify-center sm:justify-end pr-10 border-y-2 border-white bg-[#E7E7E7]'>
+                        <p className='text-2xl font-medium'>Total Purchase: </p>
+                        <p className='text-2xl font-medium'> {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(totalPurchase.toFixed(2))} </p>
                     </div>
                     <div className="w-[90%] h-28 flex items-center justify-end pr-10">
                         <button 

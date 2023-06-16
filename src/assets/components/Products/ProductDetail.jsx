@@ -238,7 +238,7 @@ export default function ProductDetail() {
             </div>
   
             <div>
-              <p className="text-xl font-bold">${prodOne.price}</p>
+              <p className="text-xl font-bold">{Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(prodOne.price)}</p>
             </div>
   
             <button

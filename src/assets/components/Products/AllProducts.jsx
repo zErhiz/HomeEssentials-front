@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from '@nextui-org/react';
 
 const AllProducts = () => {
+  const number = 123456.789;
+  console.log(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number));
     let { products_read } = products_actions
     let { manufacturers_read } = manufacturers_action
   const dispatch = useDispatch()
@@ -64,7 +66,7 @@ key={prod.photo}>
           <img className='w-6 h-6' src="/ticket.svg" alt="" />
         <div className="mt-1.5 sm:mt-0">
           <p className="text-gray-500 text-base">Price</p>
-          <p className="font-semibold text-lg text-[#7847E0]">${prod.price}</p>
+          <p className="font-semibold text-lg text-[#7847E0]">{Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(prod.price)}</p>
         </div>
       </div>
     </div>

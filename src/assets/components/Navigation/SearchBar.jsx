@@ -75,7 +75,7 @@ const SearchBar = () => {
               />
               <div className="justify-center flex flex-col items-center content-center ">
                 <h3 className="text-lg font-semibold text-center">{product.name}</h3>
-                <p className="text-gray-600 text-center">${product.price}</p>
+                <p className="text-gray-600 text-center"> {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(product.price)} </p>
               </div>
             </div>
           ))}

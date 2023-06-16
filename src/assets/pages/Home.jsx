@@ -47,7 +47,7 @@ const Home = () => {
                   <img onClick={() => navigate(`/products/${car._id}`)} className={imageStyle} src={car.photo} alt="" />
                 </div>
                 <div className='h-fit relative border-t border-[#FF8A00] flex flex-col px-2 pb-[1rem] justify-start'>
-                  <h2 className="text-md mt-2 font-medium text-[#7847E0]">$ {car.price}</h2>
+                  <h2 className="text-md mt-2 font-medium text-[#7847E0]"> {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(car.price)} </h2>
                   <h2 className="text-xs 2xl:text-md text-[#393939] text-start">{car.name}</h2>
                 </div>
               </div>
