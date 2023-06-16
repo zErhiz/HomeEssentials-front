@@ -23,63 +23,39 @@ const AllProducts = () => {
   return (
 <>
 <h1 className='p-9 text-center font-bold text-3xl'>Take a look of our products!</h1>
-<div className='w-full flex flex-wrap'>
+<div className='w-full flex flex-wrap justify-evenly'>
 {products.map((prod) => (
   
-<div className="  rounded-lg p-6 w-[100%] sm:w-[50%] 2xl:w-[25%] gap-6 shadow-sm shadow-indigo-100"
+<div className="  rounded-2xl m-5 w-60 gap-6 shadow-[0_0_30px_rgba(0,0,0,0.20)]"
 key={prod.photo}>
   
-  <div className=' cursor-pointer relative' onClick={()=>navigate(`/products/${prod._id}`)}>
-  <img src={prod.photo} className="h-64 w-[100%] border rounded-2xl  object-cover"/>
+  <div className=' cursor-pointer relative h-4/6' onClick={()=>navigate(`/products/${prod._id}`)}>
+  <img src={prod.photo} className=" h-full w-[100%] border rounded-t-2xl  object-cover"/>
   </div>
 
-  <div className="mt-2">
-      <div>
-        <dd className="font-semibold text-xl pl-5">{prod.name}</dd>
-      </div>
-
-    <div className="mt-6 flex items-center gap-8 text-xs justify-around w-full">
+  <div className="h-2/6">
+    <div className='h-1/2 py-2'>
+      <p className="font-semibold text-xl pl-5">{prod.name}</p>
+    </div>
+    <div className="h-1/2 py-2 flex items-center gap-8 text-xs justify-around w-full">
       <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-        <svg
-          className="h-4 w-4 text-indigo-700"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
-          />
-        </svg>
-
+        {prod.stock_Available > 3? (
+          <img className='w-6 h-6' src="/success.svg" alt="" />
+        ) : prod.stock_Available === 0 ? (
+          <img className='w-6 h-6' src="/error.svg" alt="" />
+        ) : prod.stock_Available <= 3 ? (
+          <img className='w-6 h-6' src="/warning.svg" alt="" />
+        ) : null}
         <div className="mt-1.5 sm:mt-0">
           <p className="text-gray-500 text-base">Stock</p>
-
-          <p className="font-medium text-base text-black">{prod.stock_Available}</p>
+          <p className="font-semibold text-lg text-[#7847E0]">{prod.stock_Available}</p>
         </div>
       </div>
-
       <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-        <svg
-          className="h-4 w-4 text-indigo-700"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-          />
-        </svg>
+        svg
         <div className="mt-1.5 sm:mt-0">
           <p className="text-gray-500 text-base">Price</p>
-          <p className="font-medium text-base">${prod.price}</p>
+          <p className="font-semibold text-lg text-[#7847E0]">${prod.price}</p>
         </div>
       </div>
     </div>
