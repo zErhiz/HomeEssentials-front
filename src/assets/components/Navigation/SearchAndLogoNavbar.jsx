@@ -180,7 +180,7 @@ const SearchAndLogoNavbar = () => {
            {seeButtonsAdmin ? (
           <div className="hidden lg:block"> 
           <div className="  flex flex-row cursor-pointer px-5"
-            onClick={() => setCart(true)}>
+            onClick={() => count.cart > 0 ? setCart(true) : null}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -269,7 +269,7 @@ const SearchAndLogoNavbar = () => {
             
                 <div className="  flex flex-row cursor-pointer px-5"
             onClick={() =>{ setCart(true) 
-             setMenuIsOpen(!menuIsOpen)}}>
+              setMenuIsOpen(!menuIsOpen)}}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

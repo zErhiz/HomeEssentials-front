@@ -15,6 +15,7 @@ function Favourites({openModal, onCloseModal}) {
     let headers = { headers: { 'authorization': `Bearer ${token}` } }
 
     const [favorites, setFavorite] = useState([])
+    console.log("favorites", favorites);
     useEffect(() => {axios.get(`${apiUrl}favorites?userEmail=${email}`, headers).then(res => setFavorite(res.data.response)).catch(err => console.log(err))}, [])
     useEffect(() => {() => setToken(localStorage.getItem('token'))}, [])
     const reload = () => axios.get(`${apiUrl}favorites?userEmail=${email}`, headers).then(res => setFavorite(res.data.response)).catch(err => console.log(err))
@@ -48,7 +49,7 @@ function Favourites({openModal, onCloseModal}) {
             
             <div className='w-full h-screen top-0 z-30 fixed'
                         onClick={() => onCloseModal(false)}></div>
-        <div className="absolute transition-all z-40 gap-3 top-20 right-16 mt-2 bg-[#ff9090] w-[22rem] shadow-[0_4px_12px_rgba(0,0,0,0.07)] rounded-md text-[#393939] items-center flex flex-col h-fit py-[2rem]">
+        <div className="absolute transition-all z-40 gap-3 top-24 right-16 mt-2 bg-[#ffffff] w-[22rem] shadow-[0_4px_12px_rgba(0,0,0,0.07)] rounded-md text-[#393939] items-center flex flex-col h-fit py-[2rem]">
                 {favorites?.map(product => (
                     <div key={product.product_id._id} className="w-[90%] cursor-pointer bg-white hover:scale-[1.03] shadow-[0_0_3px_rgba(0,0,0,0.20)] hover:shadow-[0_1px_7px_rgba(0,0,0,0.2)] rounded-md h-fit">
                         <div className="font-normal my-2 text-[#393939] flex items-center justify-between min-h-[3rem] h-fit px-3">
