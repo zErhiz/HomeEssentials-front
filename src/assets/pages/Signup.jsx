@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Input, Button } from "@nextui-org/react";
 import { useEffect, useState } from 'react';
@@ -18,36 +17,60 @@ export default function Signup() {
   const photo = useRef()
   const name = useRef()
   const lastName = useRef()
+
   function handleForm(e) {
     e.preventDefault()
-    let data = {
-      email: email.current.value,
-      password: password.current.value,
-      photo: photo.current.value,
 
-    }
-    axios.post(apiUrl + 'auth/signup', data)
-      .then(res => {
-        toast.success("Success Notification !", {
-          position: toast.POSITION.TOP_CENTER
+    let inputName = name.current.value;
+    let inputLastName = lastName.current.value;
+    let inputEmail = email.current.value;
+    let inputPhoto = photo.current.files[0]
+    let inputPassword = password.current.value;
 
-        });
+    const formData = new FormData();
+    formData.append('name', inputName);
+    formData.append('lastName', inputLastName);
+    formData.append('email', inputEmail);
+    formData.append('password', inputPassword);
+    formData.append('photo', inputPhoto);
 
+    let dataUser = {
+      email: inputEmail,
+      password: inputPassword
+    };
 
-        navigate('/signin')
+    axios
+      .post(apiUrl + "auth/signup", formData)
+      .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
 
+        // Realizar la solicitud de inicio de sesión después de que la solicitud de registro haya finalizado
+        axios
+          .post(apiUrl + "auth/signin", dataUser)
+          .then((res) => {
+            console.log(res);
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("user", JSON.stringify(res.data.user));
+            Swal.fire({
+              title: "User created succesfully, welcome!",
+              icon: "success",
+              showConfirmButton: true,
+              confirmButtonText: "OK",
+              allowOutsideClick: false
+            });
+            navigate("/");
+          })
+          .catch((err) => {
+            console.log(err.response.data.message);
+            Swal.fire(`${err.response.data.message}`);
+          });
       })
-
-      .catch(err => {
-        console.log(err)
-        Swal.fire({
-          title: 'Check the fields',
-          text: err.response.data.message,
-          icon: 'error',
-          confirmButtonText: 'Ok'
-        });
-      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+        Swal.fire(`${err.response.data.message}`);
+      });
   }
+
   return (
     <div
       className='z-20 min-h-screen w-[100%] flex font-sans justify-end font-semibold items-center'
@@ -63,7 +86,7 @@ export default function Signup() {
           <h1 className='text-3xl font-bold'>Welcome!</h1>
           <img className='absolute w-8 opacity-10 top-3 right-3' src={logo} alt="logo" />
         </div>
-        <form onSubmit={(e) => handleForm(e)} className='relative sm:w-[100%] h-[30rem] bg-white p-9 flex flex-col justify-evenly rounded-[0_0_8px_8px] shadow-[0_5px_10px_rgba(0,0,0,0.15)]'>
+        <form onSubmit={(e) => handleForm(e)} encType="multipart/form-data" className='relative sm:w-[100%] h-[30rem] bg-white p-9 flex flex-col justify-evenly rounded-[0_0_8px_8px] shadow-[0_5px_10px_rgba(0,0,0,0.15)]'>
           <p className='absolute bottom-3 left-3 text-4xl font-bold text-[#E7E7E7]'>Sign Up</p>
           <div className='flex justify-center w-full'>
             <div className='flex flex-col gap-4'>
@@ -107,11 +130,11 @@ export default function Signup() {
                   placeholder="min. 8 characters"
                 />
               </div>
-              <Input label='Photo' ref={photo} placeholder="URL" />...
+              <input type="file" name="photo" id="upload" label='Photo' ref={photo} />
             </div>
           </div>
           <div className='flex flex-col justify-center items-center'>
-            <input className='bg-orange-400 text-black xl:w-[25%] cursor-pointer border rounded-md p-2 text-white' type='submit' value='Register' />
+            <input className='bg-orange-400 text-black xl:w-[25%] cursor-pointer border rounded-md p-2' type='submit' value='Register' />
             <ToastContainer />
             <h2 className='text-[#7847E0] text-sm'>Already registered? <strong><Link to='/signin'>Sign in</Link></strong></h2>
           </div>
