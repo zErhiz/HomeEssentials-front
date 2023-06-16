@@ -73,13 +73,11 @@ const UserPanel = () => {
 
 
   return (
-    <div className='bg-[#E7E7E7] p-4 h-fit flex flex-col justify-center items-center mt-12 sm:mt-0'>
+    <div className='bg-[#E7E7E7] flex h-screen flex-col justify-center items-center mt-12 sm:mt-0'>
       {!loading ? (<></>) : (<Grid className="fixed bg-[#00000073] p-2 rounded-lg"/>)}
-            <div className='flex justify-center items-center pb-4'>
-              <h3 className='font-bold text-gray-700 text-2xl'>User Panel</h3>
-            </div>
-            <div className="p-4 sm:w-[70vw] rounded-lg shadow-lg bg-[#fff] flex flex-col lg:flex-row lg:h-[28rem]">
-              <div className="w-full lg:w-1/2 flex flex-col sm:flex-row lg:flex-col items-center justify-center">
+
+            <div className="sm:w-[70vw] p-16 py-24 rounded-lg shadow-lg bg-[#fff] flex flex-col lg:flex-row">
+              <div className="w-full lg:w-[40%] flex flex-col sm:flex-row lg:flex-col items-center justify-center">
               <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full rounded-lg cursor-pointer">
                                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                       <img src={!img? infoUser?.photo : img} alt="" className="w-40 h-40 rounded-full object-cover" />
@@ -90,7 +88,7 @@ const UserPanel = () => {
                                             className="hidden" />
                                     </label>
                 <div className="flex flex-col px-2">
-                  <p className="my-1 2xl:text-xl text-md font-normal"> {infoUser?.name}</p>
+                  <p className="my-1 2xl:text-xl text-sm font-normal"> {infoUser?.name}</p>
                   <p className="my-1 2xl:text-xl text-sm font-normal"> {infoUser?.lastName}</p>
                   <p className="my-1 2xl:text-xl text-sm font-normal"> {infoUser?.email}</p>
                 </div>
@@ -99,8 +97,8 @@ const UserPanel = () => {
                                 e.target.reset()
                                 e.preventDefault()
                                 handleForm()
-              }} className="w-full text-[#7847E0] lg:w-1/2 h-full flex flex-col justify-around">
-                  <h2 className="bock text-center font-bold text-gray-700 text-2xl mb-4">Edit data</h2>
+              }} className="w-full text-[#7847E0] lg:w-1/2 h-[22rem] flex flex-col justify-between">
+                  <h2 className="bock text-start text-gray-700 text-lg">Edit data</h2>
                   <div className="mb-4 flex border border-[#7847E0] rounded-lg">
                       <label className="w-1/2 px-3 py-2 font-semibold">
                           Name:

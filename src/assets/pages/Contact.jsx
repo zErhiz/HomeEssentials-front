@@ -66,8 +66,8 @@ const Contact = () => {
           <div className="flex flex-col gap-4">
             <h2 className="font-bold">Store location</h2>
             <div className="flex flex-col gap-4">
-              <h2>Av. Fray A. Alcalde 10,</h2>
-              <h2>44100 Guad., Jal., México</h2>
+              <h2>Av. Paraiso. 4345,</h2>
+              <h2>42003, Bs.As., Argentina.</h2>
               <h2>info@misitio.com</h2>
               <h2>+52-1-33-12345678</h2>
             </div>

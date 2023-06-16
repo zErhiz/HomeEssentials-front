@@ -30,9 +30,9 @@ const Footer = () => {
                 Store location
               </h4>
               <p className="text-gray-700">
-                Av. Fray A. Alcalde 10
+                Av. Paraiso. 4345
                 <br />
-                44100, Guad., Jal., México
+                42003, Bs.As., Argentina.
                 <br />
                 info@misitio.com
                 <br />
