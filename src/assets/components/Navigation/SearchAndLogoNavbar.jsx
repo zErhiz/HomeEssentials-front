@@ -46,34 +46,22 @@ const SearchAndLogoNavbar = () => {
  const role = user?.role
   
   const [menuIsOpen, setMenuIsOpen] = useState(false)
-  const [seeButtonsUser, setSeeButtonsUser] = useState(true)
+  const [seeButtonsUser , setSeeButtonsUser] = useState(true)
   const handlebutton = (boolean) => {
     boolean ? setSeeButtonsUser(false) : setSeeButtonsUser(true)
   }
   let token = () => localStorage.getItem('token')
   let headers = { headers: { 'authorization': `Bearer ${token()}` } }
-  useEffect(()=>{
-
-    axios.get(`${apiUrl}cart/${email}`, headers).then(res => {
-       
-      dispatch((cartNav({
-          
-          cart:res.data.response.length
-  
-      })))
-      
-      }).catch(err => console.log(err))
-  },[])
   const handleSignOut = () => {
-    axios.post(apiUrl + `auth/signout`, userLocalStorage.email, headers)
+      axios.post(apiUrl + `auth/signout`, userLocalStorage.email, headers)
       .then(() => {
-        localStorage.clear();
-        navigate('/')
+          localStorage.clear();
+          navigate('/')
       })
       .catch(err => alert(err))
-    dispatch(SaveUserLogin({
-      token: "",
-      user: {}
+      dispatch(SaveUserLogin({
+        token: "",
+        user: {}
     }))
   }
   const tokenLocalStorage = localStorage.getItem('token');
@@ -89,79 +77,21 @@ const SearchAndLogoNavbar = () => {
   //console.log(userCurrent);
 
   const [products, setProducts] = useState([])
-//capturar productos
-useEffect(() => {
-  axios.get(`${apiUrl}cart/${email}`, headers)
-
-          .then(res => setProducts(res.data.response)   )
-          .catch(err => console.log(err))}, []
-)
-
-
-
-
-//agregar producto
-const addProduct = (product_id) => {
-  const data = {userEmail: email, productId: product_id}
-  axios.post(`${apiUrl}cart/create`, data, headers).then(res => {
-      console.log(res)
-      toast.success(res.data.message[0], {
-          theme: "colored",
-          })
-      render()
-  }).catch(err => {
-      console.log(err)
-      toast.error(err.response.data.message[0], {
-          theme: "colored",
-          });})
-}
-//Restar producto
-const substractProduct = (product_id) => { 
-  const data = {userEmail: email, productId: product_id}
-  axios.put(`${apiUrl}cart/subtract`, data, headers).then(res => {
-      console.log(res)
-      toast.warn(res.data.message[0], {
-          theme: "colored",
-          })
-      render()
-  }).catch(err => console.log(err))
-}
-//Eliminar producto
-const deleteProduct = (product_id) => { 
-  axios.delete(`${apiUrl}cart?userEmail=${email}&productId=${product_id}`, headers).then(res => {
-      console.log(res)
-      toast.error(res.data.message[0], {
-          theme: "colored",
-          })
-      render()
-  }).catch(err => console.log(err))
-}
-//finalizar compra
-const purchase = () => { 
-  toast('Unit deleted');
-  const body = {
-      address: address,
-      country: country,
-      dni: dni,
-      phoneNumber: phoneNumber
-  }
-  axios.post(`${apiUrl}cart/confirm?userEmail=${email}`, body, headers).then(res => {
-      console.log(res)
-  }).catch(err => console.log(err))
-}
-
-
-const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => setProducts(res.data.response)).catch(err => console.log(err))}
-
+  useEffect(() => {
+      //capturar productos
+      axios.get(`${apiUrl}cart/${email}`, headers)
+              .then(res => setProducts(res.data.response))
+              .catch(err => console.log(err))
+  }, []);
 
   return (
     <>
-      <Carrito openModal={cart}
-        onCloseModal={() => setCart(false)} />
-      <Favourites openModal={fav}
-        onCloseModal={() => setFav(false)} />
+    <Carrito openModal={cart} 
+              onCloseModal={()=> setCart(false)}/>
+      <Favourites openModal={fav} 
+              onCloseModal={()=> setFav(false)}/>
 
-      <div className="justify-center bg-[#FFFFFF] h-[100px] lg:h-[70px] 2xl:h-[80px] flex lg:justify-between">
+      <div className=" justify-center bg-[#FFFFFF] h-[100px] lg:h-[80px] flex lg:justify-between">
         <div className="px-4 lg:flex lg:gap-12 flex flex-col lg:flex-row justify-center items-center content-center lg:px-12">
           <div className=" flex flex-row gap-12">
             <img className="w-24 object-cover cursor-pointer" onClick={home} src={logo} alt="logo" />
@@ -172,9 +102,10 @@ const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => 
           </div>
           <div className="flex items-center">
             <SearchBar />
+
           </div>
         </div>
-        <div className="lg:flex lg:justify-center font-semibold lg:items-center lg:px-12 lg:gap-3">
+        <div className=" lg:flex lg:justify-center lg:items-center lg:content-center lg:px-12 lg:gap-8">
           <div className="hidden lg:block">
             {!tokenCurrent ? (
               <Anchor
@@ -198,27 +129,24 @@ const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => 
                 Enter
               </Anchor>
             ) : (
-              <div
-                onClick={() => {
-                  handlebutton(seeButtonsUser)
-                }}
-                className="mx-2 text-[#393939] lg:gap-1 flex justify-center items-center relative cursor-pointer">
-                <div className="min-w-40 flex items-center gap-3">
-                  <p>{userCurrent.name}</p>
-                  <img src={userCurrent.photo} className="w-8 h-8 rounded-full object-cover" />
-                </div>
-                {!seeButtonsUser ? (
-                  <div className="absolute top-10 lg:w-[7rem] 2xl:h-[5rem] 2xl:2-[10rem] lg:h-[4.5rem] bg-[#ffffff] shadow-[0_1px_10px_rgba(0,0,0,0.09)] drop-shadow-[0_0_1px_rgba(0,0,0,0.05)] rounded-lg z-30">
-                    <button onClick={() => navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:bg-[#c6c6c621] hover:dark:shadow-black/10 text-sm"> User Panel</button>
-                    <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner border-t-[1.5px] hover:bg-[#c6c6c621] 2xl:border-t-[2px] hover:dark:shadow-black/10 text-[#7847E0] text-sm"> Sign Out</button>
-                    {role === 1 || role === 2 ? (
-                      <button onClick={() => navigate('/admin/products')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10">
-                        Admin Panel
-                      </button>
-                    ) : null}
-                  </div>
-                ) : ("")}
+              <div onClick={() => {handlebutton(seeButtonsUser)
+              }} className=" mx-2 text-xl lg:gap-1 flex justify-center content-center items-center relative cursor-pointer">
+              <div className="min-w-40 flex">
+                <img src={userCurrent.photo} className="w-8 h-8 rounded-full object-cover"/>
+                <p>{userCurrent.name} {userCurrent.lastName}</p>
               </div>
+              {!seeButtonsUser ? (
+                <div className="absolute top-10 left-0 w-40 h-20 bg-[#FFFFFF] rounded-b-lg z-30">
+                  <button onClick={()=> navigate('/userPanel')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> User Panel</button>
+                  <button onClick={handleSignOut} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10"> Sign Out</button>
+                  {role === 1 || role === 2 ? (
+  <button onClick={() => navigate('/admin/products')} className="w-full h-1/2 text-start pl-2 hover:shadow-inner hover:dark:shadow-black/10">
+    Admin Panel
+  </button>
+) : null}
+                </div>
+              ) : ("")}
+            </div>
             )}
           </div>
           {!seeButtonsUser ? (
@@ -252,7 +180,7 @@ const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => 
            {seeButtonsAdmin ? (
           <div className="hidden lg:block"> 
           <div className="  flex flex-row cursor-pointer px-5"
-            onClick={() => setCart(true)}>
+            onClick={() => count.cart > 0 ? setCart(true) : null}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -341,7 +269,7 @@ const render = () => { axios.get(`${apiUrl}cart/${email}`, headers).then(res => 
             
                 <div className="  flex flex-row cursor-pointer px-5"
             onClick={() =>{ setCart(true) 
-             setMenuIsOpen(!menuIsOpen)}}>
+              setMenuIsOpen(!menuIsOpen)}}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
