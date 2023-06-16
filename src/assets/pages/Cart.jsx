@@ -205,7 +205,7 @@ console.log(count)
                             } }
                             className="px-4 py-3 font-bold text-white bg-gradient-to-r from-purple-900 to-purple-600 
                                         rounded-lg hover:bg-purple-700 focus:outline-none focus:shadow-outline">
-                            Continue with the payment process
+                            Continue with payment
                         </button>
                     </div>
                 </div>
