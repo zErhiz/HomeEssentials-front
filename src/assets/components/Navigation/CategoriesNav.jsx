@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import categories_actions from '../../../store/actions/categories'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,46 +14,46 @@ const CategoriesNav = () => {
   console.log(manufacturers);
 
   //
-  const [filterPrice , setFilterPrice] = useState(1)
+  const [filterPrice, setFilterPrice] = useState(1)
   //capturar categorias chekeadas
   const category_id = useRef('')
-  const [ categoriesCheked, setCategoriesCheked ] = useState([])
-  function capture(){
+  const [categoriesCheked, setCategoriesCheked] = useState([])
+  function capture() {
     const categoriesFilter = Object.values(category_id.current).filter(each => each.checked).map(each => each.value)
     setCategoriesCheked(categoriesFilter)
-}
+  }
   //capturar empresas chekeadas
   const manufacturer_id = useRef('')
-  const [ manufacturerCheked, setManufacturerCheked ] = useState([])
-  function captureManufacturer(){
+  const [manufacturerCheked, setManufacturerCheked] = useState([])
+  function captureManufacturer() {
     const manufacturerFilter = Object.values(manufacturer_id.current).filter(each => each.checked).map(each => each.value)
     setManufacturerCheked(manufacturerFilter)
-}
-//console.log("manufacturerCheked", manufacturerCheked);
-//mostrar listas
-const [ viewCategories , setViewCategories ] = useState(false)
-const [ viewManufacturers , setViewManufacturers ] = useState(false)
-const [ viewPrice , setViewPrice ] = useState(false)
-
-useEffect(() => {
-  if (categories.length === 0) {
-    dispatch(categories_read())
   }
-}, [])
+  //console.log("manufacturerCheked", manufacturerCheked);
+  //mostrar listas
+  const [viewCategories, setViewCategories] = useState(false)
+  const [viewManufacturers, setViewManufacturers] = useState(false)
+  const [viewPrice, setViewPrice] = useState(false)
 
-useEffect(() => {
-      dispatch(products_read({categoriesCheked , manufacturerCheked , filterPrice}))
-}, [categoriesCheked, manufacturerCheked, filterPrice])
+  useEffect(() => {
+    if (categories.length === 0) {
+      dispatch(categories_read())
+    }
+  }, [])
+
+  useEffect(() => {
+    dispatch(products_read({ categoriesCheked, manufacturerCheked, filterPrice }))
+  }, [categoriesCheked, manufacturerCheked, filterPrice])
 
   return (
-    <div className='h-[60px] bg-[#7847E0] hidden lg:flex items-center content-center pl-5'>
-      {viewCategories||viewManufacturers||viewPrice? (
+    <div className='h-[60px] bg-[#7847E0] hidden lg:flex items-center content-center pl-12'>
+      {viewCategories || viewManufacturers || viewPrice ? (
         <div className="fixed top-0 left-0 h-screen w-screen z-10"
-        onClick={()=> {setViewManufacturers(false), setViewCategories(false), setViewPrice(false)}}></div>
+          onClick={() => { setViewManufacturers(false), setViewCategories(false), setViewPrice(false) }}></div>
       ) : null}
       <button
-        className="text-white font-medium w-44 mx-4 py-1 rounded-md shadow-inner hover:shadow-black border border-white z-10"
-        onClick={()=> {
+        className="text-white font-medium w-44 py-1 rounded-md shadow-inner hover:shadow-[0_4px_10px_rgba(0,0,0,0.20)] border border-[#edebeb4b] hover:border-[#d4d4d4f8] z-20"
+        onClick={() => {
           navigate(`/allproducts`)
           setCategoriesCheked([])
           setManufacturerCheked([])
@@ -61,72 +61,72 @@ useEffect(() => {
         }}>
         View All Products
       </button>
-      <div className="w-46 mx-4 h-full relative flex items-center justify-center z-10">
+      <div className="w-46  h-full relative flex items-center justify-center z-10">
         <button
-          className="text-white font-medium w-44 mx-2 py-1 rounded-md shadow-inner hover:shadow-black border border-white"
-          onClick={(e)=> { e.preventDefault(), setViewPrice(!viewPrice), navigate(`/allproducts`)}}>
+          className="text-white font-medium w-44 mx-2 py-1 rounded-md hover:shadow-[0_4px_10px_rgba(0,0,0,0.20)] border border-[#edebeb4b] hover:border-[#d4d4d4f8] z-20"
+          onClick={(e) => { e.preventDefault(), setViewPrice(!viewPrice), navigate(`/allproducts`) }}>
           Filter by Price
         </button>
-        {viewPrice? 
-        (<ul className="absolute bg-[#7847E0] top-8 flex flex-col justify-start w-56 pb-4 mt-7 items-center content-center flex-wrap h-fit z-30 text-white font-medium rounded-b-xl">
-            <button onClick={()=> setFilterPrice(1)}
-                    className="cursor-pointer p-2 hover:border-b hover:border-white hover:bg-[#7847E0] w-full rounded-b-2xl hover:font-bold text-center">
-            Least to Greatest
+        {viewPrice ?
+          (<ul className="absolute bg-[#7847E0] top-7 flex flex-col justify-start w-[11.5rem] pb-4 mt-7 items-center content-center flex-wrap h-fit z-30 text-white font-medium rounded-b-xl">
+            <button onClick={() => setFilterPrice(1)}
+              className="cursor-pointer p-2 hover:border-b border-b border-transparent hover:border-white hover:bg-[#7847E0] w-full rounded-md hover:font-bold text-center">
+              Least to Greatest
             </button>
-            <button onClick={()=> setFilterPrice(-1)}
-                    className="cursor-pointer p-2 hover:border-b hover:border-white hover:bg-[#7847E0] w-full rounded-b-2xl hover:font-bold text-center">
-            Greatest to Least
+            <button onClick={() => setFilterPrice(-1)}
+              className="cursor-pointer p-2 hover:border-b border-b border-transparent hover:border-white hover:bg-[#7847E0] w-full rounded-b-md hover:font-bold text-center">
+              Greatest to Least
             </button>
-        </ul>
-        ) : null}
+          </ul>
+          ) : null}
       </div>
-      <form ref={manufacturer_id} className="w-46 mx-4  h-full relative flex items-center justify-center z-10">
+      <form ref={manufacturer_id} className="w-46  h-full relative flex items-center justify-center z-10">
         <button
-          className="text-white font-medium w-44 mx-2 py-1 rounded-md shadow-inner hover:shadow-black border border-white"
-          onClick={(e)=> {e.preventDefault(), setViewManufacturers(!viewManufacturers), navigate(`/allproducts`)}}>
+          className="text-white font-medium w-44 mx-2 py-1 rounded-md hover:shadow-[0_4px_10px_rgba(0,0,0,0.20)] border border-[#edebeb4b] hover:border-[#d4d4d4f8] z-20"
+          onClick={(e) => { e.preventDefault(), setViewManufacturers(!viewManufacturers), navigate(`/allproducts`) }}>
           Filter by Manufacturers
         </button>
-          {viewManufacturers? 
-          (<ul className="absolute bg-[#7847E0] top-8 flex flex-col justify-start w-56 pb-4 mt-7 items-center content-center flex-wrap h-fit z-30 text-white font-medium rounded-b-xl">
+        {viewManufacturers ?
+          (<ul className="absolute bg-[#7847E0] top-7 flex flex-col justify-start w-[12rem] pb-4 mt-7 items-center content-center flex-wrap h-fit z-30 text-white font-medium rounded-b-xl">
             {manufacturers.map((manufacturer) =>
-                              <label htmlFor={manufacturer._id} key={manufacturer._id}
-                              className="cursor-pointer p-2 hover:border-b hover:border-white hover:bg-[#7847E0] w-full rounded-b-2xl hover:font-bold text-center"
-                              style={{...(manufacturerCheked.includes(manufacturer._id)? {color: "black", borderBottom: '2px solid red', borderColor: "white", fontWeight: 'bold'} : {}) }}>
-                              {manufacturer.name}
-                              <input name="category_id" 
-                                      onClick={captureManufacturer} 
-                                      defaultChecked={categories.includes(manufacturer._id)} 
-                                      style={{ appearance: 'none' }}
-                                      type="checkbox" 
-                                      value={manufacturer._id} 
-                                      id={manufacturer._id} />
-                                </label>)}
-        </ul>
-        ) : null}
+              <label htmlFor={manufacturer._id} key={manufacturer._id}
+                className="cursor-pointer p-2 hover:border-b hover:border-white border-b border-transparent hover:bg-[#7847E0] w-full rounded-b-md hover:font-bold text-center"
+                style={{ ...(manufacturerCheked.includes(manufacturer._id) ? { color: "black", borderBottom: '2px solid red', borderColor: "white", fontWeight: 'bold' } : {}) }}>
+                {manufacturer.name}
+                <input name="category_id"
+                  onClick={captureManufacturer}
+                  defaultChecked={categories.includes(manufacturer._id)}
+                  style={{ appearance: 'none' }}
+                  type="checkbox"
+                  value={manufacturer._id}
+                  id={manufacturer._id} />
+              </label>)}
+          </ul>
+          ) : null}
       </form>
-      <form ref={category_id} className="w-46 mx-4  h-full relative flex items-center justify-center z-10">
+      <form ref={category_id} className="w-46 h-full relative flex items-center justify-center z-10">
         <button
-          className="text-white font-medium w-44 mx-2 py-1 rounded-md shadow-inner hover:shadow-black border border-white"
-          onClick={(e)=> {e.preventDefault(), setViewCategories(!viewCategories), navigate(`/allproducts`)}}>
+          className="text-white font-medium w-44 mx-2 py-1 rounded-md hover:shadow-[0_4px_10px_rgba(0,0,0,0.20)] border border-[#edebeb4b] hover:border-[#d4d4d4f8]"
+          onClick={(e) => { e.preventDefault(), setViewCategories(!viewCategories), navigate(`/allproducts`) }}>
           Filter by Categories
         </button>
-        {viewCategories? 
-        (<ul className="absolute bg-[#7847E0] top-8 flex flex-col justify-start w-56 pb-4 mt-7 items-center content-center flex-wrap h-fit z-30 text-white font-medium rounded-b-xl">
-          {categories.map((category) =>
-                              <label htmlFor={category._id} key={category._id}
-                              className="cursor-pointer p-2 hover:border-b hover:border-white hover:bg-[#7847E0] w-full rounded-b-2xl hover:font-bold text-center"
-                              style={{...(categoriesCheked.includes(category._id)? {color: "black", borderBottom: '2px solid red', borderColor: "white", fontWeight: 'bold'} : {}) }}>
-                              {category.name}
-                              <input name="category_id" 
-                                      onClick={capture} 
-                                      defaultChecked={categories.includes(category._id)} 
-                                      style={{ appearance: 'none' }}
-                                      type="checkbox" 
-                                      value={category._id} 
-                                      id={category._id} />
-                                </label>)}
-        </ul>
-                                ) : null}
+        {viewCategories ?
+          (<ul className="absolute bg-[#7847E0] top-7 flex flex-col justify-start w-[11.5rem] pb-4 mt-7 items-center content-center flex-wrap h-fit z-30 text-white font-medium rounded-b-xl">
+            {categories.map((category) =>
+              <label htmlFor={category._id} key={category._id}
+                className="cursor-pointer p-2 hover:border-b border-b border-transparent hover:border-white hover:bg-[#7847E0] w-full rounded-b-md hover:font-bold text-center"
+                style={{ ...(categoriesCheked.includes(category._id) ? { color: "black", borderBottom: '2px solid red', borderColor: "white", fontWeight: 'bold' } : {}) }}>
+                {category.name}
+                <input name="category_id"
+                  onClick={capture}
+                  defaultChecked={categories.includes(category._id)}
+                  style={{ appearance: 'none' }}
+                  type="checkbox"
+                  value={category._id}
+                  id={category._id} />
+              </label>)}
+          </ul>
+          ) : null}
       </form>
     </div>
   )

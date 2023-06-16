@@ -63,19 +63,19 @@ const SearchBar = () => {
         </div>
 
         <div
-          className={`absolute transition-all top-[7rem] left-16 flex flex-col z-50 overflow-x-hidden ${showOverflowScroll ? "overflow-auto" : ""
-            } h-[70%]`}
+          className={`absolute transition-all top-[105px] left-20 flex flex-col z-50 overflow-x-hidden ${showOverflowScroll ? "overflow-auto" : ""
+            } h-fit overflow-y-auto`}
         >
           {searchResults.map((product) => (
-            <div onClick={() => navigate(`/products/${product._id}`)} key={product._id} className="cursor-pointer bg-white rounded-md shadow-md p-4 flex border justify-start">
+            <div onClick={() => navigate(`/products/${product._id}`)} key={product._id} className="cursor-pointer bg-white rounded-md shadow-md px-4 py-2 flex border justify-start">
               <img
                 src={product.photo}
                 alt={product.name}
-                className="w-40 h-40 object-cover mb-4"
+                className="w-40 h-40 object-cover"
               />
-              <div className="justify-center flex flex-col items-center content-center ">
-                <h3 className="text-lg font-semibold text-center">{product.name}</h3>
-                <p className="text-gray-600 text-center"> {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(product.price)} </p>
+              <div className="justify-end flex flex-col w-full items-end content-center">
+                <h3 className="text-xl font-semibold w-[70%] text-end">{product.name}</h3>
+                <p className="text-gray-600 "> {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(product.price)} </p>
               </div>
             </div>
           ))}
