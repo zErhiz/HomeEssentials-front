@@ -63,8 +63,8 @@ const SearchBar = () => {
         </div>
 
         <div
-          className={`absolute transition-all top-[105px] left-20 flex flex-col z-50 overflow-x-hidden ${showOverflowScroll ? "overflow-auto" : ""
-            } h-fit overflow-y-auto`}
+          className={`absolute transition-all top-[7rem] left-16 flex flex-col z-50 overflow-x-hidden ${showOverflowScroll ? "overflow-auto" : ""
+            } h-[70%]`}
         >
           {searchResults.map((product) => (
             <div onClick={() => navigate(`/products/${product._id}`)} key={product._id} className="cursor-pointer bg-white rounded-md shadow-md px-4 py-2 flex border justify-start">
