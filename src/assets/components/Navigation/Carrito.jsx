@@ -79,7 +79,7 @@ function Carrito({openModal, onCloseModal}) {
                                 <div className="ml-4 flex flex-1 flex-col">
                                   <div className="flex flex-col justify-evenly h-full">
                                       <p className='text-base font-medium'>{product.product_id.name}</p>
-                                      <p className="px-4 font-medium w-full text-end">Price: USD {product.product_id.price}</p>
+                                      <p className="px-4 font-medium w-full text-end">Price: {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(product.product_id.price)} </p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <p className="text-gray-500">Quantity:  {product.quantity}</p>
@@ -100,7 +100,7 @@ function Carrito({openModal, onCloseModal}) {
 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6 flex-col items-center">
                       <div className="flex justify-center text-base font-medium text-gray-900">
-                        <p className='pl-3'><span>Total Purchase:</span>  USD {totalPurchase.toFixed(2)}</p>
+                        <p className='pl-3'><span>Total Purchase:</span>   {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(totalPurchase.toFixed(2))} </p>
                       </div>
                       <div className='w-full flex justify-evenly items-center'>
                           <div className="mt-6">
