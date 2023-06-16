@@ -425,7 +425,7 @@ const handleInputChangeBrandEdit = (event) =>{
                 </div>
                 <div className="h-fit relative border-t-[1px] border-[#393939] flex flex-col p-2 pb-[1rem] justify-start">
                   <h2 className="text-md mt-[1rem] font-medium text-[#7847E0]">
-                    $ {car.price}
+                  {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(car.price)} 
                   </h2>
                   <h2 className="text-xs 2xl:text-md text-[#393939] text-start">
                     {car.name}
