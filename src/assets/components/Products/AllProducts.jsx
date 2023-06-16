@@ -63,7 +63,7 @@ key={prod.photo}>
         </div>
       </div>
       <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-        svg
+          <img className='w-6 h-6' src="/ticket.svg" alt="" />
         <div className="mt-1.5 sm:mt-0">
           <p className="text-gray-500 text-base">Price</p>
           <p className="font-semibold text-lg text-[#7847E0]">{Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(prod.price)}</p>

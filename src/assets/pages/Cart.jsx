@@ -121,6 +121,15 @@ console.log(count)
     const buttonProcess = () => {
         products.length > 0? setViewForm(true) : toast.error("No items in the cart", {theme: "colored",})
     }
+    
+    const opciones = {
+    style: "decimal",
+    useGrouping: true,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+    };
+
+
 
     return (
         <div className="w-full min-h-[85vh] flex flex-col items-center">

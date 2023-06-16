@@ -84,7 +84,7 @@ useEffect(() => {
         <button
           className="text-white font-medium w-44 mx-2 py-1 rounded-md shadow-inner hover:shadow-black border border-white"
           onClick={(e)=> {e.preventDefault(), setViewManufacturers(!viewManufacturers), navigate(`/allproducts`)}}>
-          Filter by Manofacturers
+          Filter by Manufacturers
         </button>
           {viewManufacturers? 
           (<ul className="absolute bg-[#7847E0] top-8 flex flex-col justify-start w-56 pb-4 mt-7 items-center content-center flex-wrap h-fit z-30 text-white font-medium rounded-b-xl">
