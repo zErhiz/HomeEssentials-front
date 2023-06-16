@@ -32,6 +32,11 @@ const NavigationComponent = () => {
                 Users
               </li>
             </Anchor>
+            <Anchor to="/admin/contact">
+              <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                Contact
+              </li>
+            </Anchor>
           </ul>
         </nav>
       </div>
