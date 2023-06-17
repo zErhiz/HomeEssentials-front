@@ -42,7 +42,7 @@ const SearchAndLogoNavbar = () => {
 
 
 
-  const [seeButtonsAdmin, setButtonAdmin] = useState(user?.role === 0 ? true : false);
+  //const [seeButtonsAdmin, setButtonAdmin] = useState(user?.role === 0 ? true : false);
   const role = user?.role
 
   const [menuIsOpen, setMenuIsOpen] = useState(false)
@@ -154,7 +154,7 @@ const SearchAndLogoNavbar = () => {
             <div className="absolute w-full h-full top-0 right-0 z-20"
               onClick={() => { handlebutton(seeButtonsUser) }}></div>
           ) : ("")}
-          {seeButtonsAdmin ? (
+          {/* {seeButtonsAdmin ? ( */}
             <div className="hidden lg:block flex justify-center content-center items-center">
               <div
                 className="mx-2 text-[#393939] flex cursor-pointer justify-center items-center content-center gap-1"
@@ -177,8 +177,8 @@ const SearchAndLogoNavbar = () => {
                 <p className="2xl:font-normal font-medium 2xl:text-xl text-md">Favorites</p>
               </div>
             </div>
-          ) : null}
-          {seeButtonsAdmin ? (
+          {/* ) : null} */}
+          {/* {seeButtonsAdmin ? ( */}
             <div className="hidden lg:block">
               <div className="  flex flex-row cursor-pointer px-5"
                 onClick={() => count.cart > 0 ? setCart(true) : null}>
@@ -200,7 +200,7 @@ const SearchAndLogoNavbar = () => {
 
               </div>
             </div>
-          ) : null}
+          {/* ) : null} */}
         </div>
         <div
           className={`${menuIsOpen ? "fixed inset-0 bg-white" : "hidden"
