@@ -33,7 +33,7 @@ const Home = () => {
     <>
       <HomeFirstComponent />
       <div className="bg-white h-[10vh] xl:h-[5vh]"></div>
-      <div className="h-fit min-h-[10vh] bg-[#EDEBEB] flex  flex-col items-center gap-80 lg:gap-12 ">
+      <div className="h-fit min-h-[10vh] bg-[#EDEBEB] flex  flex-col items-center gap-10 sm:gap-80 lg:gap-12 ">
       
        <HomeOfferts /> 
         <HomeBuying /> 
