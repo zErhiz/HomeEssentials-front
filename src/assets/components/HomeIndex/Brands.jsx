@@ -49,7 +49,7 @@ const Brands = () => {
   }, [])
   return (
     <>
-      <div className="bg-white 2xl:min-h-[10%] min-h-fit h-fit w-[85%] flex flex-col 2xl:py-[4rem] gap-2 shadow-[0_4px_5px_rgba(0,0,0,0.09)] rounded-md justify-center">
+      <div className="bg-white 2xl:min-h-[10%] min-h-fit h-fit w-[85%] hidden sm:flex flex-col 2xl:py-[4rem] gap-2 shadow-[0_4px_5px_rgba(0,0,0,0.09)] rounded-md justify-center">
         <div className="w-[100%] justify-center flex">
           <h2 className="text-2xl font-medium mt-[4rem]">Brands</h2>
         </div>

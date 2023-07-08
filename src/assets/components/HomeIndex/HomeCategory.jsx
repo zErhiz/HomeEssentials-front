@@ -23,7 +23,7 @@ const HomeCategory = () => {
 
   return ( 
     <>
-      <div className="bg-white w-[85%] h-fit flex rounded-md shadow-[0_4px_5px_rgba(0,0,0,0.09)] flex-col gap-2">
+      <div className="bg-white w-[85%] h-fit hidden sm:flex rounded-md shadow-[0_4px_5px_rgba(0,0,0,0.09)] flex-col gap-2">
         <div className="w-[100%] justify-center flex">
           <h2 className="text-2xl font-medium mt-[4rem]">Shop by category</h2>
         </div>

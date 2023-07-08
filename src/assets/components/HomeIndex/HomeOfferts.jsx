@@ -5,7 +5,7 @@ const HomeOfferts = () => {
   return (
     <>
       <div className='h-[7%] min-[688px]:h-[10%] max-[768px]:bg-[#EDEBEB] md:h-[15%] lg:h-[20%] xl:h-[20%] selection:bg-[#FF8A00] 2xl:h-[20%] w-[100%] xl:w-[95%] flex flex-col xl:flex-row justify-between gap-4 xl:gap-0'>
-        <div className='flex items-center p-12 shadow-[0_4px_5px_rgba(0,0,0,0.09)] h-[50%] lg:h-[30vw] mt-[2rem] sm:mt-[7rem] w-[100%] xl:w-[49%] bg-cover bg-center rounded-md' style={{ backgroundImage: `url('${image}')`, backgroundSize: "cover", backgroundPosition: "center" }}>
+        <div className='flex items-center p-12 shadow-[0_4px_5px_rgba(0,0,0,0.09)] h-[50%] lg:h-[30vw] mt-[7rem] w-[100%] xl:w-[49%] bg-cover bg-center rounded-md' style={{ backgroundImage: `url('${image}')`, backgroundSize: "cover", backgroundPosition: "center" }}>
           <div className='w-[60%] gap-4 flex flex-col'>
             <h2 className='text-xs md:text-xl'>Seasonal offers</h2>
             <h2 className='font-bold text-sm md:text-5xl'>Up to 30% discount</h2>
@@ -14,7 +14,7 @@ const HomeOfferts = () => {
           </div>
 
         </div>
-        <div className='flex items-center p-12 shadow-[0_4px_5px_rgba(0,0,0,0.09)] h-[50%] lg:h-[30vw] mt-[1rem] sm:mt-[7rem] w-[100%] xl:w-[49%] bg-cover bg-center rounded-md' style={{ backgroundImage: "url('https://i.ibb.co/TPHgjcN/zyro-image-1.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
+        <div className='flex items-center p-12 shadow-[0_4px_5px_rgba(0,0,0,0.09)] h-[50%] lg:h-[30vw] mt-[7rem] w-[100%] xl:w-[49%] bg-cover bg-center rounded-md' style={{ backgroundImage: "url('https://i.ibb.co/TPHgjcN/zyro-image-1.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
           <div className='w-[60%] gap-4 flex flex-col'>
             <h2 className='text-[#dfe1e6] text-xs md:text-xl'>Newcomers</h2>
             <h2 className='text-[#dfe1e6] font-bold text-sm md:text-5xl '> We have what you are looking for</h2>

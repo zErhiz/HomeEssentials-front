@@ -41,7 +41,7 @@ const AllProducts = () => {
 
         {products.map((prod) => (
 
-          <div className="rounded-xl mx-3 my-2 hover:scale-[1.03] duration-100 w-60 gap-6 shadow-[0_4px_10px_rgba(0,0,0,0.08)] bg-white"
+          <div className="rounded-xl mx-3 my-2 hover:scale-[1.03] duration-100 w-full sm:w-60 gap-6 shadow-[0_4px_10px_rgba(0,0,0,0.08)] bg-white pb-5 sm:pb-auto"
             key={prod.photo}>
 
             <div className=' cursor-pointer relative h-4/6' onClick={() => navigate(`/products/${prod._id}`)}>

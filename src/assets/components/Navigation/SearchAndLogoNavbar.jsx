@@ -91,16 +91,16 @@ const SearchAndLogoNavbar = () => {
       <Favourites openModal={fav}
         onCloseModal={() => setFav(false)} />
 
-      <div className=" justify-center bg-[#FFFFFF] h-[100px] lg:h-[80px] flex lg:justify-between">
+      <div className=" justify-center bg-[#FFFFFF] sm:h-[100px] lg:h-[80px] flex lg:justify-between mt-5 sm:mt-auto">
         <div className="px-4 lg:flex lg:gap-12 flex flex-col lg:flex-row justify-center items-center content-center lg:px-12">
-          <div className=" flex flex-row gap-12">
-            <img className="w-24 object-cover cursor-pointer" onClick={home} src={logo} alt="logo" />
+          <div className=" flex flex-row gap-12 w-screen sm:w-auto px-4 sm:px-auto justify-between">
+            <img className="h-10 sm:h-auto sm:w-24 object-cover cursor-pointer" onClick={home} src={logo} alt="logo" />
             <button className="block lg:hidden" onClick={() => setMenuIsOpen(!menuIsOpen)}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="sm:w-6 sm:h-6 w-10 h-10">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg> </button>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center mt-5 sm:mt-0">
             <SearchBar />
 
           </div>

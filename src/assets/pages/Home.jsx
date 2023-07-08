@@ -38,7 +38,7 @@ const Home = () => {
        <HomeOfferts /> 
         <HomeBuying /> 
         {/* div de cartas */}
-         <div className="bg-white text-[#393939] shadow-[0_4px_5px_rgba(0,0,0,0.09)] rounded-md h-fit xl:min-h-[25%] 2xl:min-h-[20%] w-[85%] flex flex-col p-[4rem]">
+         <div className="bg-white text-[#393939] shadow-[0_4px_5px_rgba(0,0,0,0.09)] rounded-md h-fit xl:min-h-[25%] 2xl:min-h-[20%] w-full sm:w-[85%] flex flex-col p-[4rem]">
           <h2 className="text-2xl w-[100%] items-center mb-[4rem] justify-center flex font-medium">Best Sellers</h2>
           <div className="h-fit xl:h-[60%] lg:w-full gap-4 justify-center flex-wrap flex">
             {cards.map((car) => (
@@ -54,7 +54,7 @@ const Home = () => {
             ))}
           </div>
           <div className="flex justify-center mt-[3rem]">
-            <button onClick={redirectToAllProducts} className='rounded-full py-2.5 w-[90%] sm:w-[50%] md:w-[40%] lg:w-[30%]  2xl:w-[15%] md:py-2.5 bg-[#7847E0] text-white font-semibold'> See all products</button>
+            <button onClick={redirectToAllProducts} className='rounded-full py-2.5  w-full sm:w-[50%] md:w-[40%] lg:w-[30%]  2xl:w-[15%] md:py-2.5 bg-[#7847E0] text-white font-semibold'> See all products</button>
           </div>
         </div> 
 

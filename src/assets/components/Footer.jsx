@@ -25,19 +25,14 @@ const Footer = () => {
       <footer className="bg-[#FFFFFF] py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="mb-4 flex flex-col gap-5">
+            <div className="mb-4 flex flex-col sm:gap-5 items-center">
               <h4 className="text-black text-lg font-semibold">
                 Store location
               </h4>
-              <p className="text-gray-700">
-                Av. Paraiso. 4345
-                <br />
-                42003, Bs.As., Argentina.
-                <br />
-                info@misitio.com
-                <br />
-                +52-1-33-12345678
-              </p>
+              <p className="text-gray-700">Av. Paraiso. 4345</p>
+              <p className="text-gray-700">42003, Bs.As., Argentina.</p>
+              <p className="text-gray-700">info@misitio.com</p>
+              <p className="text-gray-700">+52-1-33-12345678</p>
               <div className="flex gap-4">
                 <a href="https://www.instagram.com">
                   <BsInstagram />
@@ -54,9 +49,9 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="mb-4 flex flex-col gap-4">
+            <div className="mb-4 flex flex-col gap-4 items-center">
               <h4 className="text-black text-lg font-semibold">Store</h4>
-              <ul className="text-gray-700">
+              <ul className="text-gray-700 flex flex-col items-center">
               {categories.map((cat) => (
                <li key={cat._id}>
                   <Anchor to={`/products/category/${cat._id}`}>{cat.name}</Anchor>
@@ -65,11 +60,11 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="mb-4 flex flex-col gap-4">
+            <div className="mb-4 flex flex-col gap-4 items-center">
               <h4 className="text-black text-lg font-semibold">
                 Customer Support
               </h4>
-              <ul className="text-gray-700">
+              <ul className="text-gray-700 flex flex-col items-center">
                 <li>
                   <Anchor to="/contact">Contact us</Anchor>
                 </li>
@@ -85,9 +80,9 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="mb-4 flex flex-col gap-4">
+            <div className="mb-4 flex flex-col gap-4 items-center">
               <h4 className="text-black text-lg font-semibold">Policy</h4>
-              <ul className="text-gray-700">
+              <ul className="text-gray-700 flex flex-col items-center">
                 <li>
                   <Anchor to="#">Shipping and Returns</Anchor>
                 </li>
